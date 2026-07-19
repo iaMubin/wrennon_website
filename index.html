@@ -1,0 +1,473 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wrennon &mdash; AI agents built for ecommerce brands</title>
+<meta name="description" content="Wrennon builds AI agents trained on your product catalog, order data, and checkout flow &mdash; purpose-built for ecommerce, from Shopify to WhatsApp commerce.">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#0A0D12">
+<link rel="canonical" href="https://wrennon.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wrennon">
+<meta property="og:title" content="Wrennon &mdash; AI agents built for ecommerce brands">
+<meta property="og:description" content="Wrennon builds AI agents trained on your product catalog, order data, and checkout flow &mdash; purpose-built for ecommerce, from Shopify to WhatsApp commerce.">
+<meta property="og:url" content="https://wrennon.com/">
+<meta property="og:image" content="https://wrennon.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Wrennon &mdash; AI agents built for ecommerce brands">
+<meta name="twitter:description" content="Wrennon builds AI agents trained on your product catalog, order data, and checkout flow &mdash; purpose-built for ecommerce, from Shopify to WhatsApp commerce.">
+<meta name="twitter:image" content="https://wrennon.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Wrennon",
+  "url": "https://wrennon.com/",
+  "logo": "https://wrennon.com/icon-512.png"
+}
+</script>
+</head>
+<body>
+
+
+<div class="cursor-glow" aria-hidden="true"></div>
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="logo"><img class="logo-mark" src="images/wren-mark.svg" alt="Wrennon" width="34" height="34" aria-hidden="true">Wrennon</a>
+    <div class="nav-links">
+      <div class="nav-item has-mega">
+        <button type="button" class="nav-mega-trigger" aria-expanded="false">Product<svg class="nav-chev" viewBox="0 0 12 8" width="10" height="7" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-mega">
+          <a href="product.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>How it works</strong><em>Catalog, orders &amp; checkout, trained end to end</em></span></a>
+          <a href="integrations.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>Integrations</strong><em>Shopify, WooCommerce, Magento &amp; more</em></span></a>
+          <a href="security.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>Security</strong><em>How we handle your store's data</em></span></a>
+          <a href="roi-calculator.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>ROI Calculator</strong><em>Estimate what automation is worth to you</em></span></a>
+        </div>
+      </div>
+      <div class="nav-item has-mega">
+        <button type="button" class="nav-mega-trigger" aria-expanded="false">Solutions<svg class="nav-chev" viewBox="0 0 12 8" width="10" height="7" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-mega">
+          <a href="use-cases.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>Use cases</strong><em>Pre-purchase, post-purchase, cart recovery</em></span></a>
+          <a href="pricing.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>Pricing</strong><em>Simple plans for SMB storefronts</em></span></a>
+          <a href="demo.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>Live demo</strong><em>See a real conversation flow</em></span></a>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
+    </div>
+    <div class="nav-right">
+      <a href="demo.html" class="nav-cta btn-cta-bold">View Demo</a>
+      <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu-backdrop"></div>
+  <div class="mobile-menu">
+    <a href="product.html">Product</a>
+    <a href="integrations.html">Integrations</a>
+    <a href="use-cases.html">Use cases</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="blog.html">Blog</a>
+    <a href="careers.html">Careers</a>
+    <a href="help-center.html">Help Center</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<header class="page-header home-hero">
+  <div class="hero-ambient" aria-hidden="true"></div>
+  <canvas id="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="eyebrow">AI agents for ecommerce, built on your catalog</div>
+        <h1 class="page-title">The AI agent that<br><span class="line2">knows your <em id="rotatingWord" class="rotating-word"><span class="rw-inner">store</span></em></span><br>as well as you do.</h1>
+        <p class="page-sub">Wrennon builds AI agents trained on your product catalog, order data, and checkout flow &mdash; so every answer is specific to your store, not a generic script. Built ecommerce-first; the same engine adapts to service and internal-ops teams too.</p>
+        <div class="hero-actions" style="margin-top:36px;">
+          <a href="demo.html" class="btn-cta-bold">View Demo</a>
+          <a href="product.html" class="btn-ghost">See how it works</a>
+        </div>
+      </div>
+
+      <div class="hero-illustration" aria-hidden="true">
+        <div class="chat-card">
+          <div class="chat-card-head">
+            <span class="chat-avatar"><img src="images/wren-mark.svg" alt="Wrennon" width="18" height="18" aria-hidden="true"></span>
+            <div>
+              <div class="chat-name">Wrennon Agent</div>
+              <div class="chat-status"><span class="status-dot"></span>Online &mdash; replies in seconds</div>
+            </div>
+          </div>
+          <div class="chat-body" id="heroChatBody"></div>
+          <div class="chat-input">
+            <div class="chat-input-icons">
+              <span class="chat-icon-btn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg></span>
+              <span class="chat-icon-btn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></span>
+              <span class="chat-icon-btn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></span>
+            </div>
+            <span id="heroChatTyped" class="chat-input-placeholder">Type a messageâ€¦</span>
+            <span class="chat-send">&#10148;</span>
+          </div>
+        </div>
+
+        <img class="hero-bird" src="images/wren-mark.svg" alt="Wrennon" aria-hidden="true">
+
+        <div class="float-chip chip-1">&check; In stock</div>
+        <div class="float-chip chip-2">24/7 live</div>
+        <div class="float-chip chip-3">&starf; 8.8&times; ROI</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="logos-section">
+  <div class="wrap">
+    <div class="logos-label">Built for the platforms your store already runs on</div>
+  </div>
+  <div class="marquee-viewport">
+    <div class="marquee-track">
+      <span class="marquee-pill"><span class="dot"></span>Shopify</span>
+      <span class="marquee-pill"><span class="dot"></span>WooCommerce</span>
+      <span class="marquee-pill"><span class="dot"></span>Magento</span>
+      <span class="marquee-pill"><span class="dot"></span>WhatsApp Commerce</span>
+      <span class="marquee-pill"><span class="dot"></span>Custom storefronts</span>
+      <span class="marquee-pill"><span class="dot"></span>BigCommerce</span>
+      <span class="marquee-pill"><span class="dot"></span>Instagram &amp; Messenger</span>
+      <span class="marquee-pill"><span class="dot"></span>Shopify</span>
+      <span class="marquee-pill"><span class="dot"></span>WooCommerce</span>
+      <span class="marquee-pill"><span class="dot"></span>Magento</span>
+      <span class="marquee-pill"><span class="dot"></span>WhatsApp Commerce</span>
+      <span class="marquee-pill"><span class="dot"></span>Custom storefronts</span>
+      <span class="marquee-pill"><span class="dot"></span>BigCommerce</span>
+      <span class="marquee-pill"><span class="dot"></span>Instagram &amp; Messenger</span>
+    </div>
+  </div>
+  <div class="marquee-viewport industry-row">
+    <div class="marquee-track reverse">
+      <span class="marquee-pill">Apparel &amp; Fashion</span>
+      <span class="marquee-pill">Beauty &amp; Cosmetics</span>
+      <span class="marquee-pill">Home &amp; Garden</span>
+      <span class="marquee-pill">Food &amp; Beverage</span>
+      <span class="marquee-pill">Health &amp; Wellness</span>
+      <span class="marquee-pill">Electronics</span>
+      <span class="marquee-pill">Apparel &amp; Fashion</span>
+      <span class="marquee-pill">Beauty &amp; Cosmetics</span>
+      <span class="marquee-pill">Home &amp; Garden</span>
+      <span class="marquee-pill">Food &amp; Beverage</span>
+      <span class="marquee-pill">Health &amp; Wellness</span>
+      <span class="marquee-pill">Electronics</span>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight terminal-section">
+  <div class="wrap-narrow">
+    <div class="section-head" style="margin-bottom:36px;">
+      <div class="section-eyebrow">Under the hood</div>
+      <h2 class="section-title" style="font-size:clamp(24px,3vw,32px);">Built by engineers, tuned by data &mdash; not just prompts.</h2>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="terminal-bar-id">
+          <span class="terminal-mark"><img src="images/wren-mark.svg" alt="Wrennon" width="14" height="14" aria-hidden="true"></span>
+          <span class="terminal-label"><span class="t-prompt">â¯</span>~/wrennon-agent-builder</span>
+        </div>
+        <div class="terminal-status"><span class="status-dot"></span><span>live build</span></div>
+      </div>
+      <div class="terminal-body" id="terminalBody"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">The problem</div>
+      <h2 class="section-title">Generic chatbots weren't built to sell.</h2>
+    </div>
+    <div>
+      <div class="problem-row reveal">
+        <div class="problem-tag">01</div>
+        <div class="problem-text">Off-the-shelf bots <strong>can't see your live inventory or order status</strong> &mdash; they guess, or send the shopper straight to a human.</div>
+      </div>
+      <div class="problem-row reveal">
+        <div class="problem-tag">02</div>
+        <div class="problem-text">Cart and checkout questions are <strong>time-sensitive</strong> &mdash; every minute a shopper waits is a minute closer to abandoning.</div>
+      </div>
+      <div class="problem-row reveal">
+        <div class="problem-tag">03</div>
+        <div class="problem-text">Generic AI tools <strong>don't understand SKUs, variants, or return policies</strong> &mdash; they're built for support tickets, not storefronts.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">What Wrennon does</div>
+      <h2 class="section-title">One agent. Trained on your storefront specifically.</h2>
+      <p class="section-sub">We connect to your catalog and order data first &mdash; everything else is built around that.</p>
+    </div>
+    <div class="feature-grid bento">
+      <div class="feature-card span-2 reveal" tabindex="0">
+        <div class="feature-icon icon-catalog"><svg viewBox="0 0 20 20" width="16" height="16" fill="none"><rect x="3" y="3" width="6" height="6" stroke="currentColor" stroke-width="1.3"/><rect x="11" y="3" width="6" height="6" stroke="currentColor" stroke-width="1.3"/><rect x="3" y="11" width="6" height="6" stroke="currentColor" stroke-width="1.3"/><rect x="11" y="11" width="6" height="6" stroke="currentColor" stroke-width="1.3"/></svg></div>
+        <h3>Trained on your catalog</h3>
+        <p>Products, variants, pricing, stock &mdash; the agent answers from your live catalog, not a static script.</p>
+      </div>
+      <div class="feature-card reveal" tabindex="0">
+        <div class="feature-icon icon-order"><svg viewBox="0 0 20 20" width="16" height="16" fill="none"><circle cx="10" cy="10" r="3.2" stroke="currentColor" stroke-width="1.3"/><path d="M10 2v3M10 15v3M18 10h-3M5 10H2M15.5 4.5l-2 2M6.5 13.5l-2 2M15.5 15.5l-2-2M6.5 6.5l-2-2" stroke="currentColor" stroke-width="1.3"/></svg></div>
+        <h3>Order-aware, always</h3>
+        <p>Real-time order status, shipping updates, and return eligibility, pulled straight from your store.</p>
+      </div>
+      <div class="feature-card reveal" tabindex="0">
+        <div class="feature-icon icon-checkout"><svg viewBox="0 0 20 20" width="16" height="16" fill="none"><path d="M2 7h13M15 7l-3-3M15 7l-3 3" stroke="currentColor" stroke-width="1.3"/><path d="M18 13H5M5 13l3-3M5 13l3 3" stroke="currentColor" stroke-width="1.3"/></svg></div>
+        <h3>Built into checkout</h3>
+        <p>Shopify, WooCommerce, Magento, WhatsApp commerce &mdash; the agent works where your shoppers already are.</p>
+      </div>
+      <div class="feature-card reveal" tabindex="0">
+        <div class="feature-icon icon-brand"><svg viewBox="0 0 20 20" width="16" height="16" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.3"/><circle cx="10" cy="10" r="2.4" stroke="currentColor" stroke-width="1.3"/></svg></div>
+        <h3>Sounds like your brand</h3>
+        <p>Tone, product language, upsell rules &mdash; set once, applied consistently across every conversation.</p>
+      </div>
+      <div class="feature-card reveal" tabindex="0">
+        <div class="feature-icon icon-visibility"><svg viewBox="0 0 20 20" width="16" height="16" fill="none"><rect x="3" y="3" width="14" height="14" stroke="currentColor" stroke-width="1.3"/><path d="M3 8h14M7 8v9" stroke="currentColor" stroke-width="1.3"/></svg></div>
+        <h3>Full visibility</h3>
+        <p>Every conversation logged and reviewable. You see exactly what the agent said and why.</p>
+      </div>
+      <div class="feature-card reveal" tabindex="0">
+        <div class="feature-icon icon-improves"><svg viewBox="0 0 20 20" width="16" height="16" fill="none"><path d="M16 6a6.5 6.5 0 10.9 6.2" stroke="currentColor" stroke-width="1.3"/><path d="M16 2v4.4H11.6" stroke="currentColor" stroke-width="1.3"/></svg></div>
+        <h3>Improves with every order</h3>
+        <p>We retrain on real conversations and real purchase behavior &mdash; the agent gets sharper as your store grows.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Works with your stack</div>
+      <h2 class="section-title">Connects to the tools already running your store.</h2>
+      <p class="section-sub">No rip-and-replace. The agent plugs into your existing catalog, checkout, and messaging tools.</p>
+    </div>
+    <div class="integrations-grid">
+      <div class="integration-card reveal" tabindex="0">
+        <div class="integration-mark">Sh</div>
+        <div class="integration-name">Shopify</div>
+        <div class="integration-desc">Live catalog, inventory, and order sync &mdash; one-click install.</div>
+      </div>
+      <div class="integration-card reveal" tabindex="0">
+        <div class="integration-mark">Wo</div>
+        <div class="integration-name">WooCommerce</div>
+        <div class="integration-desc">Full product and order data pulled straight from your store.</div>
+      </div>
+      <div class="integration-card reveal" tabindex="0">
+        <div class="integration-mark">Mg</div>
+        <div class="integration-name">Magento</div>
+        <div class="integration-desc">Works with complex catalogs, variants, and multi-store setups.</div>
+      </div>
+      <div class="integration-card reveal" tabindex="0">
+        <div class="integration-mark">Wa</div>
+        <div class="integration-name">WhatsApp Business</div>
+        <div class="integration-desc">Cart recovery and order updates where shoppers already chat.</div>
+      </div>
+      <div class="integration-card reveal" tabindex="0">
+        <div class="integration-mark">Kl</div>
+        <div class="integration-name">Klaviyo</div>
+        <div class="integration-desc">Sync conversation data into flows and segments.</div>
+      </div>
+      <div class="integration-card reveal" tabindex="0">
+        <div class="integration-mark">Rc</div>
+        <div class="integration-name">Recharge</div>
+        <div class="integration-desc">Handle subscription pauses, swaps, and cancellations in-chat.</div>
+      </div>
+      <div class="integration-card reveal" tabindex="0">
+        <div class="integration-mark">St</div>
+        <div class="integration-name">Stripe</div>
+        <div class="integration-desc">Refunds and payment status without leaving the conversation.</div>
+      </div>
+      <div class="integration-card reveal" tabindex="0">
+        <div class="integration-mark">Ig</div>
+        <div class="integration-name">Instagram &amp; Messenger</div>
+        <div class="integration-desc">Meet shoppers on social DMs with the same trained agent.</div>
+      </div>
+      <div class="integrations-more">More on the way &mdash; <a href="integrations.html">see the full list &rarr;</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="stat-bento">
+      <div class="stat-card reveal">
+        <div class="stat-number">60%</div>
+        <div class="stat-label">of routine order &amp; product questions handled without a human, out of the box.</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number">&lt;48h</div>
+        <div class="stat-label">typical time to get a catalog-trained agent live on your storefront.</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">coverage across chat, WhatsApp, and social &mdash; with live handoff when it counts.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Where it fits</div>
+      <h2 class="section-title">Built for ecommerce first. Flexible beyond it.</h2>
+    </div>
+    <div class="usecase-list">
+      <div class="usecase reveal">
+        <div class="usecase-name">PRE-PURCHASE</div>
+        <div class="usecase-desc"><strong>Answers product questions in real time</strong> &mdash; sizing, stock, compatibility &mdash; using your actual catalog, not a FAQ page.</div>
+      </div>
+      <div class="usecase reveal">
+        <div class="usecase-name">POST-PURCHASE</div>
+        <div class="usecase-desc"><strong>Handles order status, shipping, and returns</strong> end to end, pulled live from your store &mdash; no "let me check and get back to you."</div>
+      </div>
+      <div class="usecase reveal">
+        <div class="usecase-name">CART RECOVERY</div>
+        <div class="usecase-desc"><strong>Follows up on abandoned carts</strong> over WhatsApp or chat with the right nudge &mdash; a question answered, a discount, or a reminder.</div>
+      </div>
+      <div class="usecase reveal">
+        <div class="usecase-name">BEYOND ECOMMERCE</div>
+        <div class="usecase-desc"><strong>The same engine adapts</strong> to internal tools, service intake, and other operational workflows once your storefront agent is live.</div>
+      </div>
+    </div>
+    <div style="margin-top:32px;">
+      <a href="use-cases.html" class="btn-ghost">See all use cases &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="section video-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">See it live</div>
+      <h2 class="section-title">Watch the agent work a real storefront.</h2>
+      <p class="section-sub">A 60-second walkthrough of a live conversation &mdash; product question to order confirmation.</p>
+    </div>
+    <div class="video-frame reveal" id="productVideoFrame">
+      <!-- To go live: drop your MP4 at /videos/product-demo.mp4 (this exact filename).
+           No file yet? The animated placeholder below shows automatically instead. -->
+      <video id="productVideo" class="product-video" autoplay muted loop playsinline preload="metadata" poster="images/chat-demo-coffee.jpg">
+        <source src="videos/product-demo.mp4" type="video/mp4">
+      </video>
+      <div class="video-fallback" id="videoFallback" hidden>
+        <div class="video-fallback-glow" aria-hidden="true"></div>
+        <button class="video-fallback-play" type="button" aria-label="Play product video">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+        </button>
+        <p class="video-fallback-text">Product walkthrough video coming soon.</p>
+        <a href="demo.html" class="btn-ghost">View the live demo instead &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="cta-section">
+      <h2>Let's look at your storefront.</h2>
+      <p>Tell us which platform you run on. We'll show you what an agent trained on your catalog looks like.</p>
+      <div class="cta-actions">
+        <a href="demo.html" class="btn-cta-bold">View Demo</a>
+        <a href="product.html" class="btn-ghost">See a sample build</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-col">
+        <div class="logo"><img class="logo-mark" src="images/wren-mark.svg" alt="Wrennon" width="34" height="34" aria-hidden="true">Wrennon</div>
+        <p class="footer-desc">AI agents built for ecommerce &mdash; trained on your catalog, orders, and checkout.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="product.html">How it works</a>
+        <a href="integrations.html">Integrations</a>
+        <a href="use-cases.html">Use cases</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="security.html">Security</a>
+        <a href="roi-calculator.html">ROI Calculator</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="blog.html">Blog</a>
+        <a href="careers.html">Careers</a>
+      </div>
+      <div class="footer-col">
+        <h4>Get in touch</h4>
+        <a href="help-center.html">Help Center</a>
+        <a href="contact.html">Contact</a>
+        <a href="demo.html" class="footer-link-btn btn-cta-bold">View Demo</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="foot-copy">Â© 2026 Wrennon</div>
+      <div class="social-icons">
+        <!-- TODO: replace href with real LinkedIn URL -->
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="4" stroke="currentColor" stroke-width="1.5"/><circle cx="7.5" cy="7.5" r="1.4" fill="currentColor" stroke="none"/><rect x="6.3" y="10.5" width="2.4" height="7.5" rx="0.5" fill="currentColor" stroke="none"/><path d="M11.5 18V10.5h2.3v1.2c.6-.9 1.6-1.5 2.8-1.5 2 0 3.4 1.3 3.4 3.9V18h-2.4v-3.4c0-1.2-.5-2-1.6-2-.9 0-1.5.6-1.7 1.2-.1.2-.1.5-.1.8V18h-2.7z" fill="currentColor" stroke="none"/></svg></a>
+        <!-- TODO: replace href with real X (Twitter) URL -->
+        <a href="#" aria-label="X"><svg viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932zm-1.61 19.422h2.039L6.486 3.24H4.298z" fill="currentColor"/></svg></a>
+        <!-- TODO: replace href with real WhatsApp link, e.g. https://wa.me/8801XXXXXXXXX -->
+        <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.4A10 10 0 1012 2z" stroke="currentColor" stroke-width="1.5"/><path d="M8.5 8.3c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.4.2.5.7 1.6.7 1.7.1.1.1.3 0 .4-.1.2-.1.3-.3.4-.1.2-.3.3-.4.5-.1.1-.3.3-.1.6.2.3.8 1.3 1.8 2.1 1.2 1 2.2 1.3 2.5 1.5.3.1.5.1.7-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.8.9.3.1.5.2.5.3.1.2.1.9-.2 1.7-.3.8-1.6 1.5-2.3 1.6-.6.1-1.3.1-2.1-.1-.5-.1-1.1-.4-1.9-.7-3.3-1.4-5.4-4.7-5.6-4.9-.2-.2-1.3-1.8-1.3-3.4 0-1.6.9-2.4 1.2-2.7z" fill="currentColor" stroke="none"/></svg></a>
+        <!-- Email -->
+        <a href="mailto:hello@wrennon.com" aria-label="Email"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M4 6.5l8 6.2 8-6.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="foot-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ---------- LIVE CHAT WIDGET (demo) ---------- -->
+<div class="chat-widget" id="chatWidget">
+  <div class="chat-widget-panel" id="chatWidgetPanel">
+    <div class="chat-widget-head">
+      <span class="chat-avatar"><img src="images/wren-mark.svg" alt="Wrennon" width="18" height="18" aria-hidden="true"></span>
+      <div>
+        <div class="chat-name">Wrennon</div>
+        <div class="chat-status"><span class="status-dot"></span>Ask me about pricing, setup, or demos</div>
+      </div>
+      <button class="chat-widget-close" id="chatWidgetClose" aria-label="Close chat">âœ•</button>
+    </div>
+    <div class="chat-widget-body" id="chatWidgetBody">
+      <div class="bubble bubble-agent">ðŸ‘‹ Hey, I'm the Wrennon demo agent &mdash; this widget is a live example of what we build for your storefront. Try asking about <strong>pricing</strong>, <strong>setup time</strong>, or <strong>integrations</strong>.</div>
+    </div>
+    <div class="chat-widget-input">
+      <input type="text" id="chatWidgetInput" placeholder="Type a messageâ€¦" autocomplete="off">
+      <button id="chatWidgetSend" aria-label="Send">&#10148;</button>
+    </div>
+  </div>
+  <button class="chat-widget-launcher" id="chatWidgetLauncher" aria-label="Open chat">
+    <span class="chat-widget-launcher-pulse" aria-hidden="true"></span>
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="none"><path d="M4 5.5h16a1.5 1.5 0 011.5 1.5v9a1.5 1.5 0 01-1.5 1.5H9l-4.5 4V17.5H4A1.5 1.5 0 012.5 16V7A1.5 1.5 0 014 5.5z" stroke="var(--cream)" stroke-width="1.6" stroke-linejoin="round"/></svg>
+  </button>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

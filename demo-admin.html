@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — Wrennon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+      (function() {
+        var storedTheme = localStorage.getItem('wrennon_theme') || 'system';
+        var isDark = storedTheme === 'dark' || (storedTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.setAttribute('data-theme', isDark ? 'dark-matte' : 'light-offwhite');
+      })();
+    </script>
+    <link rel="stylesheet" href="live-demo-assets/theme.css">
+    <link rel="stylesheet" href="live-demo-assets/admin.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-surface);
+            color: var(--ink);
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        @keyframes slideUpFade {
+            0% { opacity: 0; transform: translateY(20px) scale(0.98); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .admin-container {
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            background: var(--bg-surface);
+            border: none;
+            border-radius: 0;
+            padding: 0 40px 40px 40px;
+            height: 100vh;
+            overflow-y: auto;
+            animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 32px;
+            
+            position: sticky;
+            top: 0;
+            background: var(--bg-surface);
+            z-index: 100;
+            margin-left: -40px;
+            margin-right: -40px;
+            padding: 24px 40px;
+            border-radius: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .admin-header h2 {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+        }
+
+        .btn {
+            background: var(--bg-base);
+            color: var(--ink-soft);
+            border: 1px solid var(--line);
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            background: var(--line);
+            color: var(--ink);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: var(--ink);
+            color: var(--bg-base);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #FFF;
+            transform: translateY(-1px);
+        }
+
+        .btn-danger {
+            background: var(--bg-base);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        .btn-danger:hover {
+            background: var(--danger);
+            color: var(--bg-base);
+            transform: translateY(-1px);
+        }
+
+        h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--ink);
+            font-weight: 700;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 16px;
+            align-items: end;
+            background: var(--bg-base);
+            padding: 24px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--line);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            color: var(--ink-soft);
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .input-wrapper input, .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--line);
+            background: var(--bg-surface);
+            color: var(--ink);
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            outline: none;
+            transition: var(--transition);
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+        }
+
+        .input-wrapper input:focus, .form-group select:focus {
+            background: var(--bg-surface);
+            border-color: var(--accent-alert);
+        }
+        
+        .form-group select option {
+            background: var(--bg-surface);
+            color: var(--ink);
+        }
+
+        .pwd-toggle {
+            position: absolute;
+            right: 12px;
+            background: transparent;
+            border: none;
+            color: var(--ink-soft);
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+        }
+
+        .pwd-toggle:hover {
+            color: var(--ink);
+        }
+        
+        .hidden { display: none !important; }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 16px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 16px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        th {
+            font-size: 12px;
+            color: var(--ink-soft);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        tbody tr {
+            transition: var(--transition);
+        }
+
+        tbody tr:hover {
+            background: var(--bg-base);
+        }
+
+        .role-badge {
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .role-manager {
+            background: var(--line);
+            color: var(--ink-soft);
+            border: 1px solid transparent;
+        }
+
+        .role-agent {
+            background: transparent;
+            color: var(--ink);
+            border: 1px solid var(--line);
+        }
+
+        #error-msg {
+            color: #EF4444;
+            font-size: 13px;
+            margin-top: 12px;
+            font-weight: 500;
+            grid-column: 1 / -1;
+        }
+
+        /* Theme Toggle Button */
+        .theme-dropdown-container {
+            position: relative;
+        }
+        .theme-toggle-btn {
+            background: transparent;
+            border: none;
+            color: var(--ink-soft);
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+            border-radius: 4px;
+        }
+        .theme-toggle-btn:hover {
+            color: var(--ink);
+            background: rgba(128,128,128,0.1);
+        }
+        .theme-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            background: var(--bg-surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 180px;
+            max-height: 300px;
+            overflow-y: auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+        .theme-dropdown-menu::-webkit-scrollbar { width: 6px; }
+        .theme-dropdown-menu::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.2); border-radius: 4px; }
+        .theme-dropdown-menu.hidden {
+            display: none;
+        }
+        .theme-option {
+            background: transparent;
+            border: none;
+            color: var(--ink);
+            padding: 8px 12px;
+            text-align: left;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .theme-option:hover, .theme-option:focus {
+            background: rgba(128,128,128,0.1);
+        }
+        .theme-option.active {
+            font-weight: 600;
+            color: var(--accent);
+            background: rgba(128,128,128,0.05);
+        }
+        .theme-category {
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--ink-soft);
+            padding: 12px 12px 4px 12px;
+            user-select: none;
+        }
+        .theme-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 4px;
+        }
+        .theme-tab {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--ink-soft);
+            padding: 10px 0;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .theme-tab:hover {
+            color: var(--ink);
+        }
+        .theme-tab.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        .theme-tab-content.hidden {
+            display: none;
+        }
+        .theme-divider {
+            height: 1px;
+            background-color: var(--line);
+            margin: 4px 0;
+        }
+        /* ---------- Mobile responsiveness ---------- */
+        @media (max-width: 860px) {
+            .admin-container { padding: 0 20px 32px 20px; }
+            .admin-header { margin-left: -20px; margin-right: -20px; padding: 18px 20px; flex-wrap: wrap; gap: 12px; }
+            .admin-header h2 { font-size: 17px; }
+            form { grid-template-columns: 1fr 1fr; }
+            #analytics-stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            table { display: block; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+        }
+        @media (max-width: 560px) {
+            .admin-container { padding: 0 14px 28px 14px; }
+            .admin-header { margin-left: -14px; margin-right: -14px; padding: 16px 14px; }
+            form { grid-template-columns: 1fr; }
+            #analytics-stats-grid { grid-template-columns: 1fr !important; }
+            th, td { padding: 12px 10px; font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <div>
+                <a href="#" style="font-family: 'Big Shoulders Display', sans-serif; font-style: normal; font-weight: 700; font-size: 31px; letter-spacing: 0.01em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; margin-bottom: 8px;">
+                    <img src="images/wren-mark.svg" alt="Wrennon" width="28" height="28" style="flex-shrink: 0;">Wrennon
+                </a>
+                <h2>Admin Dashboard</h2>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center;">
+                <div class="theme-dropdown-container">
+                    <button id="theme-menu-btn" class="theme-toggle-btn" aria-label="Theme options" aria-haspopup="true" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                    </button>
+                    <div id="theme-dropdown" class="theme-dropdown-menu hidden" role="menu">
+                        <button class="theme-option" data-theme-value="system" role="menuitem">System Preference</button>
+                        <div class="theme-tabs">
+                            <button class="theme-tab active" data-target="admin-light-themes">Light</button>
+                            <button class="theme-tab" data-target="admin-dark-themes">Dark</button>
+                        </div>
+                        <div id="admin-light-themes" class="theme-tab-content active">
+                            <button class="theme-option" data-theme-value="light-brownish" role="menuitem">Brownish White</button>
+                            <button class="theme-option" data-theme-value="light-neutral-gray" role="menuitem">Neutral Gray</button>
+                            <button class="theme-option" data-theme-value="light-corporate-blue" role="menuitem">Corporate Blue</button>
+                            <button class="theme-option" data-theme-value="light-slate-teal" role="menuitem">Slate Teal</button>
+                            <button class="theme-option" data-theme-value="light-graphite" role="menuitem">Graphite</button>
+                        </div>
+                        <div id="admin-dark-themes" class="theme-tab-content hidden">
+                            <button class="theme-option" data-theme-value="dark-matte" role="menuitem">Matte Black</button>
+                            <button class="theme-option" data-theme-value="dark-navy" role="menuitem">Black Navy</button>
+                            <button class="theme-option" data-theme-value="dark-charcoal" role="menuitem">Charcoal</button>
+                            <button class="theme-option" data-theme-value="dark-corporate-blue" role="menuitem">Corporate Blue</button>
+                            <button class="theme-option" data-theme-value="dark-slate-teal" role="menuitem">Slate Teal</button>
+                            <button class="theme-option" data-theme-value="dark-graphite" role="menuitem">Graphite</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn" onclick="const s = new URLSearchParams(window.location.search).get('sector') || 'e-commerce'; window.location.href='demo-agent.html?sector='+s;">Back to Agent Chat</button>
+                <button class="btn" onclick="logout()" style="display: flex; align-items: center; gap: 8px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    Logout
+                </button>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 48px;">Team Directory</h3>
+        <p style="color: var(--ink-soft); font-size: 14px; margin-bottom: 20px;">Click on any agent to view their details.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Employee ID</th>
+                    <th>Access Level</th>
+                    <th>Chats Resolved</th>
+                    <th>Joined</th>
+                    <th style="text-align: right;">Action</th>
+                </tr>
+            </thead>
+            <tbody id="agents-list">
+                <!-- Populated by JS -->
+            </tbody>
+        </table>
+
+        <div style="margin-top: 48px; background: var(--bg-surface); padding: 24px; border-radius: var(--radius-md, 10px); border: 1px solid var(--line); box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+            <h3 style="display: flex; align-items: center; gap: 8px; margin: 0;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ink-soft);">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <line x1="19" y1="8" x2="19" y2="14"></line>
+                    <line x1="22" y1="11" x2="16" y2="11"></line>
+                </svg>
+                Create New Agent
+                <button class="btn btn-sm" id="toggle-create-agent-btn" onclick="toggleCreateAgent()" style="padding: 6px;">
+                    <svg id="toggle-create-agent-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(0deg); transition: transform 0.3s ease;">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+            </h3>
+            <div id="create-agent-container" style="display: none; background: var(--bg-base); padding: 24px; border-radius: 12px; border: 1px solid var(--line); margin-top: 16px;">
+                <!-- hidden inputs to trick browser password managers -->
+                <input style="display:none" type="text" name="fakeusernameremembered"/>
+                <input style="display:none" type="password" name="fakepasswordremembered"/>
+                <form id="create-agent-form">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="agent-fullname" required readonly onfocus="this.removeAttribute('readonly');" autocomplete="new-password" placeholder="e.g. John Doe">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Agent Username</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="agent-username" required readonly onfocus="this.removeAttribute('readonly');" autocomplete="new-password" placeholder="e.g. john_doe">
+                        </div>
+                        <div id="uname-error" style="color: var(--danger); font-size: 11px; margin-top: 4px;"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Employee ID</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="agent-employee-id" required readonly onfocus="this.removeAttribute('readonly');" autocomplete="new-password" placeholder="e.g. EMP-1234">
+                        </div>
+                        <div id="emp-error" style="color: var(--danger); font-size: 11px; margin-top: 4px;"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="agent-password" required readonly onfocus="this.removeAttribute('readonly');" autocomplete="new-password">
+                            <button type="button" class="pwd-toggle" id="toggle-pwd" aria-label="Toggle password visibility">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                    <path class="eye" d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle class="eye" cx="12" cy="12" r="3"></circle>
+                                    <line class="eye-slash hidden" x1="1" y1="1" x2="23" y2="23"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div id="pwd-error" style="color: var(--danger); font-size: 11px; margin-top: 4px;"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Role</label>
+                        <select id="agent-role">
+                            <option value="agent">Agent</option>
+                            <option value="manager">Manager</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="height: 43px; margin-bottom: 2px;">Create Agent</button>
+                    <div id="error-msg"></div>
+                </form>
+                <div id="create-agent-success" style="display: none; flex-direction: column; align-items: center; justify-content: center; padding: 48px 16px; text-align: center;">
+                    <div class="success-icon" style="background: rgba(34,197,94,0.1); color: #16A34A; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <h4 style="margin: 0 0 8px 0; font-size: 1.125rem; font-weight: 600;">Agent Created Successfully</h4>
+                    <p style="margin: 0 0 24px 0; color: var(--ink-soft); font-size: 0.875rem;">The new agent can now log in using their credentials.</p>
+                    <div style="display: flex; gap: 12px; width: 100%; justify-content: center;">
+                        <button type="button" class="btn" onclick="closeCreateAgentPanel()">Done</button>
+                        <button type="button" class="btn btn-primary" onclick="resetCreateAgentForm()" style="display: flex; align-items: center; gap: 8px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <line x1="19" y1="8" x2="19" y2="14"></line>
+                                <line x1="22" y1="11" x2="16" y2="11"></line>
+                            </svg>
+                            Add New Agent
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Knowledge Base Generator -->
+        <h3 style="margin-top: 48px; display: flex; align-items: center; gap: 8px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent);">
+                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+            </svg>
+            Knowledge Base Generator
+        </h3>
+        <p style="color: var(--ink-soft); font-size: 14px; margin-bottom: 20px;">Generate KB articles based on recent customer interactions and trends.</p>
+        <div style="background: var(--bg-base); border-radius: var(--radius-sm); border: 1px solid var(--line); padding: 24px;">
+            <div style="display: flex; gap: 16px; margin-bottom: 16px;">
+                <button class="btn btn-primary" id="generate-kb-btn" onclick="generateKBArticle()" style="display: flex; align-items: center; gap: 8px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    Generate Draft
+                </button>
+            </div>
+            <div id="kb-results" style="display: flex; flex-direction: column; gap: 16px;">
+                <div style="color: var(--ink-soft); font-size: 14px;">Click "Generate Draft" to create a new article based on recent unresolved or complex cases.</div>
+            </div>
+        </div>
+
+        <!-- Analytics & Copilot Section -->
+        <h3 style="margin-top: 48px;">System Analytics & Copilot Insights</h3>
+        <p style="color: var(--ink-soft); font-size: 14px; margin-bottom: 20px;">Real-time performance metrics and recent AI assistant actions.</p>
+        
+        <div id="analytics-stats-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px;">
+            <div style="background: var(--bg-base); padding: 24px; border-radius: var(--radius-sm); border: 1px solid var(--line);">
+                <div style="color: var(--ink-soft); font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Total Support Tickets</div>
+                <div id="analytics-total-tickets" style="font-size: 28px; font-weight: 700; color: var(--ink);">0</div>
+            </div>
+            <div style="background: var(--bg-base); padding: 24px; border-radius: var(--radius-sm); border: 1px solid var(--line);">
+                <div style="color: var(--ink-soft); font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">AI Resolution Rate</div>
+                <div style="display: flex; align-items: baseline; gap: 8px;">
+                    <div id="analytics-deflection-rate" style="font-size: 28px; font-weight: 700; color: var(--accent);">0%</div>
+                    <div id="analytics-ai-resolved" style="color: var(--ink-soft); font-size: 13px;">(0 resolved)</div>
+                </div>
+            </div>
+            <div style="background: var(--bg-base); padding: 24px; border-radius: var(--radius-sm); border: 1px solid var(--line);">
+                <div style="color: var(--ink-soft); font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Revenue Generated</div>
+                <div id="analytics-revenue" style="font-size: 28px; font-weight: 700; color: #10B981;">$0.00</div>
+            </div>
+            <div style="background: var(--bg-base); padding: 24px; border-radius: var(--radius-sm); border: 1px solid var(--line);">
+                <div style="color: var(--ink-soft); font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Total Upsells</div>
+                <div id="analytics-upsells" style="font-size: 28px; font-weight: 700; color: var(--ink);">0</div>
+            </div>
+        </div>
+
+        <div style="background: var(--bg-base); border-radius: var(--radius-sm); border: 1px solid var(--line); padding: 24px;">
+            <h4 style="margin-bottom: 16px; font-size: 16px; color: var(--ink);">Recent Copilot Activity</h4>
+            <div id="copilot-activity-list" style="display: flex; flex-direction: column; gap: 16px;">
+                <!-- Populated by JS -->
+                <div style="color: var(--ink-soft); font-size: 14px; text-align: center; padding: 20px;">Fetching latest copilot actions...</div>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 48px;">Automated QA &amp; CSAT Scorecards</h3>
+        <p style="color: var(--ink-soft); font-size: 14px; margin-bottom: 20px;">AI-generated evaluations of recent human-handled and AI-handled conversations.</p>
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="text-align: left; padding: 12px; border-bottom: 1px solid var(--line);">Time</th>
+                        <th style="text-align: left; padding: 12px; border-bottom: 1px solid var(--line);">Conv ID</th>
+                        <th style="text-align: center; padding: 12px; border-bottom: 1px solid var(--line);">Empathy</th>
+                        <th style="text-align: center; padding: 12px; border-bottom: 1px solid var(--line);">Accuracy</th>
+                        <th style="text-align: center; padding: 12px; border-bottom: 1px solid var(--line);">Resolution</th>
+                        <th style="text-align: center; padding: 12px; border-bottom: 1px solid var(--line);">Pred. CSAT</th>
+                        <th style="text-align: left; padding: 12px; border-bottom: 1px solid var(--line);">AI Feedback Notes</th>
+                    </tr>
+                </thead>
+                <tbody id="qa-scorecards-list">
+                    <!-- Populated by JS; static demo rows as a fallback -->
+                </tbody>
+            </table>
+        </div>
+
+        <h3 style="margin-top: 48px;">AI Brand Persona</h3>
+        <p style="color: var(--ink-soft); font-size: 14px; margin-bottom: 20px;">Customize how the AI talks to customers (this dynamically updates the System Prompt).</p>
+        <div style="background: var(--bg-base); border-radius: var(--radius-sm); border: 1px solid var(--line); padding: 24px; display: flex; flex-direction: column; gap: 16px;">
+            <textarea id="brand-voice-textarea" style="width: 100%; height: 120px; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: var(--bg-surface); color: var(--ink); font-family: inherit; font-size: 14px; resize: vertical;" placeholder="e.g. You are a highly professional, polite, and formal support agent for a luxury brand. Never use emojis."></textarea>
+            <button class="btn btn-primary" id="save-brand-persona-btn" onclick="saveBrandVoice()" style="align-self: flex-start;">Save Brand Persona</button>
+        </div>
+
+        <div style="margin-top: 48px; margin-bottom: 20px; border-bottom: 1px solid var(--line); padding-bottom: 12px;">
+            <h3 style="margin: 0; display: flex; align-items: center; gap: 8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent);">
+                    <path d="M12 20h9"></path>
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                </svg>
+                System Audit Logs
+                <button class="btn" id="toggle-logs-btn" onclick="toggleLogs()" style="padding: 4px; margin-left: 8px; display: flex; align-items: center; justify-content: center; background: transparent; border: 1px solid var(--line);">
+                    <svg id="toggle-logs-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg); transition: transform 0.3s ease;">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+            </h3>
+        </div>
+        <div id="logs-container" style="display: none; overflow-x: auto;">
+        <table style="margin-bottom: 40px; opacity: 0.9;">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Actor</th>
+                    <th>Action</th>
+                    <th>Target</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody id="logs-list">
+                <!-- Populated by JS -->
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <!-- Agent Details Modal -->
+    <div id="agent-modal" class="modal" onclick="if(event.target === this) this.style.display='none'" style="display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); align-items: center; justify-content: center; z-index: 100; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);">
+        <div style="background: var(--bg-surface); padding: 32px; border-radius: 16px; border: 1px solid var(--line); width: min(400px, 90vw); max-height: 85vh; overflow-y: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.3);" onclick="event.stopPropagation()">
+            <h3 style="margin-bottom: 24px;">Agent Details</h3>
+            <div style="margin-bottom: 16px;">
+                <label style="color: var(--ink-soft); font-size: 12px; font-weight: 600; text-transform: uppercase;">Full Name</label>
+                <div id="modal-fullname" style="font-size: 16px; font-weight: 500; margin-top: 4px;"></div>
+            </div>
+            <div style="margin-bottom: 16px;">
+                <label style="color: var(--ink-soft); font-size: 12px; font-weight: 600; text-transform: uppercase;">Username</label>
+                <div id="modal-username" style="font-size: 16px; font-weight: 500; margin-top: 4px;"></div>
+            </div>
+            <div style="margin-bottom: 16px;">
+                <label style="color: var(--ink-soft); font-size: 12px; font-weight: 600; text-transform: uppercase;">Employee ID</label>
+                <div id="modal-employee-id" style="font-size: 16px; font-weight: 500; margin-top: 4px; font-family: monospace;"></div>
+            </div>
+            <div style="margin-bottom: 24px;">
+                <label style="color: var(--ink-soft); font-size: 12px; font-weight: 600; text-transform: uppercase;">Role</label>
+                <div id="modal-role" style="font-size: 16px; font-weight: 500; margin-top: 4px;"></div>
+            </div>
+            
+            <div id="password-reset-section" style="margin-bottom: 24px; padding-top: 24px; border-top: 1px solid var(--line);">
+                <label style="color: var(--ink-soft); font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 8px; display: block;">Reset Password</label>
+                <div style="display: flex; gap: 8px; position: relative;">
+                    <input type="password" id="reset-new-password" placeholder="New Password" style="flex: 1; padding: 10px 40px 10px 12px; border-radius: 8px; border: 1px solid var(--line); background: rgba(255,255,255,0.03); color: var(--ink); outline: none;">
+                    <button type="button" class="pwd-toggle" id="toggle-reset-pwd" aria-label="Toggle password visibility" style="right: 80px;">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <path class="eye" d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle class="eye" cx="12" cy="12" r="3"></circle>
+                            <line class="eye-slash hidden" x1="1" y1="1" x2="23" y2="23"></line>
+                        </svg>
+                    </button>
+                    <button class="btn btn-primary" id="reset-pwd-btn" onclick="resetAgentPassword()" style="padding: 0 16px; min-width: auto; height: 40px;">Reset</button>
+                </div>
+                <div id="reset-error-msg" style="color: var(--danger); font-size: 11px; margin-top: 8px;"></div>
+            </div>
+
+            <div id="modal-actions" style="display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid var(--line);">
+                <button class="btn btn-danger" id="modal-remove-btn" onclick="deleteAgent(selectedAgentUsername)">Remove Agent</button>
+                <button class="btn" onclick="document.getElementById('agent-modal').style.display='none'">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const _RENDER_HOST = "wrennon-backend.onrender.com";
+        const _IS_LOCAL = location.hostname === "localhost" || location.hostname === "127.0.0.1" || location.protocol === "file:";
+        const API_BASE = `${_IS_LOCAL ? "http" : "https"}://${_IS_LOCAL ? "localhost:8000" : _RENDER_HOST}/api`;
+        
+        // --- INJECT STATIC MOCK FETCH FOR DEMO ---
+        const originalFetch = window.fetch;
+        window.fetch = async function(url, options) {
+            if (typeof url === 'string') {
+                if (url.includes('/admin/agents/alex/reset-password') || url.includes('/admin/agents/issac/reset-password')) {
+                    return new Response(JSON.stringify({ msg: 'Mock password reset' }), { status: 200 });
+                }
+                if (url.includes('/admin/agents')) {
+                    return new Response(JSON.stringify([
+                        { username: 'issac', full_name: 'Issac', role: 'manager', employee_id: 'EMP-ADM-01', active_conversations: 0, resolved_count: 420, last_active: new Date().toISOString(), created_at: '2025-02-11T09:00:00.000Z' },
+                        { username: 'alex', full_name: 'Alex', role: 'agent', employee_id: 'EMP-AGT-02', active_conversations: 2, resolved_count: 142, last_active: new Date().toISOString(), created_at: '2025-06-03T09:00:00.000Z' },
+                        { username: 'harry', full_name: 'Harry', role: 'agent', employee_id: 'EMP-AGT-03', active_conversations: 3, resolved_count: 98, last_active: new Date().toISOString(), created_at: '2025-09-22T09:00:00.000Z' },
+                        { username: 'wrennon-ai', full_name: 'Wrennon AI', role: 'ai', employee_id: 'AI-CORE', active_conversations: 50, resolved_count: 1337, last_active: new Date().toISOString(), created_at: '2025-02-11T09:00:00.000Z' }
+                    ]), { status: 200, headers: { 'Content-Type': 'application/json' } });
+                }
+                if (url.includes('/admin/logs')) {
+                    return new Response(JSON.stringify([
+                        { created_at: new Date().toISOString(), level: 'INFO', action: 'system_startup', actor: 'system', target: 'wrennon-ai-engine', details: 'Wrennon AI Engine loaded successfully.' },
+                        { created_at: new Date(Date.now() - 1800000).toISOString(), level: 'INFO', action: 'kb_article_published', actor: 'issac', target: 'KB-0142', details: 'Published knowledge base article: Return & Exchange Policy Update.' },
+                        { created_at: new Date(Date.now() - 3600000).toISOString(), level: 'WARNING', action: 'high_load', actor: 'system', target: 'conversation-queue', details: 'Unusual spike in customer traffic detected \u2014 auto-scaled AI workers.' },
+                        { created_at: new Date(Date.now() - 5400000).toISOString(), level: 'INFO', action: 'handoff_resolved', actor: 'alex', target: 'sess_4b1c275ee6a4', details: 'Resolved escalated conversation for Aliza Rahman (duplicate charge inquiry).' },
+                        { created_at: new Date(Date.now() - 7200000).toISOString(), level: 'INFO', action: 'agent_login', actor: 'issac', target: '\u2014', details: 'Admin user issac logged in.' },
+                        { created_at: new Date(Date.now() - 9000000).toISOString(), level: 'INFO', action: 'handoff_resolved', actor: 'harry', target: 'sess_5c2d386ff7b5', details: 'Resolved escalated conversation for Grace Whitman (damaged item replacement).' },
+                        { created_at: new Date(Date.now() - 14400000).toISOString(), level: 'WARNING', action: 'password_reset', actor: 'issac', target: 'alex', details: 'Password reset issued for agent account alex.' },
+                        { created_at: new Date(Date.now() - 21600000).toISOString(), level: 'INFO', action: 'agent_login', actor: 'alex', target: '\u2014', details: 'Agent alex logged in.' },
+                        { created_at: new Date(Date.now() - 28800000).toISOString(), level: 'INFO', action: 'agent_login', actor: 'harry', target: '\u2014', details: 'Agent harry logged in.' }
+                    ]), { status: 200, headers: { 'Content-Type': 'application/json' } });
+                }
+                if (url.includes('/analytics/stats')) {
+                    return new Response(JSON.stringify({
+                        total_conversations: 1423,
+                        active_conversations: 50,
+                        avg_resolution_time: "4m 12s",
+                        ai_resolution_rate: "87%",
+                        total_tickets: 1423,
+                        deflection_rate: 87,
+                        resolved_by_ai: 1237,
+                        revenue_generated: 18642.50,
+                        upsell_count: 96
+                    }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+                }
+                if (url.includes('/copilot/suggest')) {
+                    return new Response(JSON.stringify({
+                        next_best_action: "Offer a prepaid return label and proactively check if the customer would prefer a same-item replacement instead of a refund.",
+                        suggested_reply: "Thanks for flagging this \u2014 I've pulled up your order and I can send a free replacement right away, or process a full refund if you'd prefer that instead. Which would you like?"
+                    }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+                }
+                if (url.includes('/kb/suggest')) {
+                    return new Response(JSON.stringify({
+                        confidence: "92%",
+                        title: "Handling Duplicate Charge & Authorization Hold Inquiries",
+                        content: "When a customer reports being charged twice for the same order, first check the payment gateway logs for a second *settled* transaction versus a temporary *authorization hold* left behind by a retried webhook. Holds are not real charges and typically clear automatically within 24-48 hours. If a genuine duplicate settlement is confirmed, issue an immediate refund for the extra charge and send written confirmation the customer can share with their bank."
+                    }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+                }
+            }
+            return originalFetch.apply(this, arguments);
+        };
+        // --- END MOCK FETCH ---
+        
+
+        
+        // Toggle password logic
+        const togglePwdBtn = document.getElementById("toggle-pwd");
+        const pwdInput = document.getElementById("agent-password");
+        const eyePaths = togglePwdBtn.querySelectorAll(".eye");
+        const slashLine = togglePwdBtn.querySelector(".eye-slash");
+        
+        togglePwdBtn.addEventListener("click", () => {
+            if (pwdInput.type === "password") {
+                pwdInput.type = "text";
+                eyePaths.forEach(p => p.classList.add("hidden"));
+                slashLine.classList.remove("hidden");
+            } else {
+                pwdInput.type = "password";
+                eyePaths.forEach(p => p.classList.remove("hidden"));
+                slashLine.classList.add("hidden");
+            }
+        });
+        
+        // Toggle password logic (Reset Password Modal)
+        const toggleResetPwdBtn = document.getElementById("toggle-reset-pwd");
+        if (toggleResetPwdBtn) {
+            const pwdInput = document.getElementById("reset-new-password");
+            const eyePaths = toggleResetPwdBtn.querySelectorAll(".eye");
+            const slashLine = toggleResetPwdBtn.querySelector(".eye-slash");
+            
+            toggleResetPwdBtn.addEventListener("click", () => {
+                if (pwdInput.type === "password") {
+                    pwdInput.type = "text";
+                    eyePaths.forEach(p => p.classList.add("hidden"));
+                    slashLine.classList.remove("hidden");
+                } else {
+                    pwdInput.type = "password";
+                    eyePaths.forEach(p => p.classList.remove("hidden"));
+                    slashLine.classList.add("hidden");
+                }
+            });
+        }
+        
+        // Toggle Logs
+        function toggleLogs() {
+            const logsContainer = document.getElementById("logs-container");
+            const toggleIcon = document.getElementById("toggle-logs-icon");
+            if (logsContainer.style.display === "none") {
+                logsContainer.style.display = "block";
+                toggleIcon.style.transform = "rotate(180deg)";
+            } else {
+                logsContainer.style.display = "none";
+                toggleIcon.style.transform = "rotate(0deg)";
+            }
+        }
+
+        const usernameInput = document.getElementById("agent-username");
+        const empIdInput = document.getElementById("agent-employee-id");
+        const createBtn = document.querySelector('#create-agent-form button[type="submit"]');
+        const errorMsg = document.getElementById("error-msg"); // Kept for server errors
+        const unameError = document.getElementById("uname-error");
+        const empError = document.getElementById("emp-error");
+        const pwdError = document.getElementById("pwd-error");
+        const fullPwdInstruction = "Requires 8+ chars, uppercase, lowercase, number, & special char.";
+
+        function validateForm() {
+            let unameErrText = "";
+            let empErrText = "";
+            let pwdErrText = "";
+            
+            const pwd = pwdInput.value;
+            const uname = usernameInput.value.trim();
+            const empId = empIdInput.value.trim();
+            
+            if (uname && currentAgentsData && currentAgentsData.some(a => a.username.toLowerCase() === uname.toLowerCase())) {
+                unameErrText = "Username already exists.";
+            } 
+            if (empId && currentAgentsData && currentAgentsData.some(a => a.employee_id && a.employee_id.toLowerCase() === empId.toLowerCase())) {
+                empErrText = "Employee ID already exists.";
+            } 
+            if (pwd) {
+                if (pwd.length < 8 || !/[A-Z]/.test(pwd) || !/[a-z]/.test(pwd) || !/[0-9]/.test(pwd) || !/[!@#$%^&*(),.?":{}|<>]/.test(pwd)) {
+                    pwdErrText = fullPwdInstruction;
+                }
+            }
+            
+            unameError.innerText = unameErrText;
+            empError.innerText = empErrText;
+            pwdError.innerText = pwdErrText;
+            
+            errorMsg.innerText = ""; // Clear generic error
+            
+            const hasError = unameErrText || empErrText || pwdErrText;
+            createBtn.disabled = !!hasError;
+            return !hasError;
+        }
+
+        usernameInput.addEventListener('input', validateForm);
+        empIdInput.addEventListener('input', validateForm);
+        pwdInput.addEventListener('input', validateForm);
+
+        const resetBtn = document.getElementById("reset-pwd-btn");
+        const resetErrorMsg = document.getElementById("reset-error-msg");
+        const resetPwdInput = document.getElementById("reset-new-password");
+        
+        resetPwdInput.addEventListener('input', () => {
+            const pwd = resetPwdInput.value;
+            let error = "";
+            if (pwd) {
+                if (pwd.length < 8 || !/[A-Z]/.test(pwd) || !/[a-z]/.test(pwd) || !/[0-9]/.test(pwd) || !/[!@#$%^&*(),.?":{}|<>]/.test(pwd)) {
+                    error = fullPwdInstruction;
+                }
+            }
+            resetErrorMsg.innerText = error;
+            resetBtn.disabled = error.length > 0;
+        });
+
+        const currentUser = localStorage.getItem("agent_username");
+
+        let currentAgentsData = [];
+        let selectedAgentUsername = null;
+        
+        function showAgentDetails(index) {
+            const agent = currentAgentsData[index];
+            if(!agent) return;
+            selectedAgentUsername = agent.username;
+            document.getElementById("modal-fullname").innerText = agent.full_name;
+            document.getElementById("modal-username").innerText = agent.username;
+            document.getElementById("modal-employee-id").innerText = agent.employee_id;
+            document.getElementById("modal-role").innerText = agent.role;
+            
+            if (agent.role === 'ai') {
+                document.getElementById('password-reset-section').style.display = 'none';
+                document.getElementById('modal-remove-btn').style.display = 'none';
+            } else {
+                document.getElementById('password-reset-section').style.display = 'block';
+                if (agent.username === currentUser || agent.role === 'manager') {
+                    document.getElementById('modal-remove-btn').style.display = 'none';
+                } else {
+                    document.getElementById('modal-remove-btn').style.display = 'block';
+                }
+            }
+            document.getElementById("reset-new-password").value = "";
+            
+            document.getElementById('agent-modal').style.display = 'flex';
+        }
+
+        async function resetAgentPassword() {
+            if (!selectedAgentUsername) return;
+            const newPassword = document.getElementById("reset-new-password").value;
+            if (!newPassword) {
+                alert("Please enter a new password");
+                return;
+            }
+            if (!confirm(`Are you sure you want to reset password for ${selectedAgentUsername}?`)) return;
+            
+            const res = await fetch(`${API_BASE}/admin/agents/${selectedAgentUsername}/reset-password`, {
+                method: 'PUT',
+                headers: { 
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({ new_password: newPassword })
+            });
+            if (res.ok) {
+                alert("Password reset successfully!");
+                document.getElementById("reset-new-password").value = "";
+                fetchLogs(); // refresh logs
+            } else {
+                const data = await res.json();
+                alert(`Error: ${data.detail}`);
+            }
+        }
+
+        async function fetchAgents() {
+            try {
+                const res = await fetch(`${API_BASE}/admin/agents`, {
+                    credentials: "include"
+                });
+                
+                if (res.status === 401 || res.status === 403) {
+                    alert("Session expired or access denied.");
+                    const s = new URLSearchParams(window.location.search).get('sector') || 'e-commerce';
+                    window.location.href = "demo-agent.html?sector=" + s;
+                    return;
+                }
+                if (!res.ok) return;
+
+                const agents = await res.json();
+                currentAgentsData = agents;
+                const tbody = document.getElementById("agents-list");
+                tbody.innerHTML = "";
+
+                agents.forEach((agent, index) => {
+                    const roleClass = agent.role === 'manager' ? 'role-manager' : (agent.role === 'ai' ? 'role-badge' : 'role-agent');
+                    let roleStyle = agent.role === 'ai' ? 'background: rgba(59, 130, 246, 0.15); color: #60A5FA; border: 1px solid rgba(59, 130, 246, 0.3);' : '';
+                    const date = agent.created_at ? new Date(agent.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '-';
+                    
+                    const isSelf = agent.username === currentUser;
+                    const isAi = agent.role === 'ai';
+                    
+                    let actionCol = `<button class="btn" style="font-size: 12px; padding: 6px 12px;" onclick="event.stopPropagation(); showAgentDetails(${index})">Manage</button>`;
+                    if (isSelf) {
+                        actionCol = `<span style="color: var(--ink-soft); font-size: 12px; font-weight: 600; margin-right: 12px;">(You)</span>`;
+                    } else if (isAi) {
+                        actionCol = "";
+                    }
+
+                    const tr = document.createElement("tr");
+                    tr.style.cursor = "pointer";
+                    tr.onclick = () => showAgentDetails(index);
+                    tr.innerHTML = `
+                        <td style="font-weight: 600;">${agent.username}</td>
+                        <td style="color: var(--ink-soft); font-family: monospace;">${agent.employee_id}</td>
+                        <td><span class="role-badge ${roleClass}" style="${roleStyle}">${agent.role}</span></td>
+                        <td style="font-weight: 700; font-size: 15px; color: var(--accent);">${agent.resolved_count}</td>
+                        <td style="color: var(--ink-soft);">${date}</td>
+                        <td style="text-align: right;">
+                            ${actionCol}
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (err) {
+                console.error("Failed to fetch agents:", err);
+                const tbody = document.getElementById("agents-list");
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--danger);">Server is currently offline or unreachable.</td></tr>`;
+            }
+        }
+        
+
+
+        async function deleteAgent(username) {
+            if (!confirm(`Are you sure you want to remove agent '${username}'?`)) return;
+            const res = await fetch(`${API_BASE}/admin/agents/${username}`, {
+                method: 'DELETE',
+                credentials: "include"
+            });
+            if (res.ok) {
+                document.getElementById('agent-modal').style.display = 'none';
+                fetchAgents();
+            } else {
+                const data = await res.json();
+                document.getElementById("error-msg").innerText = data.detail;
+            }
+        }
+
+        function toggleCreateAgent() {
+            const container = document.getElementById("create-agent-container");
+            const toggleIcon = document.getElementById("toggle-create-agent-icon");
+            if (container.style.display === "none" || container.style.display === "") {
+                container.style.display = "block";
+                toggleIcon.style.transform = "rotate(180deg)";
+            } else {
+                container.style.display = "none";
+                toggleIcon.style.transform = "rotate(0deg)";
+            }
+        }
+
+        function resetCreateAgentForm() {
+            const form = document.getElementById("create-agent-form");
+            form.reset();
+            document.getElementById("error-msg").innerText = "";
+            const pwdInputLocal = document.getElementById("agent-password");
+            if (pwdInputLocal && pwdInputLocal.type === "text") {
+                document.getElementById("toggle-pwd").click();
+            }
+            document.getElementById("create-agent-success").style.display = "none";
+            form.style.display = "block";
+        }
+
+        function closeCreateAgentPanel() {
+            resetCreateAgentForm();
+            toggleCreateAgent();
+        }
+
+        document.getElementById("create-agent-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            if (!validateForm()) return;
+
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.disabled = true;
+            btn.innerText = "Creating...";
+            
+            const username = document.getElementById("agent-username").value;
+            const full_name = document.getElementById("agent-fullname").value;
+            const employee_id = document.getElementById("agent-employee-id").value;
+            const password = pwdInput.value;
+            const role = document.getElementById("agent-role").value;
+
+            const res = await fetch(`${API_BASE}/admin/agents`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({ username, full_name, employee_id, password, role })
+            });
+
+            btn.disabled = false;
+            btn.innerText = "Create Agent";
+
+            if (res.ok) {
+                document.getElementById("error-msg").innerText = "";
+                document.getElementById("create-agent-form").style.display = "none";
+                document.getElementById("create-agent-success").style.display = "flex";
+
+                fetchAgents();
+                fetchLogs();
+            } else {
+                const data = await res.json();
+                document.getElementById("error-msg").innerText = data.detail;
+            }
+        });
+        
+        async function fetchLogs() {
+            try {
+                const res = await fetch(`${API_BASE}/admin/logs`, {
+                    credentials: "include"
+                });
+                if (!res.ok) return;
+                
+                const logs = await res.json();
+                const tbody = document.getElementById("logs-list");
+                tbody.innerHTML = "";
+                
+                logs.forEach(log => {
+                    const date = new Date(log.created_at).toLocaleString(undefined, { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td style="color: var(--ink-soft); font-size: 13px;">${date}</td>
+                        <td style="font-weight: 600;">${log.actor}</td>
+                        <td style="color: var(--accent); font-family: monospace;">${log.action}</td>
+                        <td>${log.target || "-"}</td>
+                        <td style="color: var(--ink-soft); font-size: 13px;">${log.details || "-"}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (err) {
+                console.error("Failed to fetch logs:", err);
+            }
+        }
+
+        // Force clear autofill fields completely on load
+        setTimeout(() => {
+            const inputs = ['agent-username', 'agent-fullname', 'agent-employee-id', 'agent-password'];
+            inputs.forEach(id => {
+                const el = document.getElementById(id);
+                if(el) {
+                    el.value = "";
+                    el.setAttribute('readonly', 'readonly');
+                }
+            });
+        }, 100);
+
+        // Theme Sync Logic
+        function setupThemeDropdown() {
+            const menuBtn = document.getElementById("theme-menu-btn");
+            const dropdown = document.getElementById("theme-dropdown");
+            const options = document.querySelectorAll(".theme-option");
+            if (!menuBtn || !dropdown) return;
+
+            function applyTheme(themeValue) {
+                localStorage.setItem("wrennon_theme", themeValue);
+                if (themeValue === "system") {
+                    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    document.documentElement.setAttribute("data-theme", isDark ? "dark-matte" : "light-offwhite");
+                } else {
+                    document.documentElement.setAttribute("data-theme", themeValue);
+                }
+                
+                options.forEach(opt => {
+                    opt.classList.toggle("active", opt.dataset.themeValue === themeValue);
+                });
+            }
+
+            menuBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const isExpanded = menuBtn.getAttribute("aria-expanded") === "true";
+                menuBtn.setAttribute("aria-expanded", !isExpanded);
+                dropdown.classList.toggle("hidden");
+                if (!isExpanded) {
+                    options[0].focus();
+                }
+            });
+
+            document.addEventListener("click", (e) => {
+                if (!dropdown.contains(e.target) && e.target !== menuBtn) {
+                    dropdown.classList.add("hidden");
+                    menuBtn.setAttribute("aria-expanded", "false");
+                }
+            });
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    dropdown.classList.add("hidden");
+                    menuBtn.setAttribute("aria-expanded", "false");
+                    menuBtn.focus();
+                }
+            });
+
+            options.forEach(opt => {
+                opt.addEventListener("click", () => {
+                    applyTheme(opt.dataset.themeValue);
+                    dropdown.classList.add("hidden");
+                    menuBtn.setAttribute("aria-expanded", "false");
+                });
+            });
+
+            const currentTheme = localStorage.getItem("wrennon_theme") || "system";
+            applyTheme(currentTheme);
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                if (localStorage.getItem("wrennon_theme") === "system") {
+                    document.documentElement.setAttribute("data-theme", e.matches ? "dark-matte" : "light-offwhite");
+                }
+            });
+
+            window.addEventListener('storage', (e) => {
+                if (e.key === "wrennon_theme") {
+                    applyTheme(e.newValue || "system");
+                }
+            });
+        }
+        setupThemeDropdown();
+
+        function logout() {
+            localStorage.removeItem("agent_token");
+            localStorage.removeItem("agent_username");
+            localStorage.removeItem("agent_role");
+            const s = new URLSearchParams(window.location.search).get('sector') || 'e-commerce';
+            window.location.href = "demo-agent.html?sector=" + s;
+        }
+
+        async function fetchAnalytics() {
+            try {
+                const res = await fetch(`${API_BASE}/analytics/stats`);
+                if (!res.ok) return;
+                const data = await res.json();
+                document.getElementById('analytics-total-tickets').innerText = data.total_tickets;
+                document.getElementById('analytics-deflection-rate').innerText = data.deflection_rate + "%";
+                document.getElementById('analytics-ai-resolved').innerText = `(${data.resolved_by_ai} resolved by AI)`;
+                document.getElementById('analytics-revenue').innerText = `$${data.revenue_generated.toFixed(2)}`;
+                document.getElementById('analytics-upsells').innerText = data.upsell_count;
+            } catch (err) {
+                console.error("Failed to fetch analytics:", err);
+            }
+        }
+
+        async function fetchCopilot() {
+            try {
+                const req = {
+                    ticket_id: "TICKET-" + Math.floor(Math.random() * 10000),
+                    conversation_summary: "Customer inquiring about product specs."
+                };
+                const res = await fetch(`${API_BASE}/copilot/suggest`, {
+                    method: 'POST',
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(req)
+                });
+                if (!res.ok) return;
+                const data = await res.json();
+                
+                const list = document.getElementById('copilot-activity-list');
+                list.innerHTML = `
+                    <div style="background: var(--bg-surface); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--line);">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: var(--ink-soft); font-size: 12px; font-weight: 600;">RECOMMENDED ACTION</span>
+                            <span style="background: rgba(16, 185, 129, 0.1); color: #10B981; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600;">High Confidence</span>
+                        </div>
+                        <div style="color: var(--ink); font-weight: 500; font-size: 15px; margin-bottom: 8px;">${data.next_best_action}</div>
+                        
+                        <div style="margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--line);">
+                            <span style="color: var(--ink-soft); font-size: 12px; font-weight: 600;">SUGGESTED REPLY DRAFT</span>
+                            <p style="color: var(--ink); font-size: 14px; margin-top: 8px; font-style: italic;">"${data.suggested_reply}"</p>
+                        </div>
+                    </div>
+                `;
+            } catch (err) {
+                console.error("Failed to fetch copilot:", err);
+            }
+        }
+
+        async function generateKBArticle() {
+            const btn = document.getElementById('generate-kb-btn');
+            const results = document.getElementById('kb-results');
+            
+            btn.disabled = true;
+            btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg> Generating...`;
+            
+            try {
+                const res = await fetch(`${API_BASE}/kb/suggest`, { method: 'POST' });
+                if (res.ok) {
+                    const data = await res.json();
+                    results.innerHTML = `
+                        <div style="background: var(--bg-surface); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--line);">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                                <span style="color: var(--ink-soft); font-size: 12px; font-weight: 600;">NEW KB DRAFT</span>
+                                <span style="background: rgba(16, 185, 129, 0.1); color: #10B981; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600;">${data.confidence} Confidence</span>
+                            </div>
+                            <div style="color: var(--ink); font-weight: 600; font-size: 16px; margin-bottom: 8px;">${data.title}</div>
+                            <p style="color: var(--ink-soft); font-size: 14px; line-height: 1.5; margin-bottom: 16px;">${data.content}</p>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn btn-primary" onclick="alert('KB Article Published!')">Publish</button>
+                                <button class="btn">Edit Draft</button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    results.innerHTML = `<div style="color: var(--danger); font-size: 14px;">Failed to generate KB article.</div>`;
+                }
+            } catch (err) {
+                console.error("Failed to generate KB article:", err);
+                results.innerHTML = `<div style="color: var(--danger); font-size: 14px;">An error occurred.</div>`;
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Generate Draft`;
+            }
+        }
+
+        async function fetchScorecards() {
+            const demoScorecards = [
+                { time: "Jul 18, 03:52 PM", conv_id: "CUST-4471", empathy: 9, accuracy: 10, resolution: 9, csat: 5, notes: "Calm, accurate tracking info delivered fast. Textbook resolution." },
+                { time: "Jul 18, 02:14 PM", conv_id: "CUST-4473", empathy: 7, accuracy: 8, resolution: 6, csat: 3, notes: "Correct escalation on incorrect item, but reply felt slightly scripted." },
+                { time: "Jul 18, 12:40 PM", conv_id: "CUST-4478", empathy: 9, accuracy: 9, resolution: 9, csat: 5, notes: "Proactively offered a discount code before being asked. Strong upsell save." },
+                { time: "Jul 17, 06:05 PM", conv_id: "CUST-4472", empathy: 8, accuracy: 9, resolution: 10, csat: 5, notes: "Clean handoff to human agent with full context summary attached." },
+                { time: "Jul 17, 04:22 PM", conv_id: "CUST-4477", empathy: 6, accuracy: 7, resolution: 7, csat: 3, notes: "Sentiment spike missed for one turn before auto-escalation kicked in." },
+            ];
+
+            const renderRows = (rows) => {
+                const tbody = document.getElementById('qa-scorecards-list');
+                if (!tbody) return;
+                tbody.innerHTML = rows.map(r => `
+                    <tr>
+                        <td style="padding: 12px; border-bottom: 1px solid var(--line); color: var(--ink-soft);">${r.time}</td>
+                        <td style="padding: 12px; border-bottom: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 13px;">${r.conv_id}</td>
+                        <td style="padding: 12px; border-bottom: 1px solid var(--line); text-align: center;">${r.empathy}/10</td>
+                        <td style="padding: 12px; border-bottom: 1px solid var(--line); text-align: center;">${r.accuracy}/10</td>
+                        <td style="padding: 12px; border-bottom: 1px solid var(--line); text-align: center;">${r.resolution}/10</td>
+                        <td style="padding: 12px; border-bottom: 1px solid var(--line); text-align: center; color: var(--accent); font-weight: 600;">${r.csat}/5</td>
+                        <td style="padding: 12px; border-bottom: 1px solid var(--line); font-size: 13px;">${r.notes}</td>
+                    </tr>
+                `).join('');
+            };
+
+            try {
+                const res = await fetch(`${API_BASE}/admin/analytics/scorecards`, { credentials: "include" });
+                if (res.ok) {
+                    const data = await res.json();
+                    if (Array.isArray(data) && data.length > 0) {
+                        renderRows(data.map(card => ({
+                            time: new Date(card.created_at).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
+                            conv_id: (card.conversation_id || '').substring(0, 8) + '...',
+                            empathy: card.empathy_score, accuracy: card.accuracy_score, resolution: card.resolution_score,
+                            csat: card.csat_prediction, notes: card.feedback_notes,
+                        })));
+                        return;
+                    }
+                }
+            } catch (err) {
+                console.error("Failed to fetch scorecards:", err);
+            }
+            // Fallback: show representative demo data so the section isn't empty in the live demo.
+            renderRows(demoScorecards);
+        }
+
+        async function fetchBrandVoice() {
+            try {
+                const res = await fetch(`${API_BASE}/admin/settings/brand_voice`, { credentials: "include" });
+                if (res.ok) {
+                    const data = await res.json();
+                    const ta = document.getElementById('brand-voice-textarea');
+                    if (ta) ta.value = data.value || "";
+                }
+            } catch (err) {
+                console.error("Failed to fetch brand voice:", err);
+            }
+        }
+
+        async function saveBrandVoice() {
+            const val = document.getElementById('brand-voice-textarea').value;
+            const btn = document.getElementById('save-brand-persona-btn');
+            const originalText = btn ? btn.innerText : '';
+            if (btn) { btn.disabled = true; btn.innerText = 'Saving...'; }
+            try {
+                const res = await fetch(`${API_BASE}/admin/settings/brand_voice`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: "include",
+                    body: JSON.stringify({ value: val })
+                });
+                if (btn) { btn.disabled = false; btn.innerText = res.ok ? 'Saved ✓' : originalText; }
+                if (res.ok) {
+                    setTimeout(() => { if (btn) btn.innerText = originalText; }, 1800);
+                } else {
+                    alert('Failed to save Brand Persona.');
+                }
+            } catch (err) {
+                console.error("Failed to save brand voice:", err);
+                if (btn) { btn.disabled = false; btn.innerText = originalText; }
+            }
+        }
+
+        fetchAgents();
+        fetchLogs();
+        fetchAnalytics();
+        fetchScorecards();
+        fetchBrandVoice();
+        fetchCopilot();
+    </script>
+    <script>
+        // Tab switching logic for theme dropdown
+        document.querySelectorAll('.theme-tab').forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.stopPropagation(); // prevent dropdown from closing
+                const targetId = tab.getAttribute('data-target');
+                const dropdown = tab.closest('.theme-dropdown-menu');
+                
+                // Remove active class from all tabs
+                dropdown.querySelectorAll('.theme-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Hide all contents
+                dropdown.querySelectorAll('.theme-tab-content').forEach(c => c.classList.add('hidden'));
+                // Show target content
+                const targetContent = dropdown.querySelector('#' + targetId);
+                if(targetContent) targetContent.classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

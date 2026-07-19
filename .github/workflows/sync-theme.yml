@@ -1,0 +1,46 @@
+name: Sync mock demo theme from live app
+
+on:
+  # Triggered by the main app's CI right after a production deploy.
+  # See MAIN-APP-INTEGRATION/notify-site-theme-changed.yml (add that
+  # workflow to the MAIN APP repo, not this one).
+  repository_dispatch:
+    types: [theme-updated]
+
+  # Safety net in case the dispatch is ever missed (deploy failed to
+  # notify, secret expired, etc). Runs every 12 hours regardless.
+  schedule:
+    - cron: "0 */12 * * *"
+
+  # Manual trigger for testing.
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-theme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Pull latest CSS from the live app
+        env:
+          LIVE_APP_ORIGIN: https://<your-live-app-domain>
+        run: node scripts/sync-theme-from-live-app.js
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "wrennon-theme-bot"
+          git config user.email "theme-bot@users.noreply.github.com"
+          git add live-demo-assets/theme.css live-demo-assets/agent.css live-demo-assets/admin.css live-demo-assets/widget.css
+          if git diff --cached --quiet; then
+            echo "No theme changes to commit."
+          else
+            git commit -m "chore: sync mock demo theme from live app [skip ci]"
+            git push
+          fi
