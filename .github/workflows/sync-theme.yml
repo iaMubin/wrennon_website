@@ -30,7 +30,7 @@ jobs:
 
       - name: Pull latest CSS from the live app
         env:
-          LIVE_APP_ORIGIN: https://<your-live-app-domain>
+          LIVE_APP_ORIGIN: https://wrennon-1.vercel.app
         run: node scripts/sync-theme-from-live-app.js
 
       - name: Commit and push if changed
