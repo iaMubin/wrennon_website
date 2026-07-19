@@ -1,4 +1,4 @@
-/* ============================================================
+/* ===========================================================
    WRENNON — ADMIN DASHBOARD
    Premium Component Styles v2 — Tokens live in theme.css.
    ============================================================ */
@@ -667,25 +667,27 @@ body {
 }
 
 .admin-brand-header .logo-text {
-  color: var(--ink-header);
-  font-size: 20px;
+  color: var(--ink);
+  font-size: 28px;
   text-transform: none;
   letter-spacing: -0.025em;
 }
 
 .admin-brand-header .logo-img {
-  width: 29px;
-  height: 29px;
+  width: 36px;
+  height: 36px;
   /* Removed filter to support all themes naturally */
 }
 
 .admin-header {
-  margin: 0 -6px 26px;
-  padding: 24px 6px 18px;
-  background: transparent;
-  border-radius: 0;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  margin: 0 -34px 26px;
+  padding: 16px 34px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
 }
 
 .admin-header h2 {

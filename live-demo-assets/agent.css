@@ -246,10 +246,13 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 24px;
 }
 
 #brand img {
   flex-shrink: 0;
+  width: 30px;
+  height: 30px;
 }
 
 .dot {
@@ -380,15 +383,16 @@ body {
   padding: 14px 16px;
   border-radius: var(--radius-md);
   cursor: pointer;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   transition: var(--transition);
   position: relative;
   background: var(--bg-base);
   border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
 }
 .conv-item:hover {
   border-color: var(--ink-soft);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
 .conv-item--selected {
@@ -735,13 +739,13 @@ body {
 
 .msg--system {
   align-self: stretch;
-  background: var(--bg-surface);
+  background: color-mix(in srgb, var(--accent) 6%, var(--bg-surface));
   color: var(--ink);
   font-size: var(--fs-sm);
   max-width: 100%;
   border-radius: var(--radius-sm);
   font-weight: 500;
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--line));
   border-left: 3px solid var(--accent);
   padding: 14px 16px;
   font-family: var(--font-body);
@@ -1417,7 +1421,7 @@ body {
 }
 
 #sidebar-header .logo-text {
-  color: var(--ink-header);
+  color: var(--ink);
   font-size: 20px;
   letter-spacing: -0.025em;
   text-transform: none;
@@ -1508,15 +1512,15 @@ body {
 }
 
 #empty-state::before {
-  content: '✦';
-  display: grid;
-  place-items: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 14px;
-  background: var(--accent-glow);
-  color: var(--accent);
-  font-size: 20px;
+  content: '';
+  display: block;
+  width: 72px;
+  height: 72px;
+  background: url('/agent/images/wren-mark.svg') no-repeat center center;
+  background-size: contain;
+  opacity: 0.15;
+  filter: grayscale(100%);
+  margin-bottom: 8px;
 }
 
 #conversation-header, #sidebar-header, #empty-state {
@@ -1605,20 +1609,25 @@ body {
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 18px;
+  top: 22px;
   left: 16px;
   z-index: 110;
-  width: 32px;
-  height: 32px;
-  background: transparent;
-  border: none;
+  width: 34px;
+  height: 34px;
+  background: var(--bg-surface);
+  border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   color: var(--ink-soft);
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
 }
 #mobile-sidebar-toggle:hover {
   background: var(--bg-hover);
+  color: var(--ink);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--ink-soft);
   color: var(--ink);
 }
 
@@ -1629,6 +1638,12 @@ body {
 #sidebar-header {
   padding-left: 64px !important;
   box-sizing: border-box;
+  container-type: inline-size;
+  position: relative;
+}
+
+@container (max-width: 260px) {
+  #brand .logo-img { display: none !important; }
 }
 
 #sidebar-header .icon-btn-group {
