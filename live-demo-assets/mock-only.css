@@ -1,0 +1,134 @@
+/* ============================================================
+   MOCK-DEMO-ONLY STYLES
+   ------------------------------------------------------------
+   Everything in this file is UI that exists ONLY in the marketing
+   site's scripted demo, not in the real product. Keep it in this
+   separate file (not agent.css/admin.css/widget.css) so that
+   scripts/sync-theme-from-live-app.js never overwrites or deletes
+   it when it pulls the live app's real CSS files.
+
+   If you add more demo-only theatrical effects in future, add
+   them here too, and link this file from wherever they're used.
+   ============================================================ */
+
+/* --- AI Task Step Card ---
+   Shows the AI's behind-the-scenes work (looking up an order, reading a
+   photo, etc.) as a short sequence of steps in the agent transcript, similar
+   to how Zendesk/Intercom surface AI "reasoning" to agents. Agent-side only
+   - the customer just sees a normal typing indicator. */
+.ai-task-card {
+  margin: 10px 0 10px 34px;
+  max-width: 340px;
+  background: var(--bg-surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  animation: aiTaskCardIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes aiTaskCardIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.ai-task-card__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+.ai-task-card__spinner {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  animation: aiTaskSpin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes aiTaskSpin {
+  to { transform: rotate(360deg); }
+}
+.ai-task-card__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ai-task-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  transition: var(--transition);
+}
+.ai-task-step__icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.ai-task-step--pending .ai-task-step__icon {
+  border: 1.5px solid var(--line);
+}
+.ai-task-step--pending .ai-task-step__label {
+  opacity: 0.55;
+}
+.ai-task-step--active .ai-task-step__icon {
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  animation: aiTaskSpin 0.7s linear infinite;
+}
+.ai-task-step--active .ai-task-step__label {
+  color: var(--ink);
+  font-weight: 600;
+}
+.ai-task-step--done .ai-task-step__icon {
+  background: var(--accent-success);
+}
+.ai-task-step--done .ai-task-step__icon::after {
+  content: "";
+  width: 4px;
+  height: 7px;
+  border-right: 1.5px solid white;
+  border-bottom: 1.5px solid white;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+.ai-task-step--done .ai-task-step__label {
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+.ai-task-card--collapsed {
+  padding: 7px 12px;
+  animation: aiTaskCardIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ai-task-card__summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent-success);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.ai-task-card__check {
+  display: inline-flex;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-success);
+  color: white;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  flex-shrink: 0;
+}

@@ -25,7 +25,10 @@ already ARE the single source of truth, live, at all times.
 
 `scripts/sync-theme-from-live-app.js` fetches those 4 URLs from the
 live app and overwrites the matching files in `live-demo-assets/`.
-That's the entire sync — no JSON layer, no generation step.
+It also fetches the live app's `admin_dashboard.html`, extracts the
+current HTML theme dropdown blocks (light and dark), and directly
+injects them into `demo-admin.html` and `demo-agent.html` in this repo,
+so both the CSS variables and the UI dropdowns are 100% in sync automatically.
 
 `.github/workflows/sync-theme.yml` runs that script and commits +
 pushes if anything changed → Netlify (connected to this repo)
@@ -36,13 +39,13 @@ redeploys automatically. It runs on:
 
 ## One thing left to fill in
 Both `.github/workflows/sync-theme.yml` (this repo) and
-`MAIN-APP-INTEGRATION/notify-site-theme-changed.yml` (goes in the
+`main-app-integration/notify-site-theme-changed.yml` (goes in the
 main app repo) have a placeholder:
 - `https://<your-live-app-domain>` → your live app's real domain
 - `<your-github-username>/<wrennon-site-repo>` → this repo's real path
 
 ## Setup steps (main app repo side)
-1. Add `MAIN-APP-INTEGRATION/notify-site-theme-changed.yml` to
+1. Add `main-app-integration/notify-site-theme-changed.yml` to
    `<main-app-repo>/.github/workflows/`.
 2. Create a fine-grained GitHub PAT scoped to just this site repo
    (Contents: read/write), and store it as `SITE_REPO_PAT` in the
@@ -52,7 +55,6 @@ main app repo) have a placeholder:
 
 Once that's done: change a theme in the product → push → Vercel
 deploys → main app's Action notifies this repo → this repo's Action
-pulls the 4 CSS files fresh → commits → Netlify redeploys. No manual
-CSS editing, ever, unless the theme *system* itself changes shape
-(new variable names, new theme count) — in which case the picker
-dropdown HTML (not just CSS) needs a manual update, same as this pass.
+CSS editing, ever. If the theme *system* itself changes shape
+(new variable names, new theme count), the Node script automatically
+pulls the new dropdown HTML directly from the live app and updates the UI!

@@ -50,6 +50,50 @@ async function main() {
     }
   }
 
+  // Also sync HTML dropdowns
+  console.log("Fetching live admin_dashboard.html for HTML dropdowns...");
+  try {
+    const liveHtmlUrl = ORIGIN.replace(/\/$/, "") + "/agent/admin_dashboard.html";
+    const liveHtml = await fetchText(liveHtmlUrl);
+
+    const extractRegex = /<div\s+id="(admin-light-themes|admin-dark-themes)"[^>]*>([\s\S]*?)<\/div>\s*<\/div>/g;
+    // Note: in the actual file, the closing div is matched by looking at the HTML structure, but using a simpler regex here
+    const lightRegex = /<div\s+id="admin-light-themes"[^>]*>([\s\S]*?)(?=<\/div>\s*<div\s+id="admin-dark-themes"|<\/div>\s*<\/div>)/;
+    const darkRegex = /<div\s+id="admin-dark-themes"[^>]*>([\s\S]*?)(?=<\/div>\s*<\/div>|<\/div>\s*<div)/;
+
+    let lightThemesHtml = "";
+    let darkThemesHtml = "";
+
+    const lMatch = liveHtml.match(lightRegex);
+    const dMatch = liveHtml.match(darkRegex);
+
+    if (lMatch) lightThemesHtml = lMatch[1];
+    if (dMatch) darkThemesHtml = dMatch[1];
+
+    if (lightThemesHtml && darkThemesHtml) {
+      const htmlFiles = ["demo-admin.html", "demo-agent.html"];
+      for (const hFile of htmlFiles) {
+        const hPath = path.join(__dirname, "..", hFile);
+        let content = fs.existsSync(hPath) ? fs.readFileSync(hPath, "utf-8") : null;
+        if (content) {
+          const newContent = content
+            .replace(/<!-- THEME-LIST-LIGHT-START -->[\s\S]*?<!-- THEME-LIST-LIGHT-END -->/, `<!-- THEME-LIST-LIGHT-START -->${lightThemesHtml}<!-- THEME-LIST-LIGHT-END -->`)
+            .replace(/<!-- THEME-LIST-DARK-START -->[\s\S]*?<!-- THEME-LIST-DARK-END -->/, `<!-- THEME-LIST-DARK-START -->${darkThemesHtml}<!-- THEME-LIST-DARK-END -->`);
+          
+          if (content !== newContent) {
+            fs.writeFileSync(hPath, newContent);
+            console.log(`Updated HTML themes in ${hFile}`);
+            changed = true;
+          }
+        }
+      }
+    } else {
+      console.warn("Could not extract theme HTML blocks from live app.");
+    }
+  } catch(e) {
+    console.error("Failed to sync HTML themes:", e.message);
+  }
+
   if (!changed) {
     console.log("Nothing changed — demo already matches the live app.");
   }

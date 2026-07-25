@@ -2,7 +2,7 @@ name: Sync mock demo theme from live app
 
 on:
   # Triggered by the main app's CI right after a production deploy.
-  # See MAIN-APP-INTEGRATION/notify-site-theme-changed.yml (add that
+  # See main-app-integration/notify-site-theme-changed.yml (add that
   # workflow to the MAIN APP repo, not this one).
   repository_dispatch:
     types: [theme-updated]
@@ -30,7 +30,7 @@ jobs:
 
       - name: Pull latest CSS from the live app
         env:
-          LIVE_APP_ORIGIN: https://wrennon-1.vercel.app
+          LIVE_APP_ORIGIN: https://wrennon-1.onrender.com
         run: node scripts/sync-theme-from-live-app.js
 
       - name: Commit and push if changed

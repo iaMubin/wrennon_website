@@ -658,7 +658,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const m = el.getAttribute('data-monthly');
         const y = el.getAttribute('data-yearly');
         if (m && y) {
-          el.innerHTML = `$${isYearly ? y : m}<span class="price-period">/mo</span><span class="price-cursor">&#9616;</span>`;
+          el.innerHTML = `$${isYearly ? y : m}<span class="price-period">/mo</span>`;
         }
       });
       periods.forEach(el => {
@@ -743,3 +743,23 @@ function initHeroCanvas(canvas) {
     resize(); makeNodes();
   });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const showMoreBtn = document.getElementById('show-more-integrations');
+  const seeDetailsBtn = document.getElementById('see-details-integrations');
+  const hiddenCards = document.querySelectorAll('.hidden-integration');
+  
+  if (showMoreBtn) {
+    showMoreBtn.addEventListener('click', () => {
+      hiddenCards.forEach(card => {
+        card.classList.remove('hidden-integration');
+        card.classList.add('reveal');
+        setTimeout(() => card.classList.add('in'), 50);
+      });
+      showMoreBtn.style.display = 'none';
+      if (seeDetailsBtn) {
+        seeDetailsBtn.style.display = 'inline';
+      }
+    });
+  }
+});

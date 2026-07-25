@@ -61,34 +61,96 @@ function setupThemeDropdown() {
   if (!menuBtn || !dropdown) return;
 
   function applyTheme(themeValue) {
-    localStorage.setItem("wrennon_customer_theme", themeValue);
+    localStorage.setItem("wrennon_widget_theme", themeValue);
     const widget = document.getElementById("wrennon-widget");
     if (!widget) return;
-    
+
     if (themeValue === "system") {
       const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      widget.setAttribute("data-theme", isDark ? "dark" : "light");
+      const resolved = isDark ? "dark-matte" : "light-brownish";
+      widget.setAttribute("data-theme", resolved);
+      document.documentElement.setAttribute('data-theme', resolved);
     } else {
       widget.setAttribute("data-theme", themeValue);
+      document.documentElement.setAttribute('data-theme', themeValue);
     }
-    
+
     options.forEach(opt => {
-      opt.classList.toggle("active", opt.dataset.themeValue === themeValue);
+      if (opt.dataset.themeValue) {
+        opt.classList.toggle("active", opt.dataset.themeValue === themeValue);
+      }
     });
   }
+
+  // Set initial active state based on local storage
+  const currentTheme = localStorage.getItem('wrennon_widget_theme') || 'system';
+  applyTheme(currentTheme);
+
+  const menuMainView = document.getElementById("menu-main-view");
+  const menuAppearanceView = document.getElementById("menu-appearance-view");
+  const btnShowAppearance = document.getElementById("btn-show-appearance");
+  const btnBackAppearance = document.getElementById("btn-back-appearance");
+
+  // Handle theme tabs (Light vs Dark)
+  const themeTabs = document.querySelectorAll(".theme-tab");
+  const themeTabContents = document.querySelectorAll(".theme-tab-content");
+
+  themeTabs.forEach(tab => {
+    tab.addEventListener("click", (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+
+      themeTabs.forEach(t => t.classList.remove("active"));
+      themeTabContents.forEach(c => c.classList.add("hidden"));
+      themeTabContents.forEach(c => c.classList.remove("active"));
+
+      tab.classList.add("active");
+      const targetId = tab.getAttribute("data-target");
+      const targetContent = document.getElementById(targetId);
+      if (targetContent) {
+        targetContent.classList.remove("hidden");
+        targetContent.classList.add("active");
+      }
+    });
+  });
 
   menuBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     const isExpanded = menuBtn.getAttribute("aria-expanded") === "true";
     menuBtn.setAttribute("aria-expanded", !isExpanded);
     dropdown.classList.toggle("hidden");
-    if (!isExpanded) {
+
+    // Always open to main view when toggling the menu open
+    if (!dropdown.classList.contains("hidden") && menuMainView && menuAppearanceView) {
+      menuMainView.classList.remove("hidden");
+      menuAppearanceView.classList.add("hidden");
+    }
+
+    if (!isExpanded && options.length > 0) {
       options[0].focus();
     }
   });
 
+  if (btnShowAppearance && menuMainView && menuAppearanceView) {
+    btnShowAppearance.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      menuMainView.classList.add("hidden");
+      menuAppearanceView.classList.remove("hidden");
+    });
+  }
+
+  if (btnBackAppearance && menuMainView && menuAppearanceView) {
+    btnBackAppearance.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      menuAppearanceView.classList.add("hidden");
+      menuMainView.classList.remove("hidden");
+    });
+  }
+
   document.addEventListener("click", (e) => {
-    if (!dropdown.contains(e.target) && e.target !== menuBtn) {
+    if (!e.target.closest("#theme-dropdown") && !e.target.closest("#theme-menu-btn")) {
       dropdown.classList.add("hidden");
       menuBtn.setAttribute("aria-expanded", "false");
     }
@@ -104,20 +166,20 @@ function setupThemeDropdown() {
 
   options.forEach(opt => {
     opt.addEventListener("click", () => {
+      if (!opt.dataset.themeValue) return; // Don't trigger theme change for submenu navigation buttons
       applyTheme(opt.dataset.themeValue);
       dropdown.classList.add("hidden");
       menuBtn.setAttribute("aria-expanded", "false");
     });
   });
 
-  const currentTheme = localStorage.getItem("wrennon_customer_theme") || "system";
-  applyTheme(currentTheme);
-
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    if (localStorage.getItem("wrennon_customer_theme") === "system") {
+    if (localStorage.getItem("wrennon_widget_theme") === "system") {
       const widget = document.getElementById("wrennon-widget");
+      const resolved = e.matches ? "dark-matte" : "light-brownish";
       if (widget) {
-        widget.setAttribute("data-theme", e.matches ? "dark" : "light");
+        widget.setAttribute("data-theme", resolved);
+        document.documentElement.setAttribute('data-theme', resolved);
       }
     }
   });
@@ -567,7 +629,7 @@ function inlineMarkdown(text) {
     `</div>`;
   });
   escaped = escaped.replace(/\[Video\]\((https?:\/\/[^\)]+)\)/g, '<video controls src="$1" style="max-width: 100%; display: block; margin: 8px 0; border-radius: 8px;"></video>');
-  escaped = escaped.replace(/!\[.*?\]\(((?:https?:\/\/)?[^\)]+)\)/g, '<img src="$1" style="max-width: 100%; display: block; margin: 8px 0; border-radius: 8px;" />');
+  escaped = escaped.replace(/!\[.*?\]\(((?:https?:\/\/)?[^\)]+)\)/g, '<img src="$1" class="chat-lightbox-image" style="max-width: 100%; display: block; margin: 8px 0; border-radius: 8px; cursor: pointer;" onclick="openLightbox(this.src)" />');
   escaped = escaped.replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: underline;">$1</a>');
   escaped = escaped.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
   return escaped;
@@ -874,3 +936,95 @@ window.addEventListener('message', (event) => {
     }
   }
 });
+
+// --- Lightbox Logic ---
+let lightboxImages = [];
+let currentLightboxIndex = 0;
+
+window.openLightbox = function(src) {
+  const imgs = Array.from(document.querySelectorAll('.chat-lightbox-image'));
+  if (imgs.length === 0) return;
+
+  lightboxImages = imgs.map(img => img.src);
+  currentLightboxIndex = lightboxImages.indexOf(src);
+  if (currentLightboxIndex === -1) currentLightboxIndex = 0;
+
+  let lightbox = document.getElementById('chat-lightbox-overlay');
+  if (!lightbox) {
+    lightbox = document.createElement('div');
+    lightbox.id = 'chat-lightbox-overlay';
+    lightbox.className = 'chat-lightbox-overlay';
+    lightbox.innerHTML = `
+      <div class="chat-lightbox-close" onclick="closeLightbox()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </div>
+      <div class="chat-lightbox-nav prev" onclick="lightboxPrev(event)">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </div>
+      <div class="chat-lightbox-img-wrapper">
+        <img id="chat-lightbox-img" src="" />
+      </div>
+      <div class="chat-lightbox-nav next" onclick="lightboxNext(event)">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </div>
+    `;
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target.classList.contains('chat-lightbox-img-wrapper')) closeLightbox();
+    });
+
+    const container = document.getElementById('panel') || document.body;
+    container.appendChild(lightbox);
+    document.addEventListener('keydown', handleLightboxKeydown);
+  }
+
+  updateLightbox();
+  lightbox.style.display = 'flex';
+  setTimeout(() => lightbox.style.opacity = '1', 10);
+};
+
+window.closeLightbox = function() {
+  const lightbox = document.getElementById('chat-lightbox-overlay');
+  if (lightbox) {
+    lightbox.style.opacity = '0';
+    setTimeout(() => {
+      lightbox.style.display = 'none';
+    }, 200);
+  }
+};
+
+window.lightboxNext = function(e) {
+  if (e) e.stopPropagation();
+  if (currentLightboxIndex < lightboxImages.length - 1) {
+    currentLightboxIndex++;
+    updateLightbox();
+  }
+};
+
+window.lightboxPrev = function(e) {
+  if (e) e.stopPropagation();
+  if (currentLightboxIndex > 0) {
+    currentLightboxIndex--;
+    updateLightbox();
+  }
+};
+
+function updateLightbox() {
+  const imgEl = document.getElementById('chat-lightbox-img');
+  if (!imgEl) return;
+  imgEl.src = lightboxImages[currentLightboxIndex];
+
+  const prevBtn = document.querySelector('.chat-lightbox-nav.prev');
+  const nextBtn = document.querySelector('.chat-lightbox-nav.next');
+  if (prevBtn) prevBtn.style.visibility = (currentLightboxIndex > 0) ? 'visible' : 'hidden';
+  if (nextBtn) nextBtn.style.visibility = (currentLightboxIndex < lightboxImages.length - 1) ? 'visible' : 'hidden';
+}
+
+function handleLightboxKeydown(e) {
+  const lightbox = document.getElementById('chat-lightbox-overlay');
+  if (!lightbox || lightbox.style.display === 'none') return;
+
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') lightboxNext();
+  if (e.key === 'ArrowLeft') lightboxPrev();
+}

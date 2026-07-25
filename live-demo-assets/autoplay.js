@@ -10,17 +10,23 @@ const AGENT_NAMES = ["Alex", "Harry"];
 const SECTOR_SCRIPTS = {
   "e-commerce": {
     resolved: [
-      { actor: 'customer', action: 'type_live', text: "Hi! Do you have this watch in blue?" },
+      { actor: 'customer', action: 'type_live', text: "Hi" },
+      { actor: 'ai', action: 'type', duration: 1000 },
+      { actor: 'ai', action: 'send', text: "Hello! How can I help you today?" },
+      { actor: 'customer', action: 'type_live', text: "Do you have this watch in blue?" },
       { actor: 'customer', action: 'send_photo', text: "![Image](images/chat-demo-watch.jpg)" },
       { actor: 'ai', action: 'ai_task', steps: ["Analyzing photo", "Cross-referencing product catalog", "Checking color availability"] },
       { actor: 'ai', action: 'type', duration: 1200 },
-      { actor: 'ai', action: 'send', text: "Hi! This model currently comes in Rose Gold and Silver only. A navy strap is launching next month if you'd like me to notify you." },
+      { actor: 'ai', action: 'send', text: "This model currently comes in Rose Gold and Silver only. A navy strap is launching next month if you'd like me to notify you." },
       { actor: 'customer', action: 'type_live', text: "Yes please, notify me when it's live!" },
       { actor: 'ai', action: 'type', duration: 800 },
       { actor: 'ai', action: 'send', text: "You're all set - I'll email you the moment the navy strap drops." },
       { actor: 'system', action: 'resolve' }
     ],
     handoff: [
+      { actor: 'customer', action: 'type_live', text: "Hello" },
+      { actor: 'ai', action: 'type', duration: 1000 },
+      { actor: 'ai', action: 'send', text: "Hi there! How can I help you today?" },
       { actor: 'customer', action: 'type_live', text: "My order hasn't arrived yet and I'm really frustrated!" },
       { actor: 'ai', action: 'type', duration: 1000 },
       { actor: 'ai', action: 'send', text: "I'm sorry to hear that! Can you please provide your order number?" },
@@ -46,15 +52,21 @@ const SECTOR_SCRIPTS = {
 
   "subscription-business": {
     resolved: [
-      { actor: 'customer', action: 'type_live', text: "Hi! How do I upgrade my plan?" },
+      { actor: 'customer', action: 'type_live', text: "Hi" },
       { actor: 'ai', action: 'type', duration: 1000 },
-      { actor: 'ai', action: 'send', text: "Hello! You can upgrade anytime from Account > Billing. Want me to send you the direct link?" },
+      { actor: 'ai', action: 'send', text: "Hello! How can I help you today?" },
+      { actor: 'customer', action: 'type_live', text: "How do I upgrade my plan?" },
+      { actor: 'ai', action: 'type', duration: 1000 },
+      { actor: 'ai', action: 'send', text: "You can upgrade anytime from Account > Billing. Want me to send you the direct link?" },
       { actor: 'customer', action: 'type_live', text: "Yes please" },
       { actor: 'ai', action: 'type', duration: 800 },
       { actor: 'ai', action: 'send', text: "Sent! It'll take you straight to checkout - the upgrade is instant, no downtime." },
       { actor: 'system', action: 'resolve' }
     ],
     handoff: [
+      { actor: 'customer', action: 'type_live', text: "Hello" },
+      { actor: 'ai', action: 'type', duration: 1000 },
+      { actor: 'ai', action: 'send', text: "Hi there! How can I help you today?" },
       { actor: 'customer', action: 'type_live', text: "I was charged twice this month and I need this fixed now." },
       { actor: 'ai', action: 'ai_task', steps: ["Searching billing history", "Comparing charge records", "Flagging duplicate charge"] },
       { actor: 'ai', action: 'type', duration: 1200 },
@@ -69,15 +81,21 @@ const SECTOR_SCRIPTS = {
 
   "service-business": {
     resolved: [
-      { actor: 'customer', action: 'type_live', text: "Hi! I need to book a plumber for a leaking sink." },
+      { actor: 'customer', action: 'type_live', text: "Hi" },
       { actor: 'ai', action: 'type', duration: 1000 },
-      { actor: 'ai', action: 'send', text: "Hi! I can help with that. I have an opening tomorrow at 10 AM or Thursday at 2 PM - which works better?" },
+      { actor: 'ai', action: 'send', text: "Hello! How can I help you today?" },
+      { actor: 'customer', action: 'type_live', text: "I need to book a plumber for a leaking sink." },
+      { actor: 'ai', action: 'type', duration: 1000 },
+      { actor: 'ai', action: 'send', text: "I can help with that. I have an opening tomorrow at 10 AM or Thursday at 2 PM - which works better?" },
       { actor: 'customer', action: 'type_live', text: "Tomorrow at 10 works great" },
       { actor: 'ai', action: 'type', duration: 800 },
       { actor: 'ai', action: 'send', text: "Booked! You'll get a text with your technician's name about an hour before arrival." },
       { actor: 'system', action: 'resolve' }
     ],
     handoff: [
+      { actor: 'customer', action: 'type_live', text: "Hello" },
+      { actor: 'ai', action: 'type', duration: 1000 },
+      { actor: 'ai', action: 'send', text: "Hi there! How can I help you today?" },
       { actor: 'customer', action: 'type_live', text: "Water is actively leaking from my ceiling, I need someone now!" },
       { actor: 'ai', action: 'ai_task', steps: ["Checking technician availability", "Locating nearest emergency crew"] },
       { actor: 'ai', action: 'type', duration: 1000 },
@@ -92,15 +110,21 @@ const SECTOR_SCRIPTS = {
 
   "hospitality-business": {
     resolved: [
-      { actor: 'customer', action: 'type_live', text: "Hi! What time is check-in?" },
+      { actor: 'customer', action: 'type_live', text: "Hi" },
       { actor: 'ai', action: 'type', duration: 900 },
-      { actor: 'ai', action: 'send', text: "Hello! Standard check-in is 3 PM, but I can flag your room for early check-in if you're arriving sooner. What time will you get in?" },
+      { actor: 'ai', action: 'send', text: "Hello! How can I help you today?" },
+      { actor: 'customer', action: 'type_live', text: "What time is check-in?" },
+      { actor: 'ai', action: 'type', duration: 900 },
+      { actor: 'ai', action: 'send', text: "Standard check-in is 3 PM, but I can flag your room for early check-in if you're arriving sooner. What time will you get in?" },
       { actor: 'customer', action: 'type_live', text: "Around 11 AM" },
       { actor: 'ai', action: 'type', duration: 800 },
       { actor: 'ai', action: 'send', text: "Noted - I've prioritized your room for that time. If it's not quite ready, we'll hold your bags and text you the moment it is." },
       { actor: 'system', action: 'resolve' }
     ],
     handoff: [
+      { actor: 'customer', action: 'type_live', text: "Hello" },
+      { actor: 'ai', action: 'type', duration: 1000 },
+      { actor: 'ai', action: 'send', text: "Hi there! How can I help you today?" },
       { actor: 'customer', action: 'type_live', text: "The AC in my room isn't working and it's really hot in here." },
       { actor: 'ai', action: 'ai_task', steps: ["Checking maintenance queue", "Dispatching engineering team"] },
       { actor: 'ai', action: 'type', duration: 1000 },
@@ -115,15 +139,21 @@ const SECTOR_SCRIPTS = {
 
   "travel-business": {
     resolved: [
-      { actor: 'customer', action: 'type_live', text: "Hi! What's the baggage allowance on my ticket?" },
+      { actor: 'customer', action: 'type_live', text: "Hi" },
       { actor: 'ai', action: 'type', duration: 1000 },
-      { actor: 'ai', action: 'send', text: "Hello! You're allowed one carry-on and one checked bag up to 50lbs on your fare." },
+      { actor: 'ai', action: 'send', text: "Hello! How can I help you today?" },
+      { actor: 'customer', action: 'type_live', text: "What's the baggage allowance on my ticket?" },
+      { actor: 'ai', action: 'type', duration: 1000 },
+      { actor: 'ai', action: 'send', text: "You're allowed one carry-on and one checked bag up to 50lbs on your fare." },
       { actor: 'customer', action: 'type_live', text: "What if my bag is a bit over?" },
       { actor: 'ai', action: 'type', duration: 900 },
       { actor: 'ai', action: 'send', text: "Overweight bags up to 70lbs incur a $100 fee at check-in - best to trim it down if you can to avoid that." },
       { actor: 'system', action: 'resolve' }
     ],
     handoff: [
+      { actor: 'customer', action: 'type_live', text: "Hello" },
+      { actor: 'ai', action: 'type', duration: 1000 },
+      { actor: 'ai', action: 'send', text: "Hi there! How can I help you today?" },
       { actor: 'customer', action: 'type_live', text: "My flight just got cancelled and I need to be there tomorrow, please help!" },
       { actor: 'ai', action: 'ai_task', steps: ["Checking partner airline availability", "Comparing rebooking options"] },
       { actor: 'ai', action: 'type', duration: 1200 },
@@ -156,7 +186,7 @@ async function getDemoChats() {
     return demoChatsCache;
   }
   try {
-    const res = await fetch("live-demo-assets/demo_chats.json");
+    const res = await fetch("live-demo-assets/demo-chats.json");
     demoChatsCache = await res.json();
   } catch (e) {
     demoChatsCache = [];
@@ -165,8 +195,15 @@ async function getDemoChats() {
 }
 
 function pickReplayChat(chats, sector) {
-  const pool = chats.filter(c => c.sector === sector);
-  if (pool.length === 0) return null;
+  let pool = chats.filter(c => c.sector === sector && !c.resolved && c.messages && c.messages.length >= 3);
+  
+  if (pool.length === 0) {
+      // If we ran out of unresolved suitable chats, reset them so the demo can loop infinitely
+      chats.forEach(c => { if (c.sector === sector) c.resolved = false; });
+      pool = chats.filter(c => c.sector === sector && c.messages && c.messages.length >= 3);
+      if (pool.length === 0) return null; // fallback if literally no suitable chats exist
+  }
+  
   const prevId = lastPlayedSessionId[sector];
   const choices = pool.length > 1 ? pool.filter(c => c.session_id !== prevId) : pool;
   const chosen = choices[Math.floor(Math.random() * choices.length)];
@@ -204,6 +241,7 @@ function buildReplayScript(chat) {
           `Retrieving order #${chat.order.order_id}`,
           "Preparing response"
         ]});
+        steps.push({ actor: "system", action: "update_crm", session_id: chat.session_id });
         orderTaskShown = true;
       } else if (precededByMedia === "audio") {
         steps.push({ actor: "ai", action: "ai_task", steps: [
@@ -315,7 +353,15 @@ window.startAutoplayCycle = async function(agentFrameWindow, customerFrameWindow
     // Clear static messages and focus the new chat before cycle begins
     sendEvent(agentFrameWindow, { type: 'prepare_chat', session_id: activeSessionId });
     await sleep(200);
-    sendEvent(agentFrameWindow, { type: 'focus_chat', session_id: activeSessionId });
+    // REMOVED focus_chat here to make it realistic
+
+    let agentFocused = false;
+    const focusAgentIfNeeded = () => {
+        if (!agentFocused && agentFrameWindow) {
+            sendEvent(agentFrameWindow, { type: 'focus_chat', session_id: activeSessionId });
+            agentFocused = true;
+        }
+    };
 
     for (const step of MOVIE_SCRIPT) {
         if (!isAutoplaying) break;
@@ -324,11 +370,14 @@ window.startAutoplayCycle = async function(agentFrameWindow, customerFrameWindow
         const timestamp = new Date().toISOString();
 
         if (step.action === 'type_live') {
-            // Wait slightly before starting to type to simulate reading
-            await sleep(1500 + Math.random() * 1000);
+            // Wait slightly before starting to type to simulate reading (faster for the very first message)
+            const isFirstStep = step === MOVIE_SCRIPT[0];
+            await sleep(isFirstStep ? 400 : (1500 + Math.random() * 1000));
 
             // Live keystroke typing for human/customer
             sendToBoth({ type: 'typing', sender: step.actor, session_id: activeSessionId });
+            
+            focusAgentIfNeeded();
 
             let currentText = "";
             for (const char of step.text) {
@@ -359,9 +408,12 @@ window.startAutoplayCycle = async function(agentFrameWindow, customerFrameWindow
                 sendToBoth(payload);
             }
 
+            focusAgentIfNeeded();
+
             await sleep(1000);
 
         } else if (step.action === 'type') {
+            focusAgentIfNeeded();
             // Simple typing indicator for AI
             sendToBoth({ type: 'typing', sender: step.actor, session_id: activeSessionId });
             await sleep(step.duration);
@@ -375,6 +427,7 @@ window.startAutoplayCycle = async function(agentFrameWindow, customerFrameWindow
                 session_id: activeSessionId,
                 created_at: timestamp
             });
+            focusAgentIfNeeded();
             await sleep(1000);
         } else if (step.action === 'send_photo') {
             // Simulate attaching/uploading a photo, then send it as a single
@@ -390,8 +443,11 @@ window.startAutoplayCycle = async function(agentFrameWindow, customerFrameWindow
                 session_id: activeSessionId,
                 created_at: timestamp
             });
+            focusAgentIfNeeded();
             await sleep(1200);
         } else if (step.action === 'ai_task') {
+            focusAgentIfNeeded();
+
             // Agent-only: show the AI's behind-the-scenes work (order
             // lookup, reading a photo, etc.) as a short step sequence,
             // mirroring how Zendesk/Intercom surface AI reasoning to agents.
@@ -410,6 +466,12 @@ window.startAutoplayCycle = async function(agentFrameWindow, customerFrameWindow
                 handled_by: step.handled_by || agentName
             });
             await sleep(1000);
+        } else if (step.action === 'update_crm') {
+            sendEvent(agentFrameWindow, {
+                type: 'update_crm',
+                session_id: step.session_id
+            });
+            await sleep(500);
         } else if (step.action === 'resolve') {
             sendEvent(agentFrameWindow, {
                 type: 'handoff',

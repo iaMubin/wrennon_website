@@ -382,7 +382,7 @@
                 <a href="#" style="font-family: 'Big Shoulders Display', sans-serif; font-style: normal; font-weight: 700; font-size: 31px; letter-spacing: 0.01em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; margin-bottom: 8px;">
                     <img src="images/wren-mark.svg" alt="Wrennon" width="28" height="28" style="flex-shrink: 0;">Wrennon
                 </a>
-                <h2>Admin Dashboard</h2>
+                <h2><em>Admin</em> Dashboard</h2>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
                 <div class="theme-dropdown-container">
@@ -420,7 +420,7 @@
             </div>
         </div>
 
-        <h3 style="margin-top: 48px;">Team Directory</h3>
+        <h3 style="margin-top: 48px;"><em>Team</em> Directory</h3>
         <p style="color: var(--ink-soft); font-size: 14px; margin-bottom: 20px;">Click on any agent to view their details.</p>
         <table>
             <thead>
@@ -509,7 +509,7 @@
                             <polyline points="22 4 12 14.01 9 11.01"></polyline>
                         </svg>
                     </div>
-                    <h4 style="margin: 0 0 8px 0; font-size: 1.125rem; font-weight: 600;">Agent Created Successfully</h4>
+                    <h4 style="margin: 0 0 8px 0; font-size: 1.125rem; font-weight: 600;">Agent Created <em>Successfully</em></h4>
                     <p style="margin: 0 0 24px 0; color: var(--ink-soft); font-size: 0.875rem;">The new agent can now log in using their credentials.</p>
                     <div style="display: flex; gap: 12px; width: 100%; justify-content: center;">
                         <button type="button" class="btn" onclick="closeCreateAgentPanel()">Done</button>
@@ -548,7 +548,7 @@
         </div>
 
         <!-- Analytics & Copilot Section -->
-        <h3 style="margin-top: 48px;">System Analytics & Copilot Insights</h3>
+        <h3 style="margin-top: 48px;">System <em>Analytics</em> & Copilot Insights</h3>
         <p style="color: var(--ink-soft); font-size: 14px; margin-bottom: 20px;">Real-time performance metrics and recent AI assistant actions.</p>
         
         <div id="analytics-stats-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px;">
@@ -574,14 +574,14 @@
         </div>
 
         <div style="background: var(--bg-base); border-radius: var(--radius-sm); border: 1px solid var(--line); padding: 24px;">
-            <h4 style="margin-bottom: 16px; font-size: 16px; color: var(--ink);">Recent Copilot Activity</h4>
+            <h4 style="margin-bottom: 16px; font-size: 16px; color: var(--ink);">Recent Copilot <em>Activity</em></h4>
             <div id="copilot-activity-list" style="display: flex; flex-direction: column; gap: 16px;">
                 <!-- Populated by JS -->
                 <div style="color: var(--ink-soft); font-size: 14px; text-align: center; padding: 20px;">Fetching latest copilot actions...</div>
             </div>
         </div>
 
-        <h3 style="margin-top: 48px;">Automated QA &amp; CSAT Scorecards</h3>
+        <h3 style="margin-top: 48px;">Automated QA &amp; CSAT <em>Scorecards</em></h3>
         <p style="color: var(--ink-soft); font-size: 14px; margin-bottom: 20px;">AI-generated evaluations of recent human-handled and AI-handled conversations.</p>
         <div style="overflow-x: auto;">
             <table style="width: 100%; border-collapse: collapse;">
@@ -602,7 +602,7 @@
             </table>
         </div>
 
-        <h3 style="margin-top: 48px;">AI Brand Persona</h3>
+        <h3 style="margin-top: 48px;">AI Brand <em>Persona</em></h3>
         <p style="color: var(--ink-soft); font-size: 14px; margin-bottom: 20px;">Customize how the AI talks to customers (this dynamically updates the System Prompt).</p>
         <div style="background: var(--bg-base); border-radius: var(--radius-sm); border: 1px solid var(--line); padding: 24px; display: flex; flex-direction: column; gap: 16px;">
             <textarea id="brand-voice-textarea" style="width: 100%; height: 120px; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: var(--bg-surface); color: var(--ink); font-family: inherit; font-size: 14px; resize: vertical;" placeholder="e.g. You are a highly professional, polite, and formal support agent for a luxury brand. Never use emojis."></textarea>
@@ -644,7 +644,7 @@
     <!-- Agent Details Modal -->
     <div id="agent-modal" class="modal" onclick="if(event.target === this) this.style.display='none'" style="display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); align-items: center; justify-content: center; z-index: 100; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);">
         <div style="background: var(--bg-surface); padding: 32px; border-radius: 16px; border: 1px solid var(--line); width: min(400px, 90vw); max-height: 85vh; overflow-y: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.3);" onclick="event.stopPropagation()">
-            <h3 style="margin-bottom: 24px;">Agent Details</h3>
+            <h3 style="margin-bottom: 24px;"><em>Agent</em> Details</h3>
             <div style="margin-bottom: 16px;">
                 <label style="color: var(--ink-soft); font-size: 12px; font-weight: 600; text-transform: uppercase;">Full Name</label>
                 <div id="modal-fullname" style="font-size: 16px; font-weight: 500; margin-top: 4px;"></div>
