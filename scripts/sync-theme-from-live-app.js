@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Pulls the CURRENT live design CSS straight from the product app and
- * overwrites the mock demo's copies. Nothing to export or transform —
+ * overwrites the mock demo's copies. Nothing to export or transform \u2014
  * the app is a static site too, so its CSS files ARE the source of
  * truth already, served as plain public files.
  *
@@ -30,7 +30,7 @@ async function fetchText(url) {
 
 async function main() {
   if (!ORIGIN) {
-    console.error("LIVE_APP_ORIGIN env var not set (e.g. https://app.wrennon.com) — nothing to sync.");
+    console.error("LIVE_APP_ORIGIN env var not set (e.g. https://app.wrennon.com) \u2014 nothing to sync.");
     process.exit(1);
   }
 
@@ -95,7 +95,7 @@ async function main() {
   }
 
   if (!changed) {
-    console.log("Nothing changed — demo already matches the live app.");
+    console.log("Nothing changed \u2014 demo already matches the live app.");
   }
 }
 

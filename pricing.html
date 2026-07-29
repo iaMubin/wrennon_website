@@ -46,9 +46,15 @@
     <a href="index.html" class="logo"><img class="logo-mark" src="images/wren-mark.svg" alt="Wrennon" width="34" height="34" aria-hidden="true">Wrennon</a>
     <div class="nav-links">
       <div class="nav-item has-mega">
-        <button type="button" class="nav-mega-trigger" aria-expanded="false">Product<svg class="nav-chev" viewBox="0 0 12 8" width="10" height="7" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" class="nav-mega-trigger" aria-expanded="false">Products<svg class="nav-chev" viewBox="0 0 12 8" width="10" height="7" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="nav-mega">
-          <a href="product.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>How it works</strong><em>Catalog, orders &amp; checkout, trained end to end</em></span></a>
+          <a href="product.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>AI Agent</strong><em>Trained on your catalog, orders &amp; checkout</em></span></a>
+          <a href="helpdesk.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>Customer Service Helpdesk</strong><em>Omnichannel inbox &mdash; human and AI, side by side</em></span></a>
+        </div>
+      </div>
+      <div class="nav-item has-mega">
+        <button type="button" class="nav-mega-trigger" aria-expanded="false">Resources<svg class="nav-chev" viewBox="0 0 12 8" width="10" height="7" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-mega">
           <a href="integrations.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>Integrations</strong><em>Shopify, WooCommerce, Magento &amp; more</em></span></a>
           <a href="security.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>Security</strong><em>How we handle your store's data</em></span></a>
           <a href="roi-calculator.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>ROI Calculator</strong><em>Estimate what automation is worth to you</em></span></a>
@@ -72,8 +78,11 @@
   </div>
   <div class="mobile-menu-backdrop"></div>
   <div class="mobile-menu">
-    <a href="product.html">Product</a>
+    <a href="product.html">AI Agent</a>
+    <a href="helpdesk.html">Customer Service Helpdesk</a>
     <a href="integrations.html">Integrations</a>
+    <a href="security.html">Security</a>
+    <a href="roi-calculator.html">ROI Calculator</a>
     <a href="use-cases.html">Use cases</a>
     <a href="pricing.html">Pricing</a>
     <a href="about.html">About</a>
@@ -87,8 +96,12 @@
 <header class="page-header">
   <div class="wrap">
     <div class="eyebrow">Pricing</div>
-    <h1 class="page-title">Priced around<br>your <em>actual</em> workload.</h1>
-    <p class="page-sub">Every storefront is a different size, so every quote is too. No tiers that don't fit your catalog.</p>
+    <h1 class="page-title">AI Agent + Helpdesk.<br>One platform. <em>One bill</em>.</h1>
+    <p class="page-sub">The AI Agent scales with your chat volume. The Helpdesk &mdash; your team's shared inbox &mdash; comes with every plan, with unlimited tickets, never priced per seat.</p>
+    <div class="cta-actions" style="margin-top:28px;">
+      <a href="roi-calculator.html" class="btn-ghost">Calculate your ROI &rarr;</a>
+      <a href="#compare-plans" class="btn-ghost">Compare all features &darr;</a>
+    </div>
   </div>
 </header>
 
@@ -96,12 +109,25 @@
   <div class="wrap">
     
     <div class="pricing-toggle-wrap reveal">
-      <span class="toggle-label" id="label-monthly">Monthly</span>
-      <label class="toggle-switch">
-        <input type="checkbox" id="pricing-toggle" checked>
-        <span class="slider round"></span>
-      </label>
-      <span class="toggle-label active" id="label-yearly">Yearly <span class="discount-badge">Save up to 15%</span></span>
+      <div class="billing-toggle-row">
+        <div class="billing-toggle">
+          <span class="billing-toggle-indicator" id="billing-indicator"></span>
+          <button type="button" class="billing-toggle-btn" id="btn-monthly">Monthly</button>
+          <button type="button" class="billing-toggle-btn active" id="btn-yearly">Yearly</button>
+        </div>
+        <span class="billing-save-badge">Save up to 15%</span>
+        <span class="billing-save-badge billing-save-badge-accent">+ 50% off implementation</span>
+      </div>
+      <div class="rollover-pill">
+        <span class="rollover-pill-ico">&#8635;</span>
+        <span class="rollover-pill-text">Unused chats <strong>roll over</strong> to next month on annual plans, refreshed annually.</span>
+      </div>
+    </div>
+
+    <div class="plan-universal-row">
+      <div class="plan-universal-item"><span class="plan-universal-ico">&#10003;</span>Unlimited Helpdesk tickets</div>
+      <div class="plan-universal-item"><span class="plan-universal-ico">&#10003;</span>Dedicated 1:1 implementation</div>
+      <div class="plan-universal-item"><span class="plan-universal-ico">&#10003;</span>Turn the AI Agent on/off, anytime</div>
     </div>
 
     <div class="pricing-grid">
@@ -113,9 +139,10 @@
         <div class="plan-chats">500 chats included</div>
         <ul class="pricing-list">
           <li>Core agent features</li>
-          <li>Standard integrations</li>
+          <li>Standard integrations (Shopify, WooCommerce)</li>
+          <li>Multilingual auto-replies</li>
           <li>Email support</li>
-          <li class="overage">Overage: $0.75 flat/chat</li>
+          <li>Up to 5 team seats</li>
         </ul>
         <a href="contact.html" class="btn-ghost" style="width:100%; text-align:center;">Get Started</a>
       </div>
@@ -129,9 +156,11 @@
         <div class="plan-chats">1,000 chats included</div>
         <ul class="pricing-list">
           <li>Everything in Starter</li>
-          <li>Advanced analytics</li>
+          <li>Sentiment analysis &amp; smart escalation</li>
+          <li>Advanced analytics &amp; reporting</li>
+          <li>API &amp; webhook access</li>
           <li>Priority support</li>
-          <li class="overage">Overage: $0.75 flat/chat</li>
+          <li>Up to 10 team seats</li>
         </ul>
         <a href="contact.html" class="btn-primary" style="width:100%; text-align:center;">Get Started</a>
       </div>
@@ -139,14 +168,15 @@
       <!-- Scale -->
       <div class="pricing-card reveal">
         <span class="section-eyebrow">Scale</span>
-        <div class="price-amount" data-monthly="999" data-yearly="899">$899<span class="price-period">/mo</span></div>
+        <div class="price-amount" data-monthly="1099" data-yearly="999">$999<span class="price-period">/mo</span></div>
         <p class="billing-period">Billed annually</p>
-        <div class="plan-chats">2,000 chats included</div>
+        <div class="plan-chats">2,200 chats included</div>
         <ul class="pricing-list">
           <li>Everything in Growth</li>
           <li>Custom workflows</li>
+          <li>Automated QA &amp; CSAT scorecards</li>
           <li>Dedicated account manager</li>
-          <li class="overage">Overage: $0.75 flat/chat</li>
+          <li>Unlimited team seats</li>
         </ul>
         <a href="contact.html" class="btn-ghost" style="width:100%; text-align:center;">Get Started</a>
       </div>
@@ -154,54 +184,250 @@
       <!-- Advance -->
       <div class="pricing-card reveal">
         <span class="section-eyebrow">Advance</span>
-        <div class="price-amount" data-monthly="1099" data-yearly="999">$999<span class="price-period">/mo</span></div>
+        <div class="price-amount" data-monthly="2199" data-yearly="1999">$1999<span class="price-period">/mo</span></div>
         <p class="billing-period">Billed annually</p>
-        <div class="plan-chats">2,500 chats included</div>
+        <div class="plan-chats">5,000 chats included</div>
         <ul class="pricing-list">
           <li>Everything in Scale</li>
-          <li>White-glove onboarding</li>
-          <li>SLA guarantees</li>
-          <li class="overage">Overage: $0.75 flat/chat</li>
+          <li>Custom AI brand persona training</li>
+          <li>White-glove onboarding &amp; free migration</li>
+          <li>Multi-store / multi-brand support</li>
+          <li>Dedicated Slack channel with our team</li>
+          <li>Unlimited team seats</li>
         </ul>
         <a href="contact.html" class="btn-ghost" style="width:100%; text-align:center;">Get Started</a>
       </div>
     </div>
 
-    <!-- Enterprise -->
+    <p class="overage-mini reveal">Go over your plan? Flat <strong>$0.75</strong> per chat &mdash; on every tier.</p>
+
+    <!-- Enterprise / Custom -->
     <div class="pricing-card enterprise-card reveal">
       <div class="enterprise-info">
+        <span class="enterprise-badge">Custom</span>
         <h3>Enterprise</h3>
-        <p>Custom build for high-volume stores with complex integrations.</p>
-        <a href="contact.html" class="btn-primary" style="align-self:flex-start;">Contact for pricing</a>
+        <p>For stores running past 5,000 chats a month, with needs a standard tier can't fit &mdash; priced and built entirely around what you actually need.</p>
+        <a href="contact.html" class="btn-cta-bold">Contact for pricing</a>
       </div>
-      <ul class="pricing-list">
-        <li>Unlimited chats (custom volume pricing)</li>
-        <li>Custom LLM fine-tuning</li>
-        <li>On-premise / VPC deployment options</li>
-        <li>24/7 dedicated support team</li>
+      <ul class="enterprise-checklist">
+        <li><span class="ec-check">&#10003;</span>Custom volume pricing, priced to your real usage</li>
+        <li><span class="ec-check">&#10003;</span>Custom LLM fine-tuning on your catalog &amp; policies</li>
+        <li><span class="ec-check">&#10003;</span>On-prem / VPC deployment options</li>
+        <li><span class="ec-check">&#10003;</span>SSO / SAML &amp; audit logs</li>
+        <li><span class="ec-check">&#10003;</span>Custom contractual SLA</li>
+        <li><span class="ec-check">&#10003;</span>24/7 dedicated pod &amp; quarterly reviews</li>
       </ul>
     </div>
 
+    <div class="pricing-highlights">
+      <div class="pricing-feature-card feature-card-wide reveal">
+        <span class="pricing-feature-card-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l4 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 3a9 9 0 019 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.5"/></svg></span>
+        <h3><em>72-hour</em> reopen window</h3>
+        <p>If a customer messages again within 72 hours of a resolved chat, it reopens the same conversation &mdash; no new ticket, full history intact.</p>
+      </div>
+      <div class="pricing-feature-card reveal">
+        <span class="pricing-feature-card-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3>24/7, <em>always on</em></h3>
+        <p>Your agent never clocks out &mdash; shoppers get answers at 3am the same as 3pm.</p>
+      </div>
+      <div class="pricing-feature-card reveal">
+        <span class="pricing-feature-card-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3><em>Multilingual</em> by default</h3>
+        <p>Auto-detects the shopper's language and replies in kind, no extra setup needed.</p>
+      </div>
+
+      <div class="pricing-feature-card reveal">
+        <span class="pricing-feature-card-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M20 11a8 8 0 10-2.34 5.66M20 11V5m0 6h-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3><em>Live</em> order &amp; inventory sync</h3>
+        <p>Your agent always sees current stock and order status &mdash; never stale data, never a guessing game.</p>
+      </div>
+      <div class="pricing-feature-card reveal">
+        <span class="pricing-feature-card-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M3 8l9-4 9 4-9 4-9-4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 8v8l9 4 9-4V8M12 12v8" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+        <h3>Order status, <em>automatically</em></h3>
+        <p>Tracking updates, delivery ETAs, and order lookups &mdash; handled without a human touching a ticket.</p>
+      </div>
+      <div class="pricing-feature-card reveal">
+        <span class="pricing-feature-card-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none"/><circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none"/><path d="M3 4h2l2.4 12.2a1.6 1.6 0 001.6 1.3h8.4a1.6 1.6 0 001.6-1.3L21 8H6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3><em>Cart recovery</em> conversations</h3>
+        <p>Your agent reaches out on abandoned carts directly in chat, not just another marketing email.</p>
+      </div>
+      <div class="pricing-feature-card reveal">
+        <span class="pricing-feature-card-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+        <h3>Built with <em>data safety</em> in mind</h3>
+        <p>Your store's data is handled with strict access controls at every step &mdash; see our full <a href="security.html" style="color:var(--accent); font-weight:600;">security practices</a>.</p>
+      </div>
+
+      <div class="pricing-feature-card reveal">
+        <span class="pricing-feature-card-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M4 20V10M12 20V4M20 20v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+        <h3><em>Analytics</em> that actually help</h3>
+        <p>See what shoppers ask, where the agent struggles, and what's driving resolutions &mdash; not vanity charts.</p>
+      </div>
+      <div class="pricing-feature-card reveal">
+        <span class="pricing-feature-card-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M12 4a8 8 0 100 16 8 8 0 000-16z" stroke="currentColor" stroke-width="1.6"/><path d="M8 10c1-1.5 2.3-1.5 4 0s3 1.5 4 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M8 14c1 1.5 2.3 1.5 4 0s3-1.5 4 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        <h3><em>One</em> agent, every channel</h3>
+        <p>Web chat, WhatsApp, Instagram DMs &mdash; the same trained agent, wherever your shoppers already are.</p>
+      </div>
+      <div class="pricing-feature-card feature-card-wide reveal">
+        <span class="pricing-feature-card-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M4 8h9l-3-3m3 3l-3 3M20 16h-9l3 3m-3-3l3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3><em>Permission-aware</em> handoff</h3>
+        <p>Your agent works within whatever boundaries you set &mdash; the moment a chat needs to go further, it hands off to your team, automatically.</p>
+      </div>
+    </div>
+
+    <div class="marketing-strip reveal">
+      <span class="marketing-strip-item"><strong>14 days free</strong> &mdash; your agent works the room before you pay the cover charge.</span>
+      <span class="marketing-strip-divider">&bull;</span>
+      <span class="marketing-strip-item">We monitor your agent for <strong>life</strong> &mdash; the first <strong>90&ndash;180 days</strong> just get extra-close attention.</span>
+      <span class="marketing-strip-divider">&bull;</span>
+      <span class="marketing-strip-item">Pay yearly and we'll <strong>cut your implementation fee by 50%</strong> &mdash; math even we can't argue with.</span>
+    </div>
+
+  </div>
+</section>
+
+<section class="section" id="compare-plans">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Compare plans</div>
+      <h2 class="section-title">Every feature, <em>side by side</em>.</h2>
+    </div>
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Starter</th>
+            <th>Growth</th>
+            <th>Scale</th>
+            <th>Advance</th>
+            <th>Enterprise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="compare-group-row"><td colspan="6">Core</td></tr>
+          <tr><td>Chats included / month</td><td>500</td><td>1,000</td><td>2,200</td><td>5,000</td><td>Custom</td></tr>
+          <tr><td>Overage rate</td><td>$0.75/chat</td><td>$0.75/chat</td><td>$0.75/chat</td><td>$0.75/chat</td><td>Custom</td></tr>
+          <tr><td>Team seats</td><td>Up to 5</td><td>Up to 10</td><td>Unlimited</td><td>Unlimited</td><td>Unlimited</td></tr>
+          <tr><td>Helpdesk tickets</td><td>Unlimited</td><td>Unlimited</td><td>Unlimited</td><td>Unlimited</td><td>Unlimited</td></tr>
+
+          <tr class="compare-group-row"><td colspan="6">Helpdesk &amp; AI Agent</td></tr>
+          <tr><td>Dedicated 1:1 implementation</td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+          <tr><td>AI Agent on/off toggle</td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+          <tr><td>Sentiment analysis &amp; escalation</td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+
+          <tr class="compare-group-row"><td colspan="6">Analytics &amp; Reporting</td></tr>
+          <tr><td>Advanced analytics &amp; reporting</td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+          <tr><td>API &amp; webhook access</td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+          <tr><td>Automated QA &amp; CSAT scorecards</td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+
+          <tr class="compare-group-row"><td colspan="6">Workflow &amp; Support</td></tr>
+          <tr><td>Custom workflows</td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+          <tr><td>Dedicated account manager</td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+          <tr><td>Custom AI brand persona training</td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+          <tr><td>White-glove onboarding &amp; free migration</td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+          <tr><td>Multi-store / multi-brand support</td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+
+          <tr class="compare-group-row"><td colspan="6">Enterprise &amp; Security</td></tr>
+          <tr><td>Custom LLM fine-tuning</td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+          <tr><td>On-prem / VPC deployment</td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+          <tr><td>SSO / SAML &amp; audit logs</td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+          <tr><td>Custom contractual SLA</td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+          <tr><td>24/7 dedicated pod</td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-dash">&mdash;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">FAQs</div>
+      <h2 class="section-title">Frequently asked <em>questions</em>.</h2>
+    </div>
+    <div class="faq-layout">
+      <div class="faq-topics">
+        <button type="button" class="faq-topic-btn active" data-faq-topic="all">All questions</button>
+        <button type="button" class="faq-topic-btn" data-faq-topic="billing">Billing</button>
+        <button type="button" class="faq-topic-btn" data-faq-topic="plans">Plans &amp; Seats</button>
+        <button type="button" class="faq-topic-btn" data-faq-topic="helpdesk">Helpdesk &amp; AI Agent</button>
+        <button type="button" class="faq-topic-btn" data-faq-topic="implementation">Implementation</button>
+      </div>
+      <div class="faq-qa" data-article-list>
+        <div class="help-article" data-article data-faq-topic="billing">
+          <button class="help-article-q" data-toggle><span>What counts as a "chat" for AI Agent billing?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+          <div class="help-article-a"><div class="help-article-a-inner">
+            <p>A chat counts once per conversation, no matter how many messages it takes to resolve. Conversations handled entirely by a human through the Helpdesk don't count against your AI Agent limit.</p>
+          </div></div>
+        </div>
+        <div class="help-article" data-article data-faq-topic="billing">
+          <button class="help-article-q" data-toggle><span>What happens if I go over my plan's chat limit?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+          <div class="help-article-a"><div class="help-article-a-inner">
+            <p>Your agent keeps working &mdash; going over doesn't shut anything off. Extra chats are billed at a flat $0.75 per chat on every plan, and we'll email you at 80% and 100% of your monthly allotment.</p>
+          </div></div>
+        </div>
+        <div class="help-article" data-article data-faq-topic="billing">
+          <button class="help-article-q" data-toggle><span>Do unused chats roll over?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+          <div class="help-article-a"><div class="help-article-a-inner">
+            <p>Yes, on annual plans. Any chats you don't use in a month carry into the next one automatically, and the full balance resets at your yearly renewal.</p>
+          </div></div>
+        </div>
+        <div class="help-article" data-article data-faq-topic="plans">
+          <button class="help-article-q" data-toggle><span>Is the Helpdesk really unlimited, on every plan?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+          <div class="help-article-a"><div class="help-article-a-inner">
+            <p>Yes. Ticket volume through the Helpdesk isn't metered or priced per seat &mdash; it's included at every tier, from Starter through Enterprise.</p>
+          </div></div>
+        </div>
+        <div class="help-article" data-article data-faq-topic="plans">
+          <button class="help-article-q" data-toggle><span>How many team seats do I get?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+          <div class="help-article-a"><div class="help-article-a-inner">
+            <p>Starter includes up to 5 seats and Growth up to 10. Scale, Advance, and Enterprise all include unlimited team seats.</p>
+          </div></div>
+        </div>
+        <div class="help-article" data-article data-faq-topic="plans">
+          <button class="help-article-q" data-toggle><span>Can I change plans or cancel anytime?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+          <div class="help-article-a"><div class="help-article-a-inner">
+            <p>Plan changes are self-serve. Upgrades apply immediately with prorated billing; downgrades and cancellations take effect at the end of your current billing cycle, and your data is retained for 90 days in case you come back.</p>
+          </div></div>
+        </div>
+        <div class="help-article" data-article data-faq-topic="helpdesk">
+          <button class="help-article-q" data-toggle><span>Can I turn the AI Agent off and just use the Helpdesk?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+          <div class="help-article-a"><div class="help-article-a-inner">
+            <p>Yes. The AI Agent can be switched on or off at any time from your dashboard settings &mdash; your team can run the Helpdesk on its own whenever you want.</p>
+          </div></div>
+        </div>
+        <div class="help-article" data-article data-faq-topic="implementation">
+          <button class="help-article-q" data-toggle><span>Is there a cost beyond the monthly plan?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+          <div class="help-article-a"><div class="help-article-a-inner">
+            <p>Yes &mdash; a one-time implementation fee, scoped to your setup, separate from your monthly plan. See <a href="implementation-fee.html" style="color:var(--accent);">how it's calculated</a>, and note it drops 50% on annual billing.</p>
+          </div></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
     <div class="section-head">
-      <div class="section-eyebrow">Why no fixed tiers</div>
-      <h2 class="section-title">Your catalog isn't a tier. Why should pricing be?</h2>
+      <div class="section-eyebrow">Straightforward pricing</div>
+      <h2 class="section-title">Simple tiers. No catalog-size penalty.</h2>
     </div>
     <div class="problem-row reveal" style="border-top:1px solid var(--line);">
       <div class="problem-tag">&rarr;</div>
-      <div class="problem-text">A 40-SKU boutique and a 3,000-SKU catalog <strong>aren't the same build</strong> &mdash; pricing them the same would be unfair to one of you.</div>
+      <div class="problem-text">A 40-SKU boutique and a 3,000-SKU catalog run on the <strong>same tiers</strong> &mdash; pricing scales with chat volume, not how many products you sell.</div>
     </div>
     <div class="problem-row reveal">
       <div class="problem-tag">&rarr;</div>
-      <div class="problem-text">We quote based on <strong>scope after we see your catalog</strong>, not before &mdash; so you know exactly what you're paying for.</div>
+      <div class="problem-text">Need more than 5,000 chats a month, custom fine-tuning, or on-prem deployment? That's the <strong>only time we scope a custom quote</strong> &mdash; see Enterprise above.</div>
     </div>
     <div class="problem-row reveal">
       <div class="problem-tag">&rarr;</div>
-      <div class="problem-text">No surprise overage fees for message volume. We <strong>agree on usage upfront</strong>, based on your real numbers.</div>
+      <div class="problem-text">Go past your plan? One <strong>flat overage rate</strong>, always. No usage negotiation, no fine print.</div>
+    </div>
+    <div class="problem-row reveal">
+      <div class="problem-tag">&rarr;</div>
+      <div class="problem-text">There's also a one-time implementation cost to get your agent live &mdash; see <a href="implementation-fee.html" style="color:var(--accent); font-weight:600;">how implementation pricing works</a>.</div>
     </div>
   </div>
 </section>
@@ -260,7 +486,7 @@
     <div class="footer-top">
       <div class="footer-col">
         <div class="logo"><img class="logo-mark" src="images/wren-mark.svg" alt="Wrennon" width="34" height="34" aria-hidden="true">Wrennon</div>
-        <p class="footer-desc">AI agents built for ecommerce — trained on your catalog, orders, and checkout.</p>
+        <p class="footer-desc">AI agents built for ecommerce &mdash; trained on your catalog, orders, and checkout.</p>
       </div>
       <div class="footer-col">
         <h4><em>Product</em></h4>
@@ -281,7 +507,6 @@
         <h4>Get in <em>touch</em></h4>
         <a href="help-center.html">Help Center</a>
         <a href="contact.html">Contact</a>
-        <a href="demo.html" class="footer-link-btn btn-cta-bold">View Demo</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -299,6 +524,37 @@
   </div>
 </footer>
 
+<script>
+  (function () {
+    document.querySelectorAll('[data-toggle]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var article = btn.closest('[data-article]');
+        var wasOpen = article.classList.contains('open');
+        var list = article.closest('[data-article-list]');
+        if (list) {
+          list.querySelectorAll('.help-article.open').forEach(function (a) {
+            if (a !== article) a.classList.remove('open');
+          });
+        }
+        article.classList.toggle('open', !wasOpen);
+      });
+    });
+
+    var topicBtns = document.querySelectorAll('.faq-topic-btn');
+    var faqArticles = document.querySelectorAll('.faq-qa .help-article');
+    topicBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        topicBtns.forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var topic = btn.getAttribute('data-faq-topic');
+        faqArticles.forEach(function (article) {
+          var match = topic === 'all' || article.getAttribute('data-faq-topic') === topic;
+          article.style.display = match ? '' : 'none';
+        });
+      });
+    });
+  })();
+</script>
 <script src="js/script.js"></script>
 </body>
 </html>

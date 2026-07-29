@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard — Wrennon</title>
+    <title>Admin Dashboard &mdash; Wrennon</title>
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <script>
       (function() {
@@ -1337,7 +1337,7 @@
                     credentials: "include",
                     body: JSON.stringify({ value: val })
                 });
-                if (btn) { btn.disabled = false; btn.innerText = res.ok ? 'Saved ✓' : originalText; }
+                if (btn) { btn.disabled = false; btn.innerText = res.ok ? 'Saved &#10003;' : originalText; }
                 if (res.ok) {
                     setTimeout(() => { if (btn) btn.innerText = originalText; }, 1800);
                 } else {

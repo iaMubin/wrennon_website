@@ -1,4 +1,4 @@
-// Wrennon Live Demo — static conversation dataset
+// Wrennon Live Demo \u2014 static conversation dataset
 //
 // Timestamps are stored as relative offsets (start_minutes_ago / offset_sec)
 // rather than fixed dates, and are converted to real ISO timestamps at load
@@ -50,7 +50,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "hum-ctx-0",
         "sender": "human",
-        "content": "I just received my new Heritage Chronograph from order #WR-88401 and I'm in love with it already 😍",
+        "content": "I just received my new Heritage Chronograph from order #WR-88401 and I'm in love with it already \uD83D\uDE0D",
         "offset_sec": 125
       },
       {
@@ -62,7 +62,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "3eb13b90",
         "sender": "ai",
-        "content": "Hello Sarah! That's wonderful to hear — the Heritage Chronograph is one of our most popular pieces. How can I help you today?",
+        "content": "Hello Sarah! That's wonderful to hear \u2014 the Heritage Chronograph is one of our most popular pieces. How can I help you today?",
         "offset_sec": 233
       },
       {
@@ -86,7 +86,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "16419f82",
         "sender": "ai",
-        "content": "It's rated to 50 meters (5 ATM), so it'll handle splashes, rain, and hand-washing fine. I'd still avoid showering or swimming with it though — the leather strap will degrade much faster with repeated soaking, even if the case itself is sealed.",
+        "content": "It's rated to 50 meters (5 ATM), so it'll handle splashes, rain, and hand-washing fine. I'd still avoid showering or swimming with it though \u2014 the leather strap will degrade much faster with repeated soaking, even if the case itself is sealed.",
         "offset_sec": 551
       },
       {
@@ -98,19 +98,19 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "07a0ca6e",
         "sender": "ai",
-        "content": "Yes — order #WR-88401 includes our standard 2-year international warranty covering the movement, dial, hands, and crown. Straps are considered a wear item and aren't covered, but we sell replacement straps separately if you ever need one.",
+        "content": "Yes \u2014 order #WR-88401 includes our standard 2-year international warranty covering the movement, dial, hands, and crown. Straps are considered a wear item and aren't covered, but we sell replacement straps separately if you ever need one.",
         "offset_sec": 680
       },
       {
         "id": "37f8a88b",
         "sender": "human",
-        "content": "Perfect. One more thing — the second hand seems to tick every 2 seconds instead of every second, is that normal?",
+        "content": "Perfect. One more thing \u2014 the second hand seems to tick every 2 seconds instead of every second, is that normal?",
         "offset_sec": 730
       },
       {
         "id": "815ef6d1",
         "sender": "ai",
-        "content": "Completely normal! The Heritage Chronograph uses a quartz movement with a 2-second sweep to conserve battery life — it's designed that way, not a defect. A true 1-second tick would drain the battery about 30% faster.",
+        "content": "Completely normal! The Heritage Chronograph uses a quartz movement with a 2-second sweep to conserve battery life \u2014 it's designed that way, not a defect. A true 1-second tick would drain the battery about 30% faster.",
         "offset_sec": 789
       },
       {
@@ -199,13 +199,13 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "b2b9437a",
         "sender": "ai",
-        "content": "Done! Since order #WR-88402 was delivered only 2 days ago, you're well within our 30-day exchange window. I've emailed you a prepaid return label — just drop the original pair off at any carrier location.",
+        "content": "Done! Since order #WR-88402 was delivered only 2 days ago, you're well within our 30-day exchange window. I've emailed you a prepaid return label \u2014 just drop the original pair off at any carrier location.",
         "offset_sec": 525
       },
       {
         "id": "571aa876",
         "sender": "human",
-        "content": "Awesome, thank you. While I have you — what's the upper made of? They look amazing in person.",
+        "content": "Awesome, thank you. While I have you \u2014 what's the upper made of? They look amazing in person.",
         "offset_sec": 597
       },
       {
@@ -223,7 +223,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "562b0f79",
         "sender": "ai",
-        "content": "We do — the Comfort+ Memory Foam insoles are $14 and drop right into the Urban Walkers. Want me to add a pair to your exchange order at no extra shipping cost?",
+        "content": "We do \u2014 the Comfort+ Memory Foam insoles are $14 and drop right into the Urban Walkers. Want me to add a pair to your exchange order at no extra shipping cost?",
         "offset_sec": 810
       },
       {
@@ -267,7 +267,7 @@ const RAW_DEMO_SESSIONS = [
     "start_minutes_ago": 460,
     "order": {
       "order_id": "WR-88403",
-      "status": "Delivered — Incorrect Item",
+      "status": "Delivered \u2014 Incorrect Item",
       "carrier": "FedEx",
       "eta": "Replacement overnight",
       "tracking_url": "https://www.fedex.com/track"
@@ -312,7 +312,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "142c3fe8",
         "sender": "ai",
-        "content": "Oh no, that is definitely not a watch! I sincerely apologize for this mix-up at our fulfillment center — this looks like a packing/labeling error on our end. Let me get this fixed for you immediately.",
+        "content": "Oh no, that is definitely not a watch! I sincerely apologize for this mix-up at our fulfillment center \u2014 this looks like a packing/labeling error on our end. Let me get this fixed for you immediately.",
         "offset_sec": 343
       },
       {
@@ -324,7 +324,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "9e574f7a",
         "sender": "ai",
-        "content": "No need to return it — please keep the coffee as our apology for the mix-up! I'm expediting a replacement Classic Silver Chronograph to you right now via overnight shipping at no extra cost, and I've flagged this order for a fulfillment audit so it doesn't happen again.",
+        "content": "No need to return it \u2014 please keep the coffee as our apology for the mix-up! I'm expediting a replacement Classic Silver Chronograph to you right now via overnight shipping at no extra cost, and I've flagged this order for a fulfillment audit so it doesn't happen again.",
         "offset_sec": 508
       },
       {
@@ -336,7 +336,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "b45ed1f0",
         "sender": "ai",
-        "content": "It'll ship within the hour and should reach you by tomorrow evening at the latest — I'll text you the new tracking number as soon as it's generated. Order #WR-88403 has been updated in our system to reflect the replacement shipment.",
+        "content": "It'll ship within the hour and should reach you by tomorrow evening at the latest \u2014 I'll text you the new tracking number as soon as it's generated. Order #WR-88403 has been updated in our system to reflect the replacement shipment.",
         "offset_sec": 633
       },
       {
@@ -348,7 +348,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "3a578a8e",
         "sender": "ai",
-        "content": "Nope, nothing needed — it's yours to keep, no return authorization required. I've also added a $15 credit to your account for the inconvenience, which you can use on your next order.",
+        "content": "Nope, nothing needed \u2014 it's yours to keep, no return authorization required. I've also added a $15 credit to your account for the inconvenience, which you can use on your next order.",
         "offset_sec": 769
       },
       {
@@ -360,7 +360,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "daf61a26",
         "sender": "ai",
-        "content": "Of course, Priya — that's exactly what we're here for. Enjoy the coffee (and the watch, once it arrives)!",
+        "content": "Of course, Priya \u2014 that's exactly what we're here for. Enjoy the coffee (and the watch, once it arrives)!",
         "offset_sec": 913
       }
     ],
@@ -413,7 +413,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "7412b293",
         "sender": "ai",
-        "content": "Thanks for sending that over, Marcus — I've reviewed your voice message. Just to confirm: you dropped the watch yesterday and now hear a rattling sound when you shake it gently, is that right?",
+        "content": "Thanks for sending that over, Marcus \u2014 I've reviewed your voice message. Just to confirm: you dropped the watch yesterday and now hear a rattling sound when you shake it gently, is that right?",
         "offset_sec": 212
       },
       {
@@ -425,7 +425,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "29a3b2e9",
         "sender": "ai",
-        "content": "That's usually the internal vibration motor housing coming loose from an impact — it doesn't affect water resistance or core function, but it should be repaired so it doesn't get worse. Good news: order #WR-88404 is still well within its 1-year warranty, and accidental drops during normal use are covered under our first-year protection plan.",
+        "content": "That's usually the internal vibration motor housing coming loose from an impact \u2014 it doesn't affect water resistance or core function, but it should be repaired so it doesn't get worse. Good news: order #WR-88404 is still well within its 1-year warranty, and accidental drops during normal use are covered under our first-year protection plan.",
         "offset_sec": 365
       },
       {
@@ -437,7 +437,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "ab9099a4",
         "sender": "ai",
-        "content": "I've generated a prepaid shipping label to our repair center — you'll get it by email in the next few minutes. Once we receive the watch, turnaround is typically 5-7 business days, and I can send a loaner Pulse Series in the meantime if you'd like one.",
+        "content": "I've generated a prepaid shipping label to our repair center \u2014 you'll get it by email in the next few minutes. Once we receive the watch, turnaround is typically 5-7 business days, and I can send a loaner Pulse Series in the meantime if you'd like one.",
         "offset_sec": 491
       },
       {
@@ -449,7 +449,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "a5e5a5ab",
         "sender": "ai",
-        "content": "Done — a loaner unit ships out today and should arrive before your original watch even reaches our repair center. You won't miss a single workout.",
+        "content": "Done \u2014 a loaner unit ships out today and should arrive before your original watch even reaches our repair center. You won't miss a single workout.",
         "offset_sec": 641
       },
       {
@@ -484,7 +484,7 @@ const RAW_DEMO_SESSIONS = [
       "order_id": "WR-88405",
       "status": "Processing",
       "carrier": "FedEx",
-      "eta": "Ships today — priority",
+      "eta": "Ships today \u2014 priority",
       "tracking_url": null
     },
     "messages": [
@@ -515,7 +515,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "6123fdf7",
         "sender": "ai",
-        "content": "Thanks for the voice message, Farhana — I understand you ordered the men's Classic Oxford Shirt in size L as an Eid gift for your brother, but he actually wears a size M, and you're flying out to see him in two days. Let's get this sorted quickly.",
+        "content": "Thanks for the voice message, Farhana \u2014 I understand you ordered the men's Classic Oxford Shirt in size L as an Eid gift for your brother, but he actually wears a size M, and you're flying out to see him in two days. Let's get this sorted quickly.",
         "offset_sec": 253
       },
       {
@@ -527,7 +527,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "b02b61c4",
         "sender": "ai",
-        "content": "Good news — order #WR-88405 hasn't shipped yet, it's still in our processing queue. I can swap the size to Medium right now at no charge, and I'll flag it for priority packing so it still goes out today.",
+        "content": "Good news \u2014 order #WR-88405 hasn't shipped yet, it's still in our processing queue. I can swap the size to Medium right now at no charge, and I'll flag it for priority packing so it still goes out today.",
         "offset_sec": 400
       },
       {
@@ -539,7 +539,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "5304317f",
         "sender": "ai",
-        "content": "Done! Size updated to Medium and marked for priority handling. With expedited shipping, it should arrive at your address by tomorrow afternoon — well before your flight.",
+        "content": "Done! Size updated to Medium and marked for priority handling. With expedited shipping, it should arrive at your address by tomorrow afternoon \u2014 well before your flight.",
         "offset_sec": 568
       },
       {
@@ -551,7 +551,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "3aa2e4f9",
         "sender": "ai",
-        "content": "No extra charge — since this was a fix on our end, I've upgraded the shipping method for free. You'll get a new tracking link within the hour.",
+        "content": "No extra charge \u2014 since this was a fix on our end, I've upgraded the shipping method for free. You'll get a new tracking link within the hour.",
         "offset_sec": 710
       },
       {
@@ -599,37 +599,37 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "hum-ctx-5",
         "sender": "human",
-        "content": "Hola, ¿ustedes envían pedidos a Canadá?",
+        "content": "Hola, \u00BFustedes env\u00EDan pedidos a Canad\u00E1?",
         "offset_sec": 102
       },
       {
         "id": "e9c349e0",
         "sender": "ai",
-        "content": "¡Hola! Sí, hacemos envíos a Canadá. El envío estándar tarda entre 7 y 10 días hábiles, y también ofrecemos envío exprés de 3 días por un costo adicional.",
+        "content": "\u00A1Hola! S\u00ED, hacemos env\u00EDos a Canad\u00E1. El env\u00EDo est\u00E1ndar tarda entre 7 y 10 d\u00EDas h\u00E1biles, y tambi\u00E9n ofrecemos env\u00EDo expr\u00E9s de 3 d\u00EDas por un costo adicional.",
         "offset_sec": 160
       },
       {
         "id": "e059a0ee",
         "sender": "human",
-        "content": "Perfecto. ¿Y si el producto no me queda bien, puedo devolverlo desde allá?",
+        "content": "Perfecto. \u00BFY si el producto no me queda bien, puedo devolverlo desde all\u00E1?",
         "offset_sec": 241
       },
       {
         "id": "508ebad7",
         "sender": "ai",
-        "content": "Por supuesto. Tienes 30 días desde la entrega para solicitar una devolución o cambio, sin importar el país. Te enviamos una etiqueta de devolución prepagada por correo apenas la solicites.",
+        "content": "Por supuesto. Tienes 30 d\u00EDas desde la entrega para solicitar una devoluci\u00F3n o cambio, sin importar el pa\u00EDs. Te enviamos una etiqueta de devoluci\u00F3n prepagada por correo apenas la solicites.",
         "offset_sec": 331
       },
       {
         "id": "a7cad415",
         "sender": "human",
-        "content": "Genial. ¿El costo de la devolución lo cubren ustedes o lo tengo que pagar yo?",
+        "content": "Genial. \u00BFEl costo de la devoluci\u00F3n lo cubren ustedes o lo tengo que pagar yo?",
         "offset_sec": 389
       },
       {
         "id": "654821d0",
         "sender": "ai",
-        "content": "Cubrimos el costo de la etiqueta para cambios de talla o color. Si simplemente cambias de opinión sobre la compra, se descuenta una tarifa pequeña de $6 del reembolso.",
+        "content": "Cubrimos el costo de la etiqueta para cambios de talla o color. Si simplemente cambias de opini\u00F3n sobre la compra, se descuenta una tarifa peque\u00F1a de $6 del reembolso.",
         "offset_sec": 465
       },
       {
@@ -641,7 +641,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "43cf2fde",
         "sender": "ai",
-        "content": "¡Con gusto! Si tienes más preguntas antes de comprar, aquí estoy para ayudarte.",
+        "content": "\u00A1Con gusto! Si tienes m\u00E1s preguntas antes de comprar, aqu\u00ED estoy para ayudarte.",
         "offset_sec": 605
       }
     ]
@@ -687,7 +687,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "8fb5d27b",
         "sender": "ai",
-        "content": "Hello James! We love hearing that — the Urban Walkers are definitely a fan favorite. What can I do for you today?",
+        "content": "Hello James! We love hearing that \u2014 the Urban Walkers are definitely a fan favorite. What can I do for you today?",
         "offset_sec": 185
       },
       {
@@ -699,7 +699,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "95a76d79",
         "sender": "ai",
-        "content": "Ah, the classic rain puddle! Since the upper is vegan suede, the most important thing is to let them dry completely and naturally first — don't use a hairdryer or put them near a radiator, direct heat can crack the material.",
+        "content": "Ah, the classic rain puddle! Since the upper is vegan suede, the most important thing is to let them dry completely and naturally first \u2014 don't use a hairdryer or put them near a radiator, direct heat can crack the material.",
         "offset_sec": 356
       },
       {
@@ -723,7 +723,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "827050a8",
         "sender": "ai",
-        "content": "I'd strongly advise against that — the heat, tumbling, and detergent residue can weaken the adhesives holding the sole and distort the shape permanently. Hand cleaning really is worth the extra few minutes.",
+        "content": "I'd strongly advise against that \u2014 the heat, tumbling, and detergent residue can weaken the adhesives holding the sole and distort the shape permanently. Hand cleaning really is worth the extra few minutes.",
         "offset_sec": 631
       },
       {
@@ -759,7 +759,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "98ae4334",
         "sender": "ai",
-        "content": "Perfect, I've added the Suede Care Kit to your cart — you'll find it ready to check out on our site. Enjoy your Urban Walkers, James!",
+        "content": "Perfect, I've added the Suede Care Kit to your cart \u2014 you'll find it ready to check out on our site. Enjoy your Urban Walkers, James!",
         "offset_sec": 1104
       }
     ],
@@ -806,7 +806,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "988c24c9",
         "sender": "ai",
-        "content": "Hi Emily! Happy to help — I can see order #WR-88407 is still in processing and hasn't shipped yet. What did you need?",
+        "content": "Hi Emily! Happy to help \u2014 I can see order #WR-88407 is still in processing and hasn't shipped yet. What did you need?",
         "offset_sec": 158
       },
       {
@@ -818,7 +818,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "f89897b9",
         "sender": "ai",
-        "content": "Since the order hasn't shipped yet, I can definitely add that for you. Gift wrapping is an additional $5 — shall I charge the card on file?",
+        "content": "Since the order hasn't shipped yet, I can definitely add that for you. Gift wrapping is an additional $5 \u2014 shall I charge the card on file?",
         "offset_sec": 293
       },
       {
@@ -830,7 +830,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "ae270da7",
         "sender": "ai",
-        "content": "Absolutely. We'll wrap the items in our premium gift paper with a ribbon, and I'll remove the pricing invoice from the box entirely — only a gift note will be included.",
+        "content": "Absolutely. We'll wrap the items in our premium gift paper with a ribbon, and I'll remove the pricing invoice from the box entirely \u2014 only a gift note will be included.",
         "offset_sec": 418
       },
       {
@@ -854,19 +854,19 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "c4c2e2e3",
         "sender": "ai",
-        "content": "Got it! Your message and gift wrapping have been added to order #WR-88407 — I've noted it should read 'Love, Sarah' even though the account name is Emily, so our packing team won't second-guess it.",
+        "content": "Got it! Your message and gift wrapping have been added to order #WR-88407 \u2014 I've noted it should read 'Love, Sarah' even though the account name is Emily, so our packing team won't second-guess it.",
         "offset_sec": 738
       },
       {
         "id": "5715bd6f",
         "sender": "human",
-        "content": "Ha, good catch, thank you! One last thing — can I get it delivered on the exact birthday date, the 24th?",
+        "content": "Ha, good catch, thank you! One last thing \u2014 can I get it delivered on the exact birthday date, the 24th?",
         "offset_sec": 824
       },
       {
         "id": "4b22d308",
         "sender": "ai",
-        "content": "I can flag it for scheduled delivery on the 24th — our carrier partner supports date-specific delivery for an extra $3. Want me to apply that too?",
+        "content": "I can flag it for scheduled delivery on the 24th \u2014 our carrier partner supports date-specific delivery for an extra $3. Want me to apply that too?",
         "offset_sec": 876
       },
       {
@@ -967,13 +967,13 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "5fb8d16c",
         "sender": "human",
-        "content": "One more worry — will this delay the shipping at all?",
+        "content": "One more worry \u2014 will this delay the shipping at all?",
         "offset_sec": 713
       },
       {
         "id": "295b4715",
         "sender": "ai",
-        "content": "No delay at all — the correction was made before the warehouse pulled the order for packing, so it stays on the original timeline. You should still have it within 3-4 business days.",
+        "content": "No delay at all \u2014 the correction was made before the warehouse pulled the order for packing, so it stays on the original timeline. You should still have it within 3-4 business days.",
         "offset_sec": 806
       },
       {
@@ -1020,7 +1020,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "hum-ctx-9",
         "sender": "human",
-        "content": "quick question before I buy — do your leather bags come with any kind of warranty?",
+        "content": "quick question before I buy \u2014 do your leather bags come with any kind of warranty?",
         "offset_sec": 118
       },
       {
@@ -1108,7 +1108,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "7c69dee1",
         "sender": "ai",
-        "content": "I completely understand the concern, Aliza — let me look into order #WR-88409 immediately.",
+        "content": "I completely understand the concern, Aliza \u2014 let me look into order #WR-88409 immediately.",
         "offset_sec": 181
       },
       {
@@ -1120,7 +1120,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "885f6e66",
         "sender": "ai",
-        "content": "I hear you, and I'm treating this as urgent. I can see two authorization entries on the order from the same day, which does look unusual. Since this involves your bank account directly, I want a specialist to verify this precisely rather than guess — connecting you with a human agent now who can pull the full payment gateway logs.",
+        "content": "I hear you, and I'm treating this as urgent. I can see two authorization entries on the order from the same day, which does look unusual. Since this involves your bank account directly, I want a specialist to verify this precisely rather than guess \u2014 connecting you with a human agent now who can pull the full payment gateway logs.",
         "offset_sec": 323
       },
       {
@@ -1132,7 +1132,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "a8e56e0c",
         "sender": "agent",
-        "content": "Hi Aliza, this is Alex from the billing team. Good news — you were only actually charged once. The second entry was a temporary authorization hold caused by a retry on our payment processor's end, not a real charge. I've manually released that hold right now.",
+        "content": "Hi Aliza, this is Alex from the billing team. Good news \u2014 you were only actually charged once. The second entry was a temporary authorization hold caused by a retry on our payment processor's end, not a real charge. I've manually released that hold right now.",
         "offset_sec": 470
       },
       {
@@ -1156,7 +1156,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "6c52c49f",
         "sender": "agent",
-        "content": "Of course — a duplicate charge scare is genuinely stressful, glad we could clear it up fast. I've also added a note to your account so if this ever happens again, it gets escalated to me directly.",
+        "content": "Of course \u2014 a duplicate charge scare is genuinely stressful, glad we could clear it up fast. I've also added a note to your account so if this ever happens again, it gets escalated to me directly.",
         "offset_sec": 769
       },
       {
@@ -1173,7 +1173,7 @@ const RAW_DEMO_SESSIONS = [
       }
     ],
     "customer_name": "Aliza Rahman",
-    "handoff_summary": "Customer reports being charged twice for order #WR-88409 and suspects fraud — needs payment gateway investigation."
+    "handoff_summary": "Customer reports being charged twice for order #WR-88409 and suspects fraud \u2014 needs payment gateway investigation."
   },
   {
     "session_id": "sess_5c2d386ff7b5",
@@ -1189,7 +1189,7 @@ const RAW_DEMO_SESSIONS = [
     "start_minutes_ago": 100,
     "order": {
       "order_id": "WR-88410",
-      "status": "Delivered — Damaged",
+      "status": "Delivered \u2014 Damaged",
       "carrier": "FedEx",
       "eta": "Replacement overnight",
       "tracking_url": "https://www.fedex.com/track"
@@ -1216,7 +1216,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "b683d2e6",
         "sender": "ai",
-        "content": "I'm so sorry to hear that, Grace — a cracked crystal on a $1,200 piece straight out of the box is completely unacceptable. Let me pull up order #WR-88410 right away.",
+        "content": "I'm so sorry to hear that, Grace \u2014 a cracked crystal on a $1,200 piece straight out of the box is completely unacceptable. Let me pull up order #WR-88410 right away.",
         "offset_sec": 188
       },
       {
@@ -1228,7 +1228,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "a65e688e",
         "sender": "ai",
-        "content": "Given the value and the timeline, I want this to get the fastest possible resolution with full authority to expedite — connecting you with a senior agent right now who can approve an overnight replacement immediately.",
+        "content": "Given the value and the timeline, I want this to get the fastest possible resolution with full authority to expedite \u2014 connecting you with a senior agent right now who can approve an overnight replacement immediately.",
         "offset_sec": 339
       },
       {
@@ -1240,7 +1240,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "7394988f",
         "sender": "agent",
-        "content": "Hi Grace, this is Harry — I've personally approved an overnight replacement, no photo review needed given your timeline. It ships within the hour from our NYC facility and is guaranteed to arrive before 10:30 AM tomorrow.",
+        "content": "Hi Grace, this is Harry \u2014 I've personally approved an overnight replacement, no photo review needed given your timeline. It ships within the hour from our NYC facility and is guaranteed to arrive before 10:30 AM tomorrow.",
         "offset_sec": 485
       },
       {
@@ -1252,7 +1252,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "1064005c",
         "sender": "agent",
-        "content": "No need to ship it back — keep it or dispose of it as you like. I've also applied a $75 credit to your account for the stress this caused on such an important occasion.",
+        "content": "No need to ship it back \u2014 keep it or dispose of it as you like. I've also applied a $75 credit to your account for the stress this caused on such an important occasion.",
         "offset_sec": 596
       },
       {
@@ -1264,7 +1264,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "8dcdcd03",
         "sender": "agent",
-        "content": "It absolutely mattered — anniversaries don't come with do-overs. You'll get tracking details within the next 30 minutes.",
+        "content": "It absolutely mattered \u2014 anniversaries don't come with do-overs. You'll get tracking details within the next 30 minutes.",
         "offset_sec": 744
       },
       {
@@ -1297,7 +1297,7 @@ const RAW_DEMO_SESSIONS = [
     "start_minutes_ago": 60,
     "order": {
       "order_id": "WR-88411",
-      "status": "In Transit — Delayed",
+      "status": "In Transit \u2014 Delayed",
       "carrier": "UPS",
       "eta": "Emergency same-day replacement dispatched",
       "tracking_url": "https://www.ups.com/track"
@@ -1324,7 +1324,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "0f1259e0",
         "sender": "ai",
-        "content": "I'm really sorry, Robert — 9 days stuck in transit is well outside our normal delivery window, and I understand the timing pressure with your daughter's birthday tomorrow. Let me check order #WR-88411.",
+        "content": "I'm really sorry, Robert \u2014 9 days stuck in transit is well outside our normal delivery window, and I understand the timing pressure with your daughter's birthday tomorrow. Let me check order #WR-88411.",
         "offset_sec": 174
       },
       {
@@ -1342,7 +1342,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "1223b513",
         "sender": "agent_internal",
-        "content": "This is a manager-level case — carrier tracking shows the package looping in a regional hub, likely lost. Authorizing an emergency same-day replacement shipment from our closest fulfillment center and comping the customer's next order given the Platinum tier and the missed-birthday risk.",
+        "content": "This is a manager-level case \u2014 carrier tracking shows the package looping in a regional hub, likely lost. Authorizing an emergency same-day replacement shipment from our closest fulfillment center and comping the customer's next order given the Platinum tier and the missed-birthday risk.",
         "offset_sec": 346
       },
       {
@@ -1360,7 +1360,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "36d8393a",
         "sender": "agent",
-        "content": "Confirmed and booked — you'll get real-time tracking within the next 15 minutes. I've also credited your account for a free item on your next order, and I'm personally flagging your account so any future issue gets escalated straight to me.",
+        "content": "Confirmed and booked \u2014 you'll get real-time tracking within the next 15 minutes. I've also credited your account for a free item on your next order, and I'm personally flagging your account so any future issue gets escalated straight to me.",
         "offset_sec": 561
       },
       {
@@ -1372,7 +1372,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "ef7ddc76",
         "sender": "agent",
-        "content": "That means a lot, Robert — and happy early birthday to your daughter. If the replacement doesn't arrive by 8 PM for any reason, message me directly and I'll have a courier there within the hour.",
+        "content": "That means a lot, Robert \u2014 and happy early birthday to your daughter. If the replacement doesn't arrive by 8 PM for any reason, message me directly and I'll have a courier there within the hour.",
         "offset_sec": 731
       },
       {
@@ -1389,7 +1389,7 @@ const RAW_DEMO_SESSIONS = [
       }
     ],
     "customer_name": "Robert Klein",
-    "handoff_summary": "Platinum member's order stuck in transit for 9 days; needed for daughter's birthday tomorrow — requesting emergency resolution."
+    "handoff_summary": "Platinum member's order stuck in transit for 9 days; needed for daughter's birthday tomorrow \u2014 requesting emergency resolution."
   },
   {
     "session_id": "sess_7e4f5a8119d7",
@@ -1444,7 +1444,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "6e595ed3",
         "sender": "ai",
-        "content": "It's machine washable on a cold, gentle cycle inside a mesh laundry bag, but we'd recommend air-drying flat rather than using a dryer — the heat can cause wool to shrink and lose its shape.",
+        "content": "It's machine washable on a cold, gentle cycle inside a mesh laundry bag, but we'd recommend air-drying flat rather than using a dryer \u2014 the heat can cause wool to shrink and lose its shape.",
         "offset_sec": 344
       },
       {
@@ -1462,7 +1462,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "0dde29a6",
         "sender": "human",
-        "content": "Makes sense. What percentage merino is it — I have mild wool sensitivity.",
+        "content": "Makes sense. What percentage merino is it \u2014 I have mild wool sensitivity.",
         "offset_sec": 573
       },
       {
@@ -1474,13 +1474,13 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "1931e9ee",
         "sender": "human",
-        "content": "That's helpful, thank you. Last question — if it does bother my skin, can I return it after wearing it once?",
+        "content": "That's helpful, thank you. Last question \u2014 if it does bother my skin, can I return it after wearing it once?",
         "offset_sec": 747
       },
       {
         "id": "6712303a",
         "sender": "ai",
-        "content": "Yes — order #WR-88412 is covered under our 30-day return policy even if worn briefly for a fit or comfort check, as long as it's not visibly damaged or heavily used. Just keep the tags on hand.",
+        "content": "Yes \u2014 order #WR-88412 is covered under our 30-day return policy even if worn briefly for a fit or comfort check, as long as it's not visibly damaged or heavily used. Just keep the tags on hand.",
         "offset_sec": 795
       },
       {
@@ -1492,7 +1492,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "3fa7f104",
         "sender": "ai",
-        "content": "Anytime, Noah — hope it works out great for you.",
+        "content": "Anytime, Noah \u2014 hope it works out great for you.",
         "offset_sec": 937
       }
     ],
@@ -1533,7 +1533,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "hum-ctx-14",
         "sender": "human",
-        "content": "I think I accidentally placed the same order twice — I see #WR-88413 and #WR-88414 in my order history, both with the same items.",
+        "content": "I think I accidentally placed the same order twice \u2014 I see #WR-88413 and #WR-88414 in my order history, both with the same items.",
         "offset_sec": 97
       },
       {
@@ -1551,7 +1551,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "474ebc19",
         "sender": "ai",
-        "content": "Absolutely — since neither order has shipped yet, I'll cancel #WR-88414 and issue a full refund to your original payment method, keeping #WR-88413 active so your item still arrives on schedule.",
+        "content": "Absolutely \u2014 since neither order has shipped yet, I'll cancel #WR-88414 and issue a full refund to your original payment method, keeping #WR-88413 active so your item still arrives on schedule.",
         "offset_sec": 285
       },
       {
@@ -1575,7 +1575,7 @@ const RAW_DEMO_SESSIONS = [
       {
         "id": "a6f2f7b8",
         "sender": "ai",
-        "content": "That's a fair ask — I've removed the shipping charge from order #WR-88413 as a courtesy. You won't be charged for delivery on this one.",
+        "content": "That's a fair ask \u2014 I've removed the shipping charge from order #WR-88413 as a courtesy. You won't be charged for delivery on this one.",
         "offset_sec": 536
       },
       {

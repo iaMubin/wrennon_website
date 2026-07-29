@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -46,9 +46,15 @@
     <a href="index.html" class="logo"><img class="logo-mark" src="images/wren-mark.svg" alt="Wrennon" width="34" height="34" aria-hidden="true">Wrennon</a>
     <div class="nav-links">
       <div class="nav-item has-mega">
-        <button type="button" class="nav-mega-trigger" aria-expanded="false">Product<svg class="nav-chev" viewBox="0 0 12 8" width="10" height="7" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" class="nav-mega-trigger" aria-expanded="false">Products<svg class="nav-chev" viewBox="0 0 12 8" width="10" height="7" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="nav-mega">
-          <a href="product.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>How it works</strong><em>Catalog, orders &amp; checkout, trained end to end</em></span></a>
+          <a href="product.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>AI Agent</strong><em>Trained on your catalog, orders &amp; checkout</em></span></a>
+          <a href="helpdesk.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>Customer Service Helpdesk</strong><em>Omnichannel inbox &mdash; human and AI, side by side</em></span></a>
+        </div>
+      </div>
+      <div class="nav-item has-mega">
+        <button type="button" class="nav-mega-trigger" aria-expanded="false">Resources<svg class="nav-chev" viewBox="0 0 12 8" width="10" height="7" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-mega">
           <a href="integrations.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>Integrations</strong><em>Shopify, WooCommerce, Magento &amp; more</em></span></a>
           <a href="security.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>Security</strong><em>How we handle your store's data</em></span></a>
           <a href="roi-calculator.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>ROI Calculator</strong><em>Estimate what automation is worth to you</em></span></a>
@@ -72,8 +78,11 @@
   </div>
   <div class="mobile-menu-backdrop"></div>
   <div class="mobile-menu">
-    <a href="product.html">Product</a>
+    <a href="product.html">AI Agent</a>
+    <a href="helpdesk.html">Customer Service Helpdesk</a>
     <a href="integrations.html">Integrations</a>
+    <a href="security.html">Security</a>
+    <a href="roi-calculator.html">ROI Calculator</a>
     <a href="use-cases.html">Use cases</a>
     <a href="pricing.html">Pricing</a>
     <a href="about.html">About</a>
@@ -88,37 +97,98 @@
   <div class="wrap">
     <div class="eyebrow">Blog</div>
     <h1 class="page-title">Notes on building<br>agents that <em>fit</em>.</h1>
-    <p class="page-sub">What we learn from mapping real processes and putting agents in front of real customers.</p>
+    <p class="page-sub">What we learn from mapping real processes and putting agents in front of real customers &mdash; no recycled AI-hype listicles.</p>
   </div>
 </header>
 
-<section class="section" style="padding-top:0;">
+<section class="section" style="padding-top:0; padding-bottom:0;">
   <div class="wrap">
+    <a href="blog-post.html" class="info-card linkable reveal" style="display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center; padding:40px;">
+      <div>
+        <span class="tag">Featured &middot; Process</span>
+        <h3 style="font-size:clamp(22px,2.6vw,30px); margin:14px 0 12px;">Why we map your process before writing a single <em>prompt</em></h3>
+        <p style="font-size:15px;">The instinct with AI agents is to start typing into a prompt box. We've learned that's the fastest way to build something that breaks on the first edge case &mdash; and why a proper process map comes first, every time.</p>
+        <div class="meta">Wrennon Team &middot; June 12, 2026 &middot; 5 min read</div>
+      </div>
+      <div class="stat-card" style="margin:0;">
+        <div class="stat-number">01</div>
+        <p class="stat-label">First in a series on how we actually build agents, from process map to live storefront.</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="blog-filter-row reveal">
+      <span class="blog-filter active">All posts</span>
+      <span class="blog-filter">Process</span>
+      <span class="blog-filter">Engineering</span>
+      <span class="blog-filter">Customer ops</span>
+      <span class="blog-filter">Case study</span>
+    </div>
     <div class="card-grid">
       <a href="blog-post.html" class="info-card linkable reveal">
-        <span class="tag">Process</span>
-        <h3>Why we map your process before writing a single <em>prompt</em></h3>
-        <p>The instinct with AI agents is to start typing into a prompt box. We've learned that's the fastest way to build something that breaks on the first edge case.</p>
-        <div class="meta">June 12, 2026 · 5 min read</div>
-      </a>
-      <a href="#" class="info-card linkable reveal">
         <span class="tag">Customer ops</span>
         <h3>What actually happens when a generic chatbot meets a <em>real</em> customer</h3>
         <p>A breakdown of the moment off-the-shelf bots usually fail &mdash; and what a process-built agent does differently at that exact point.</p>
-        <div class="meta">May 28, 2026 · 4 min read</div>
+        <div class="meta">Wrennon Team &middot; May 28, 2026 &middot; 4 min read</div>
       </a>
-      <a href="#" class="info-card linkable reveal">
+      <a href="blog-post.html" class="info-card linkable reveal">
         <span class="tag">Engineering</span>
         <h3>How we connect agents to your existing tools without <em>rebuilding</em> them</h3>
         <p>A look at the integration layer that lets an agent read and write inside your CRM, support desk, and internal systems.</p>
-        <div class="meta">May 14, 2026 · 6 min read</div>
+        <div class="meta">Wrennon Team &middot; May 14, 2026 &middot; 6 min read</div>
       </a>
-      <a href="#" class="info-card linkable reveal">
+      <a href="blog-post.html" class="info-card linkable reveal">
         <span class="tag">Case study</span>
         <h3>Cutting internal IT pings by mapping one workflow, not the whole <em>department</em></h3>
         <p>A look at how a focused process map &mdash; not a department-wide rollout &mdash; was enough to meaningfully cut repetitive internal questions.</p>
-        <div class="meta">April 30, 2026 · 5 min read</div>
+        <div class="meta">Wrennon Team &middot; April 30, 2026 &middot; 5 min read</div>
       </a>
+      <a href="blog-post.html" class="info-card linkable reveal">
+        <span class="tag">Engineering</span>
+        <h3>Why we test and stage every agent build before it reaches a real <em>customer</em></h3>
+        <p>What our deploy pipeline actually checks before a build gets promoted &mdash; and why "it works on my machine" isn't good enough for a live storefront.</p>
+        <div class="meta">Wrennon Team &middot; April 18, 2026 &middot; 5 min read</div>
+      </a>
+      <a href="blog-post.html" class="info-card linkable reveal">
+        <span class="tag">Process</span>
+        <h3>The discovery call is doing more work than you'd <em>think</em></h3>
+        <p>Why we treat the first call as a real audit &mdash; not a sales formality &mdash; and how that shapes the entire build that follows.</p>
+        <div class="meta">Wrennon Team &middot; April 5, 2026 &middot; 4 min read</div>
+      </a>
+      <a href="blog-post.html" class="info-card linkable reveal">
+        <span class="tag">Customer ops</span>
+        <h3>When to let the agent handle it, and when to hand off to a <em>human</em></h3>
+        <p>The permission boundaries we help teams set, and why the right handoff point is a business decision, not a technical one.</p>
+        <div class="meta">Wrennon Team &middot; March 22, 2026 &middot; 5 min read</div>
+      </a>
+      <a href="blog-post.html" class="info-card linkable reveal">
+        <span class="tag">Case study</span>
+        <h3>What changes in the first 90 days after an agent goes <em>live</em></h3>
+        <p>A look at the post-launch monitoring window &mdash; what we tune, what we watch for, and why launch is the start, not the finish line.</p>
+        <div class="meta">Wrennon Team &middot; March 8, 2026 &middot; 6 min read</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap-narrow">
+    <div class="cta-section" style="text-align:left; padding:40px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+        <div style="max-width:420px;">
+          <h2 style="font-size:22px; margin-bottom:8px;">New posts, <em>occasionally</em>.</h2>
+          <p style="margin:0;">No spam, no daily digest &mdash; just an email when we've actually got something worth reading.</p>
+        </div>
+        <form id="newsletterForm" class="newsletter-form" action="https://formspree.io/f/mykqddwd" method="POST">
+          <input type="hidden" name="_subject" value="Newsletter signup">
+          <input type="email" name="email" placeholder="you@company.com" required aria-label="Email address">
+          <button type="submit" class="btn-primary">Subscribe</button>
+        </form>
+        <p class="form-note" id="newsletterNote" style="width:100%; margin-top:10px;"></p>
+      </div>
     </div>
   </div>
 </section>
@@ -177,7 +247,7 @@
     <div class="footer-top">
       <div class="footer-col">
         <div class="logo"><img class="logo-mark" src="images/wren-mark.svg" alt="Wrennon" width="34" height="34" aria-hidden="true">Wrennon</div>
-        <p class="footer-desc">AI agents built for ecommerce — trained on your catalog, orders, and checkout.</p>
+        <p class="footer-desc">AI agents built for ecommerce &mdash; trained on your catalog, orders, and checkout.</p>
       </div>
       <div class="footer-col">
         <h4><em>Product</em></h4>
@@ -198,7 +268,6 @@
         <h4>Get in <em>touch</em></h4>
         <a href="help-center.html">Help Center</a>
         <a href="contact.html">Contact</a>
-        <a href="demo.html" class="footer-link-btn btn-cta-bold">View Demo</a>
       </div>
     </div>
     <div class="footer-bottom">

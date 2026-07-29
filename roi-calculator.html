@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -45,9 +45,15 @@
     <a href="index.html" class="logo"><img class="logo-mark" src="images/wren-mark.svg" alt="Wrennon" width="34" height="34" aria-hidden="true">Wrennon</a>
     <div class="nav-links">
       <div class="nav-item has-mega">
-        <button type="button" class="nav-mega-trigger active" aria-expanded="false">Product<svg class="nav-chev" viewBox="0 0 12 8" width="10" height="7" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" class="nav-mega-trigger" aria-expanded="false">Products<svg class="nav-chev" viewBox="0 0 12 8" width="10" height="7" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="nav-mega">
-          <a href="product.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>How it works</strong><em>Catalog, orders &amp; checkout, trained end to end</em></span></a>
+          <a href="product.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>AI Agent</strong><em>Trained on your catalog, orders &amp; checkout</em></span></a>
+          <a href="helpdesk.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>Customer Service Helpdesk</strong><em>Omnichannel inbox &mdash; human and AI, side by side</em></span></a>
+        </div>
+      </div>
+      <div class="nav-item has-mega">
+        <button type="button" class="nav-mega-trigger active" aria-expanded="false">Resources<svg class="nav-chev" viewBox="0 0 12 8" width="10" height="7" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-mega">
           <a href="integrations.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>Integrations</strong><em>Shopify, WooCommerce, Magento &amp; more</em></span></a>
           <a href="security.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>Security</strong><em>How we handle your store's data</em></span></a>
           <a href="roi-calculator.html" class="nav-mega-link"><span class="nav-mega-ico">&#9679;</span><span><strong>ROI Calculator</strong><em>Estimate what automation is worth to you</em></span></a>
@@ -71,8 +77,11 @@
   </div>
   <div class="mobile-menu-backdrop"></div>
   <div class="mobile-menu">
-    <a href="product.html">Product</a>
+    <a href="product.html">AI Agent</a>
+    <a href="helpdesk.html">Customer Service Helpdesk</a>
     <a href="integrations.html">Integrations</a>
+    <a href="security.html">Security</a>
+    <a href="roi-calculator.html">ROI Calculator</a>
     <a href="use-cases.html">Use cases</a>
     <a href="pricing.html">Pricing</a>
     <a href="about.html">About</a>
@@ -87,7 +96,7 @@
   <div class="wrap">
     <div class="eyebrow">ROI Calculator</div>
     <h1 class="page-title">See how much you<br>can <em>save</em> with AI.</h1>
-    <p class="page-sub">Explore potential savings from automating customer interactions with Wrennon AI Agents. Results are illustrative and based on the inputs you provide.</p>
+    <p class="page-sub">Explore potential savings from automating customer interactions with Wrennon. Default figures are sourced from official government wage data and published industry benchmarks &mdash; see methodology below.</p>
   </div>
 </header>
 
@@ -98,31 +107,42 @@
       <div class="calc-inputs reveal">
         <div class="form-group">
           <label for="monthly-tickets">Total monthly tickets</label>
-          <input type="number" id="monthly-tickets" class="calc-input" value="10000" min="0">
+          <input type="number" id="monthly-tickets" class="calc-input" value="5000" min="0">
         </div>
         
         <div class="form-group">
           <label for="agent-count">Number of agents</label>
-          <input type="number" id="agent-count" class="calc-input" value="20" min="0">
+          <input type="number" id="agent-count" class="calc-input" value="10" min="0">
         </div>
 
         <div class="form-group">
-          <label for="agent-salary">Average monthly salary loaded (per agent)</label>
+          <label for="region-select">Region (sets a verified wage default)</label>
+          <select id="region-select" class="calc-input">
+            <option value="us" selected>United States</option>
+            <option value="uk">United Kingdom</option>
+            <option value="eu">European Union</option>
+          </select>
+          <div class="input-hint">Pre-fills the field below from official wage data. Overwrite it any time with your real cost.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="agent-salary">Average monthly cost per agent (fully loaded)</label>
           <div class="input-with-prefix">
             <span class="prefix">$</span>
-            <input type="number" id="agent-salary" class="calc-input" value="4000" min="0">
+            <input type="number" id="agent-salary" class="calc-input" value="4450" min="0">
           </div>
-          <div class="input-hint">Employee salary, payroll taxes, benefits, and other overhead costs</div>
+          <div class="input-hint">Base pay, payroll taxes, and benefits. Default sourced from official government wage data &mdash; see methodology.</div>
         </div>
 
         <div class="form-group">
-          <label for="helpdesk-plan">Helpdesk price plan (monthly per agent)</label>
+          <label for="helpdesk-plan">Your Wrennon plan (monthly)</label>
           <select id="helpdesk-plan" class="calc-input">
-            <option value="55">Suite Team ($55/mo)</option>
-            <option value="89" selected>Suite Growth ($89/mo)</option>
-            <option value="115">Suite Professional ($115/mo)</option>
-            <option value="169">Suite Enterprise ($169/mo)</option>
+            <option value="299" data-chats="500">Starter ($299/mo, 500 chats)</option>
+            <option value="499" data-chats="1000">Growth ($499/mo, 1,000 chats)</option>
+            <option value="999" data-chats="2200">Scale ($999/mo, 2,200 chats)</option>
+            <option value="1999" data-chats="5000" selected>Advance ($1,999/mo, 5,000 chats)</option>
           </select>
+          <div class="input-hint">Chats beyond your plan's monthly allowance are billed at $0.75/chat &mdash; see <a href="pricing.html" style="color:var(--accent);">current plans</a>.</div>
         </div>
 
         <div class="form-group range-group">
@@ -131,7 +151,7 @@
             <span id="automation-rate-val" class="range-val-badge">40%</span>
           </div>
           <input type="range" id="automation-rate" class="calc-range" value="40" min="0" max="100">
-          <div class="input-hint">Percentage of tickets that could be fully resolved by AI agents without human intervention.</div>
+          <div class="input-hint">Share of tickets the AI resolves without a human. At least 20% of your current agents (or 1, whichever is more) stay on for escalations, edge cases, and oversight.</div>
         </div>
       </div>
 
@@ -139,7 +159,7 @@
       <div class="calc-results reveal">
         <div class="results-card">
           <h3 class="results-title">Annual net <em>savings</em></h3>
-          <p class="results-subtitle">Estimated yearly savings from automated customer interactions with AI agents, after accounting for your Zendesk subscription.</p>
+          <p class="results-subtitle">Estimated yearly savings from automating customer interactions with Wrennon, after accounting for your Wrennon plan cost.</p>
           
           <div class="main-result" id="annual-savings">$0</div>
 
@@ -161,6 +181,19 @@
               <div class="result-value" id="service-cost-impact">0%</div>
             </div>
           </div>
+
+          <div class="team-impact-note" id="teamImpactNote">
+            Your team: <strong id="team-retained">0</strong> agents stay on for escalations &amp; oversight, freeing up capacity equal to <strong id="team-reduced">0</strong> agents.
+          </div>
+
+          <div class="automation-warning" id="automationWarning" style="display:none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path></svg>
+            <span><strong>Not achievable industry-wide today.</strong> Per Intercom Fin's own published benchmarks, top-performing AI deployments (well-structured knowledge bases, ecommerce especially) reach 80&ndash;84% automation. The figures below are calculated at an 85% cap to stay realistic &mdash; not at your selected rate.</span>
+          </div>
+
+          <div class="automation-warning" id="inputSanityWarning" style="display:none;"></div>
+
+          <div class="plan-recommendation" id="planRecommendation" style="display:none;"></div>
 
           <div class="methodology-trigger-wrap">
             <p>Want to know how these numbers were calculated? <button type="button" class="methodology-btn" id="openMethodology">View methodology</button></p>
@@ -231,7 +264,7 @@
     <div class="footer-top">
       <div class="footer-col">
         <div class="logo"><img class="logo-mark" src="images/wren-mark.svg" alt="Wrennon" width="34" height="34" aria-hidden="true">Wrennon</div>
-        <p class="footer-desc">AI agents built for ecommerce — trained on your catalog, orders, and checkout.</p>
+        <p class="footer-desc">AI agents built for ecommerce &mdash; trained on your catalog, orders, and checkout.</p>
       </div>
       <div class="footer-col">
         <h4><em>Product</em></h4>
@@ -252,7 +285,6 @@
         <h4>Get in <em>touch</em></h4>
         <a href="help-center.html">Help Center</a>
         <a href="contact.html">Contact</a>
-        <a href="demo.html" class="footer-link-btn btn-cta-bold">View Demo</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -273,38 +305,58 @@
 <!-- Methodology Modal -->
 <div class="modal-backdrop" id="methodologyModal">
   <div class="modal-content">
-    <button class="modal-close" id="closeMethodology" aria-label="Close">✕</button>
+    <button class="modal-close" id="closeMethodology" aria-label="Close">&times;</button>
     <div class="modal-header">
       <h3>Calculation <em>methodology</em></h3>
     </div>
     <div class="modal-body">
-      <p>The following are considered in the calculation of the output values:</p>
+      <p>This calculator uses figures from official government wage data and published industry benchmarks &mdash; including the methodology industry-leading AI support vendors publish for their own ROI calculators &mdash; not internal or promotional numbers. Sources are listed below &mdash; adjust any input to match your actual numbers.</p>
+
+      <p style="margin-top:20px;"><strong>Default cost-per-agent, by region</strong> (fully loaded: base pay + payroll taxes/employer contributions + benefits):</p>
       <ul class="methodology-list">
-        <li><strong>Service Cost</strong> is used as the base of calculation determined by number of agents &times; (Monthly salary &times; 12).</li>
-        <li><strong>Agents</strong> are considered 100% of their time dedicated to tickets (equal to 40 hours a week) that can be automated.</li>
-        <li><strong>Automation %</strong> directly correlates to the volume of contacts removed.</li>
-        <li>An additional percentage <strong>average handle time reduction</strong> is applied (considering eligability, adoption and effectiveness) to any time remaining after automation due to information capture expediting agent resolution on uncontained tickets.</li>
+        <li><strong>United States &mdash; $4,450/mo:</strong><br>U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics: median hourly wage for Customer Service Representatives, $20.59 (May 2024). Grossed to a monthly figure at 173.3 average working hours/month, loaded at 1.25&times; for payroll taxes and benefits.</li>
+        <li><strong>United Kingdom &mdash; $4,250/mo:</strong><br>UK Office for National Statistics, Annual Survey of Hours and Earnings (ASHE) 2024: median full-time hourly earnings, &pound;18.64. Grossed to a monthly figure at 152 hours/month, loaded at 1.18&times; for employer National Insurance and pension contributions, converted to USD.</li>
+        <li><strong>European Union &mdash; $5,420/mo:</strong><br>Eurostat, average hourly labour cost in the services sector, EU-27, &euro;33.30 (2024) &mdash; this figure already includes employer social contributions. Grossed to a monthly figure at 152 hours/month, converted to USD.</li>
       </ul>
 
-      <p style="margin-top: 24px;">The following are the output values and how they are calculated:</p>
+      <p style="margin-top:20px;"><strong>Other assumptions</strong>:</p>
       <ul class="methodology-list">
-        <li><strong>Savings:</strong><br>
-          <span class="formula">((Total Cost to Serve &times; Automation rate) + (Cost of Remaining Contacts &times; AHT Reduction)) - Cost of Automated Resolutions over Allowance per plan</span>
+        <li><strong>The AI Agent augments your team, it doesn't replace it:</strong> automation is capped at 85%. Per Intercom Fin's own published AI Agent KPI framework (2026), "top performers reach 80&ndash;84%, particularly in ecommerce and subscription businesses with well-structured knowledge bases" &mdash; Wrennon is trained directly on your own catalog. Typical deployments land lower, at 55&ndash;70%.</li>
+        <li><strong>Resolution rate definitions vary across vendors</strong> &mdash; some count any conversation the customer didn't escalate as "resolved" (deflection), others require a verified fix (true resolution), which can differ by 20&ndash;30 points for the same deployment. This calculator uses the stricter, more conservative end of published ranges.</li>
+        <li><strong>At least 20% of agents stay on</strong> for escalations, edge cases, and oversight, with an absolute floor of 1 agent. The 20% figure is a reasonable operational buffer, not a cited statistic; the floor of 1 reflects standard business-continuity practice &mdash; avoiding a single point of failure &mdash; rather than a specific published number.</li>
+        <li><strong>Average handle time:</strong> 6 minutes per ticket, per Zendesk's own published customer service benchmarks.</li>
+        <li><strong>AI cost only applies to overage:</strong> chats within your plan's included monthly allowance are already covered by your flat plan fee. Only automated chats beyond that allowance are charged, at $0.75/chat &mdash; in line with Wrennon's own flat overage rate and within Gartner's 2025-reported range of $0.50&ndash;$1.05 per AI-handled ticket.</li>
+        <li><strong>Handle-time reduction on remaining human-handled tickets:</strong> 10%, a conservative internal assumption for copilot-assisted agents &mdash; not drawn from a specific published study.</li>
+      </ul>
+
+      <p style="margin-top:24px;">How the output values are calculated:</p>
+      <ul class="methodology-list">
+        <li><strong>Annual labor cost (baseline):</strong><br>
+          <span class="formula">Agents &times; monthly cost per agent &times; 12</span>
+        </li>
+        <li><strong>Gross savings</strong> (following the published methodology industry-leading AI support vendors use for their own ROI calculators):<br>
+          <span class="formula">(Automated tickets &times; cost per ticket at your baseline) + (Remaining tickets &times; cost per ticket &times; handle-time reduction) &minus; AI overage cost</span>
+        </li>
+        <li><strong>AI overage cost:</strong><br>
+          <span class="formula">max(0, automated chats &minus; your plan's included annual allowance) &times; $0.75</span>
+        </li>
+        <li><strong>Team capacity freed (informational only, doesn't gate the savings above):</strong><br>
+          <span class="formula">min(automated ticket-hours &divide; 2,080 standard annual FTE hours, Agents &minus; retained agents)</span>
+        </li>
+        <li><strong>Net savings:</strong><br>
+          <span class="formula">Gross savings &minus; your annual Wrennon plan cost</span>
         </li>
         <li><strong>Annual time saved:</strong><br>
-          Definition: Time saved by automating contact removal and capturing information on un-contained contacts (not resolved by AI Agent), which reduces human agent handle time.<br>
-          <span class="formula">Formula: (Automated tickets &times; handle time) + (Non-automated tickets &times; handle time &times; handle time reduction)</span>
+          <span class="formula">(Automated tickets &times; handle time) + (Remaining tickets &times; handle time &times; handle-time reduction)</span>
         </li>
         <li><strong>Return on investment:</strong><br>
-          Definition: The benefit or profit gained relative to the amount invested.<br>
-          <span class="formula">Formula: Net savings Ã· Cost of investment</span>
+          <span class="formula">Net savings &divide; annual Wrennon plan cost</span>
         </li>
         <li><strong>Payback period:</strong><br>
-          Definition: The time, in months, required to recover the Zendesk subscription cost based on annual savings.<br>
-          <span class="formula">Formula: (Annual Zendesk subscription cost Ã· Annual savings) &times; 12 months</span>
+          <span class="formula">(Annual Wrennon plan cost &divide; gross savings) &times; 12 months</span>
         </li>
         <li><strong>Service cost impact:</strong><br>
-          Definition: The net change in service cost after account.
+          Net savings as a percentage of your current annual labor cost.
         </li>
       </ul>
     </div>
@@ -314,12 +366,13 @@
 <!-- Disclaimer Modal -->
 <div class="modal-backdrop" id="disclaimerModal">
   <div class="modal-content" style="max-width: 500px;">
-    <button class="modal-close" id="closeDisclaimer" aria-label="Close">✕</button>
+    <button class="modal-close" id="closeDisclaimer" aria-label="Close">&times;</button>
     <div class="modal-header">
       <h3><em>Important</em> notice</h3>
     </div>
     <div class="modal-body">
-      <p class="disclaimer">The estimates provided are for illustrative purposes only. Actual results may vary, and will depend on a variety of factors such as implementation practices, user adoption, and external economic conditions. Wrennon does not guarantee any financial outcomes or benefits, and is not responsible for the accuracy of the calculations.</p>
+      <p class="disclaimer">The Wrennon AI Agent works alongside your support team &mdash; it does not replace it. This calculator caps automation at 85%, matching Intercom Fin's own published finding that top-performing AI deployments in ecommerce reach 80&ndash;84% automation. It also assumes at least 20% of your current agents (or 1, whichever is larger) remain on your team regardless of automation rate, to handle escalations, edge cases, and oversight &mdash; a conservative operational buffer, not a specific published industry figure.</p>
+      <p class="disclaimer" style="margin-top:14px;">The estimates provided are for illustrative purposes only. Actual results may vary, and will depend on a variety of factors such as implementation practices, user adoption, and external economic conditions. Wrennon does not guarantee any financial outcomes or benefits, and is not responsible for the accuracy of the calculations.</p>
     </div>
   </div>
 </div>

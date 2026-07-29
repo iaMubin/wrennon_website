@@ -1,4 +1,4 @@
-// ── Backend URL detection ──────────────────────────────────────────
+// \u2500\u2500 Backend URL detection \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
 const _RENDER_HOST = "wrennon-backend.onrender.com";
 const _IS_LOCAL = location.hostname === "localhost" || location.hostname === "127.0.0.1" || location.protocol === "file:";
 const API_BASE = `${_IS_LOCAL ? "http" : "https"}://${_IS_LOCAL ? "127.0.0.1:8000" : _RENDER_HOST}/api`;
@@ -26,7 +26,7 @@ document.getElementById("panel").appendChild(scrollToBottomBtn);
 
 // Fixed typing-indicator bar, sitting between #messages and #input-row.
 // Deliberately NOT part of the scrolling message list (unlike the old
-// implementation) — it stays anchored right above the input box no
+// implementation) \u2014 it stays anchored right above the input box no
 // matter how many messages come in while it's visible, instead of
 // visually drifting up as new messages get appended below it.
 const typingIndicatorBar = document.createElement("div");
@@ -53,7 +53,7 @@ let SESSION_ID = null;
 let SESSION_TOKEN = null;
 let reconnectInterval = null;
 
-// ── Theme Management ───────────────────────────────────────────────
+// \u2500\u2500 Theme Management \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
 function setupThemeDropdown() {
   const menuBtn = document.getElementById("theme-menu-btn");
   const dropdown = document.getElementById("theme-dropdown");
@@ -186,7 +186,7 @@ function setupThemeDropdown() {
 }
 setupThemeDropdown();
 
-// ── Session Management ─────────────────────────────────────────────
+// \u2500\u2500 Session Management \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
 // Persist session_id in localStorage so the customer can continue
 // their conversation after page refresh (within the 72-hour window).
 
@@ -220,7 +220,7 @@ async function resolveSessionId() {
     }
   }
 
-  // No valid stored session — create a new one via backend
+  // No valid stored session \u2014 create a new one via backend
   try {
     const response = await fetch(`${API_BASE}/chat/init`, { method: "POST" });
     if (response.ok) {
@@ -235,7 +235,7 @@ async function resolveSessionId() {
   }
 }
 
-// ── UI Event Handlers ──────────────────────────────────────────────
+// \u2500\u2500 UI Event Handlers \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
 
 launcher.addEventListener("click", async (e) => {
   e.stopPropagation();
@@ -274,7 +274,7 @@ inputEl.addEventListener("keydown", (e) => {
   if (e.key === "Enter") sendMessage();
 });
 
-// ── Typing indicator (customer -> backend) ──────────────────────────
+// \u2500\u2500 Typing indicator (customer -> backend) \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
 // Mirrors agent.js's exact pattern 1:1 for stability/consistency: a single
 // "typing" ping guarded by isTyping (not resent on every keystroke), and a
 // "stopped_typing" fired 1.5s after the last keystroke via a reset timer.
@@ -338,7 +338,7 @@ async function handleFileUpload(file, inputElement, uploadInputElement, autoSend
   }
 }
 
-// NOTE: General file upload removed for customers — customers can only
+// NOTE: General file upload removed for customers \u2014 customers can only
 // send photos (via photo button) and voice messages. Agents retain full
 // file upload capabilities through the agent dashboard.
 
@@ -394,9 +394,9 @@ if (voiceBtn) {
   });
 }
 
-// ── History & WebSocket ────────────────────────────────────────────
+// \u2500\u2500 History & WebSocket \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
 
-// ── History & Offline Storage ──────────────────────────────────────
+// \u2500\u2500 History & Offline Storage \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
 
 function getLocalHistory() {
   const data = localStorage.getItem(HISTORY_KEY);
@@ -506,7 +506,7 @@ function connectSocket() {
     try {
       const data = JSON.parse(event.data);
       
-      // SECURITY: Client-side defense-in-depth — reject any message
+      // SECURITY: Client-side defense-in-depth \u2014 reject any message
       // with "internal" in the sender. This is the last line of defense
       // in case all server-side guards fail.
       const rawSender = String(data.sender || "").toLowerCase();
@@ -542,14 +542,14 @@ function connectSocket() {
 
   socket.onclose = (event) => {
     // 4409: this specific connection was superseded by a newer one for
-    // the same session (see connection_manager.py's connect_customer) —
+    // the same session (see connection_manager.py's connect_customer) \u2014
     // that newer connection already exists, so reconnecting here again
     // would just create another redundant connection. Do nothing.
     if (event.code === 4409) {
       return;
     }
 
-    // 4401: the session token itself is invalid/expired — retrying with
+    // 4401: the session token itself is invalid/expired \u2014 retrying with
     // the same dead token will never succeed. Let the person know instead
     // of silently retrying forever.
     if (event.code === 4401) {
@@ -568,7 +568,7 @@ function connectSocket() {
   };
 }
 
-// ── Rendering ──────────────────────────────────────────────────────
+// \u2500\u2500 Rendering \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
 
 function renderMarkdown(text) {
   const lines = text.split("\n");
@@ -591,7 +591,7 @@ function renderMarkdown(text) {
     }
 
     const numbered = line.match(/^(\d+)[.)]\s+(.*)/);
-    const bulleted = line.match(/^[-*•]\s+(.*)/);
+    const bulleted = line.match(/^[-*\u2022]\s+(.*)/);
 
     if (numbered || bulleted) {
       const tag = numbered ? "ol" : "ul";
@@ -806,7 +806,7 @@ function appendMessage(role, text, save = true, timestamp = Date.now(), name = n
   
   if (uiRole !== "system") {
       const timeStr = formatTime(timestamp);
-      const ticks = (uiRole === "user") ? `<span class="msg-ticks">✓✓</span>` : "";
+      const ticks = (uiRole === "user") ? `<span class="msg-ticks">\u2713\u2713</span>` : "";
       const metaDiv = document.createElement("div");
       metaDiv.className = `msg-meta msg-meta--${uiRole}`;
       metaDiv.innerHTML = `<span>${timeStr}</span>${ticks}`;
@@ -851,7 +851,7 @@ function sendMessage() {
     }, '*');
   }
 
-  // A sent message means typing has definitely ended — tell the backend
+  // A sent message means typing has definitely ended \u2014 tell the backend
   // right away instead of waiting for the 1.5s idle timeout to expire on
   // its own, so the AI's grace period can start immediately.
   if (isTyping) {

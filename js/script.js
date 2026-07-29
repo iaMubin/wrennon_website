@@ -1,5 +1,5 @@
 /* ============================================
-   WRENNON — Shared JS
+   WRENNON \u2014 Shared JS
    ============================================ */
 
 // Mobile nav toggle
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Product video — if /videos/product-demo.mp4 hasn't been added yet,
+  // Product video \u2014 if /videos/product-demo.mp4 hasn't been added yet,
   // swap to the animated fallback instead of showing a broken video box.
   const productVideo = document.getElementById('productVideo');
   const videoFallback = document.getElementById('videoFallback');
@@ -43,12 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Hero ambient network animation — soft drifting nodes/connections,
+  // Hero ambient network animation \u2014 soft drifting nodes/connections,
   // suggesting "your store's data, connected". Runs only if canvas exists.
   const heroCanvas = document.getElementById('heroCanvas');
   if (heroCanvas) initHeroCanvas(heroCanvas);
 
-  // Mega menu — click/hover to open, closes on outside click or Escape
+  // Mega menu \u2014 click/hover to open, closes on outside click or Escape
   const megaItems = document.querySelectorAll('.nav-item.has-mega');
   if (megaItems.length) {
     const closeAllMega = () => {
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAllMega(); });
   }
 
-  // Floating nav pill — gains a blurred, more opaque background once the
+  // Floating nav pill \u2014 gains a blurred, more opaque background once the
   // page has scrolled past a small threshold.
   const navEl = document.querySelector('nav');
   if (navEl) {
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const body = document.getElementById('terminalBody');
   if (body) runTerminal(body);
 
-  // Hero chat mockup — animated live-conversation loop (only runs if present)
+  // Hero chat mockup \u2014 animated live-conversation loop (only runs if present)
   const heroChatBody = document.getElementById('heroChatBody');
   if (heroChatBody) runHeroChat(heroChatBody, document.getElementById('heroChatTyped'));
 
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Cursor-follow glow — a soft spotlight that eases toward the pointer
+  // Cursor-follow glow \u2014 a soft spotlight that eases toward the pointer
   const glow = document.querySelector('.cursor-glow');
   const heroDecor = document.querySelector('.hero-illustration') || document.querySelector('.hero-bg-decor');
   const wantsMotion = window.matchMedia('(hover:hover)').matches &&
@@ -165,17 +165,17 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(tick);
   }
 
-  // Rotating headline word — cycles through a wider set of words spanning
+  // Rotating headline word \u2014 cycles through a wider set of words spanning
   // ecommerce, hospitality, and subscription businesses, with a couple of
   // wry/human ones mixed in. Rolls vertically like an odometer: the outgoing
   // word slides down out of view, the incoming word slides down into place
-  // from above — both moving the same direction for a smooth, continuous feel.
+  // from above \u2014 both moving the same direction for a smooth, continuous feel.
   const rotatingWord = document.getElementById('rotatingWord');
   const rwInner = rotatingWord ? rotatingWord.querySelector('.rw-inner') : null;
   const line2 = document.querySelector('.line2');
 
   // Keeps "knows your ___" on a single line no matter how long the word is.
-  // Only the word itself (#rotatingWord) is ever scaled down — "knows your"
+  // Only the word itself (#rotatingWord) is ever scaled down \u2014 "knows your"
   // always stays at full size, matching the rest of the headline.
   function fitRotatingLine() {
     if (!line2 || !rotatingWord) return;
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ROLL_MS = 800; // must match .rw-inner transition-duration in CSS
     const HOLD_MS = 1000; // how long the word sits still once settled
 
-    // Self-scheduling chain (never a fixed setInterval) — each step only
+    // Self-scheduling chain (never a fixed setInterval) \u2014 each step only
     // starts once the previous one has fully finished, so cycles can never
     // overlap or cause a word to be skipped.
     function scheduleNext() {
@@ -231,12 +231,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(rotate, HOLD_MS);
 
-    // No hover-pause here — the whole hero header is a large area, and
+    // No hover-pause here \u2014 the whole hero header is a large area, and
     // pausing whenever the mouse merely rests inside it made the rotation
     // freeze unpredictably. It now rolls continuously, like the chat demo.
   }
 
-  // Contact form handling — submits to Formspree without a page reload
+  // Contact form handling \u2014 submits to Formspree without a page reload
   const form = document.getElementById('contactForm');
   if (form) {
     form.addEventListener('submit', async (e) => {
@@ -262,7 +262,43 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Send message';
         if (note) {
-          note.textContent = "Something went wrong — please email hello@wrennon.com directly.";
+          note.textContent = "Something went wrong \u2014 please email hello@wrennon.com directly.";
+          note.style.color = '#8B3A1E';
+        }
+      }
+    });
+  }
+
+  // Newsletter form handling \u2014 submits to Formspree without a page reload
+  const newsletterForm = document.getElementById('newsletterForm');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = newsletterForm.querySelector('button[type="submit"]');
+      const note = document.getElementById('newsletterNote');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      try {
+        const res = await fetch(newsletterForm.action, {
+          method: 'POST',
+          body: new FormData(newsletterForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          newsletterForm.reset();
+          newsletterForm.style.display = 'none';
+          if (note) {
+            note.textContent = "You're on the list \u2014 we'll email you when there's something worth reading.";
+            note.style.color = 'var(--accent)';
+          }
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch (err2) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Subscribe';
+        if (note) {
+          note.textContent = 'Something went wrong \u2014 please email hello@wrennon.com directly.';
           note.style.color = '#8B3A1E';
         }
       }
@@ -272,33 +308,74 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const terminalScenarios = [
   [
+    { text: 'git clone git@github.com:wrennon/agent-builder.git && cd agent-builder', cls: 't-line', prompt: true },
     { text: 'wrennon init --store "Vantage Apparel" --platform shopify', cls: 't-line', prompt: true },
     { text: '> syncing product catalog... 1,842 SKUs', cls: 't-accent' },
     { text: '> connecting order + fulfillment data', cls: 't-line' },
     { text: '> training agent on sizing guide + return policy', cls: 't-accent' },
-    { text: '✓ agent live — Shopify, WhatsApp, web chat', cls: 't-ok' },
+    { blank: true },
+    { text: 'pytest tests/ -q', cls: 't-line', prompt: true },
+    { text: '42 passed in 8.41s', cls: 't-ok' },
+    { blank: true },
+    { text: 'docker build -t wrennon/agent:vantage .', cls: 't-line', prompt: true },
+    { blank: true },
+    { text: 'wrennon deploy --env staging', cls: 't-line', prompt: true },
+    { text: '> health check: 200 OK', cls: 't-accent' },
+    { blank: true },
+    { text: 'wrennon promote --env production', cls: 't-line', prompt: true },
+    { text: '\u2713 agent live \u2014 Shopify, WhatsApp, web chat', cls: 't-ok' },
   ],
   [
+    { text: 'git clone git@github.com:wrennon/agent-builder.git && cd agent-builder', cls: 't-line', prompt: true },
     { text: 'wrennon init --store "Northgate Electronics" --platform woocommerce', cls: 't-line', prompt: true },
     { text: '> syncing product catalog... 640 SKUs', cls: 't-accent' },
     { text: '> connecting order + warranty data', cls: 't-line' },
     { text: '> training agent on spec sheets + compatibility rules', cls: 't-accent' },
-    { text: '✓ agent live — WooCommerce, web chat', cls: 't-ok' },
+    { blank: true },
+    { text: 'pytest tests/ -q', cls: 't-line', prompt: true },
+    { text: '31 passed in 6.02s', cls: 't-ok' },
+    { blank: true },
+    { text: 'docker build -t wrennon/agent:northgate .', cls: 't-line', prompt: true },
+    { blank: true },
+    { text: 'wrennon deploy --env staging', cls: 't-line', prompt: true },
+    { text: '> health check: 200 OK', cls: 't-accent' },
+    { blank: true },
+    { text: 'wrennon promote --env production', cls: 't-line', prompt: true },
+    { text: '\u2713 agent live \u2014 WooCommerce, web chat', cls: 't-ok' },
   ],
   [
+    { text: 'git clone git@github.com:wrennon/agent-builder.git && cd agent-builder', cls: 't-line', prompt: true },
     { text: 'wrennon init --store "Coastal Home Goods" --platform magento', cls: 't-line', prompt: true },
     { text: '> syncing product catalog... 2,310 SKUs', cls: 't-accent' },
     { text: '> connecting cart + checkout events', cls: 't-line' },
     { text: '> training agent on brand tone + upsell rules', cls: 't-accent' },
-    { text: '✓ agent live — Magento, WhatsApp commerce', cls: 't-ok' },
+    { blank: true },
+    { text: 'pytest tests/ -q', cls: 't-line', prompt: true },
+    { text: '57 passed in 11.87s', cls: 't-ok' },
+    { blank: true },
+    { text: 'docker build -t wrennon/agent:coastal .', cls: 't-line', prompt: true },
+    { blank: true },
+    { text: 'wrennon deploy --env staging', cls: 't-line', prompt: true },
+    { text: '> health check: 200 OK', cls: 't-accent' },
+    { blank: true },
+    { text: 'wrennon promote --env production', cls: 't-line', prompt: true },
+    { text: '\u2713 agent live \u2014 Magento, WhatsApp commerce', cls: 't-ok' },
   ],
 ];
 
-// Small geometric penguin glyph — stands in for the shell prompt instead of a
+// Small geometric penguin glyph \u2014 stands in for the shell prompt instead of a
 // plain "$", reads as "this is a Linux shell" while matching the site's
 // low-poly mark language.
 function typeLine(line, container) {
   return new Promise((resolve) => {
+    if (line.blank) {
+      const spacer = document.createElement('div');
+      spacer.className = 't-blank';
+      spacer.innerHTML = '&nbsp;';
+      container.appendChild(spacer);
+      resolve(spacer);
+      return;
+    }
     const div = document.createElement('div');
     div.className = line.cls;
     let typedSpan = div;
@@ -332,6 +409,12 @@ async function runTerminal(container) {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     terminalScenarios[0].forEach((l) => {
       const div = document.createElement('div');
+      if (l.blank) {
+        div.className = 't-blank';
+        div.innerHTML = '&nbsp;';
+        container.appendChild(div);
+        return;
+      }
       div.className = l.cls;
       if (l.prompt) {
         div.classList.add('t-prompt-line');
@@ -349,7 +432,7 @@ async function runTerminal(container) {
     await playScenario(container, terminalScenarios[i % terminalScenarios.length]);
     await new Promise((r) => setTimeout(r, 2200));
     // Type an explicit "clear" command, let it sit for a beat, then wipe the
-    // screen the way a real terminal does — no jarring cut or fade.
+    // screen the way a real terminal does \u2014 no jarring cut or fade.
     await new Promise((r) => setTimeout(r, 250));
     const clearDiv = await typeLine({ text: 'clear', cls: 't-line', prompt: true }, container);
     const cursorSpan = document.createElement('span');
@@ -362,99 +445,99 @@ async function runTerminal(container) {
 
 // ---------- HERO CHAT MOCKUP (animated live-conversation loop) ----------
 const heroChatScenarios = [
-  // Photo question — smartwatch
+  // Photo question \u2014 smartwatch
   [
     { who: 'user', type: 'photo', src: 'images/chat-photo-watch.jpg', text: 'Is this available in white?' },
-    { who: 'agent', text: 'Yes — that\'s the Pulse Smartwatch, White is in stock. <strong>$96</strong>. Want me to add it to your cart?' },
+    { who: 'agent', text: 'Yes \u2014 that\'s the Pulse Smartwatch, White is in stock. <strong>$96</strong>. Want me to add it to your cart?' },
     { who: 'user', text: 'Does it track sleep?' },
-    { who: 'agent', text: 'Yes — sleep tracking, heart rate, and a 5-day battery life.' },
+    { who: 'agent', text: 'Yes \u2014 sleep tracking, heart rate, and a 5-day battery life.' },
     { who: 'user', text: 'Great, add it to my cart.' },
-    { who: 'agent', text: 'Added ✓ <span class="mono-chip">#5533</span> — ready whenever you want to check out.' },
+    { who: 'agent', text: 'Added \u2713 <span class="mono-chip">#5533</span> \u2014 ready whenever you want to check out.' },
     { who: 'user', text: 'Can I pay on delivery?' },
-    { who: 'agent', text: 'Yes — cash on delivery is available at checkout.' },
+    { who: 'agent', text: 'Yes \u2014 cash on delivery is available at checkout.' },
     { who: 'user', text: 'Perfect, thank you!' },
-    { who: 'agent', text: 'You\'re welcome 🙂' },
-  ],  // Photo question — sneaker
+    { who: 'agent', text: 'You\'re welcome \uD83D\uDE42' },
+  ],  // Photo question \u2014 sneaker
   [
     { who: 'user', type: 'photo', src: 'images/chat-photo-shoe.jpg', text: 'Do you have these in stock?' },
-    { who: 'agent', text: 'Yes — that\'s our Aria Runner, in stock in Black and Grey. Which size do you need?' },
+    { who: 'agent', text: 'Yes \u2014 that\'s our Aria Runner, in stock in Black and Grey. Which size do you need?' },
     { who: 'user', text: 'Size 9, please.' },
-    { who: 'agent', text: 'Size 9 available ✓ — <strong>$96</strong>. Want me to add it to your cart?' },
+    { who: 'agent', text: 'Size 9 available \u2713 \u2014 <strong>$96</strong>. Want me to add it to your cart?' },
     { who: 'user', text: 'Yes, and does it come with extra laces?' },
-    { who: 'agent', text: 'It does — one spare set included in the box.' },
+    { who: 'agent', text: 'It does \u2014 one spare set included in the box.' },
     { who: 'user', text: 'Perfect, add it.' },
-    { who: 'agent', text: 'Added ✓ <span class="mono-chip">#5210</span> — ready for checkout whenever you are.' },
+    { who: 'agent', text: 'Added \u2713 <span class="mono-chip">#5210</span> \u2014 ready for checkout whenever you are.' },
     { who: 'user', text: 'Thanks!' },
-    { who: 'agent', text: 'Anytime 🙂' },
+    { who: 'agent', text: 'Anytime \uD83D\uDE42' },
   ],
   // Order status / product question
   [
     { who: 'user', text: 'Is the Aria Jacket in stock, size M?' },
-    { who: 'agent', text: 'Yes — 12 left in Black, size M. Free shipping over $75. Want me to add it to your cart?' },
+    { who: 'agent', text: 'Yes \u2014 12 left in Black, size M. Free shipping over $75. Want me to add it to your cart?' },
     { who: 'user', text: 'Yes please. Does it run true to size?' },
-    { who: 'agent', text: 'Runs slightly small — most shoppers size up. Added ✓ in <strong>M</strong>, but I can switch it to <strong>L</strong> if you\'d prefer.' },
+    { who: 'agent', text: 'Runs slightly small \u2014 most shoppers size up. Added \u2713 in <strong>M</strong>, but I can switch it to <strong>L</strong> if you\'d prefer.' },
     { who: 'user', type: 'voice', duration: '0:11' },
     { who: 'agent', text: 'Order <span class="mono-chip">#1842</span> shipped yesterday, arriving <strong>Thu</strong>. Want the tracking link?' },
     { who: 'user', text: 'Yes, send it over.' },
     { who: 'user', text: 'And ping me if it gets delayed.' },
-    { who: 'agent', text: 'Sent ✓ to your email — last scan was the Dhaka hub at <strong>6:40am</strong>. I\'ll flag it if anything changes.' },
+    { who: 'agent', text: 'Sent \u2713 to your email \u2014 last scan was the Dhaka hub at <strong>6:40am</strong>. I\'ll flag it if anything changes.' },
     { who: 'user', text: 'Perfect, thanks!' },
-    { who: 'agent', text: 'Anytime 🙂 — anything else before you go?' },
+    { who: 'agent', text: 'Anytime \uD83D\uDE42 \u2014 anything else before you go?' },
   ],
   // Reservation / booking (beyond-ecommerce use case)
   [
     { who: 'user', text: 'Can I book a room for this weekend?' },
     { who: 'user', text: 'Preferably something with a sea view.' },
-    { who: 'agent', text: 'Sure — Seaview Inn has a Deluxe King open Fri–Sun, <strong>$142</strong>/night, ocean-facing. Want me to hold it?' },
+    { who: 'agent', text: 'Sure \u2014 Seaview Inn has a Deluxe King open Fri\u2013Sun, <strong>$142</strong>/night, ocean-facing. Want me to hold it?' },
     { who: 'user', text: 'Yes, hold it. Any late checkout option?' },
-    { who: 'agent', text: 'Added ✓ — late checkout till 1pm is free for that room type.' },
+    { who: 'agent', text: 'Added \u2713 \u2014 late checkout till 1pm is free for that room type.' },
     { who: 'user', type: 'voice', duration: '0:08' },
-    { who: 'agent', text: 'Added — breakfast for two is <strong>$18</strong>/night, included in your total now.' },
+    { who: 'agent', text: 'Added \u2014 breakfast for two is <strong>$18</strong>/night, included in your total now.' },
     { who: 'user', text: "What's the cancellation policy?" },
     { who: 'agent', text: 'Free cancellation up to 48 hours before check-in, after that it\'s one night\'s charge.' },
     { who: 'user', text: 'Perfect, confirm the booking.' },
-    { who: 'agent', text: 'Booked ✓ Confirmation <span class="mono-chip">#H-4471</span> sent to your email — see you Friday!' },
+    { who: 'agent', text: 'Booked \u2713 Confirmation <span class="mono-chip">#H-4471</span> sent to your email \u2014 see you Friday!' },
   ],
   // Return / exchange flow
   [
     { who: 'user', text: 'I want to return the shoes I ordered last week.' },
     { who: 'user', text: "They don't fit right." },
-    { who: 'agent', text: 'Sure — Order <span class="mono-chip">#2210</span>, Trail Runner size 9? What\'s the reason?' },
+    { who: 'agent', text: 'Sure \u2014 Order <span class="mono-chip">#2210</span>, Trail Runner size 9? What\'s the reason?' },
     { who: 'user', text: 'Wrong size, I need a 9.5.' },
-    { who: 'agent', text: 'I can do a free exchange instead of a return — new pair ships in 2 days. Want that?' },
+    { who: 'agent', text: 'I can do a free exchange instead of a return \u2014 new pair ships in 2 days. Want that?' },
     { who: 'user', text: 'Yes, exchange please.' },
-    { who: 'agent', text: 'Exchange started ✓ — return label sent to your email.' },
+    { who: 'agent', text: 'Exchange started \u2713 \u2014 return label sent to your email.' },
     { who: 'user', text: 'Do I need to pay for return shipping?' },
-    { who: 'agent', text: 'No — exchanges ship both ways free. Refund-only returns have a <strong>$4.99</strong> label fee.' },
+    { who: 'agent', text: 'No \u2014 exchanges ship both ways free. Refund-only returns have a <strong>$4.99</strong> label fee.' },
     { who: 'user', text: 'Got it, thanks for the help.' },
-    { who: 'agent', text: 'Happy to help — confirmation email is on its way now.' },
+    { who: 'agent', text: 'Happy to help \u2014 confirmation email is on its way now.' },
   ],
   // Policy query
   [
     { who: 'user', text: "What's your return policy?" },
-    { who: 'agent', text: '30 days from delivery, unworn with tags — free returns on orders over $75.' },
+    { who: 'agent', text: '30 days from delivery, unworn with tags \u2014 free returns on orders over $75.' },
     { who: 'user', text: "And if it's a final sale item?" },
     { who: 'agent', text: 'Final sale items aren\'t returnable, but they\'re always flagged clearly before checkout.' },
     { who: 'user', text: 'Does the warranty cover the Ridge Backpack?' },
-    { who: 'agent', text: 'Yes — 2-year warranty against manufacturing defects, not general wear and tear.' },
+    { who: 'agent', text: 'Yes \u2014 2-year warranty against manufacturing defects, not general wear and tear.' },
     { who: 'user', text: 'How do I file a warranty claim?' },
     { who: 'user', text: "It's for a backpack I bought in March." },
-    { who: 'agent', text: 'Reply here with your order number and a photo — we usually approve within 24 hours.' },
+    { who: 'agent', text: 'Reply here with your order number and a photo \u2014 we usually approve within 24 hours.' },
     { who: 'user', text: 'Good to know, thanks.' },
-    { who: 'agent', text: 'Anytime — happy to help whenever you need it.' },
+    { who: 'agent', text: 'Anytime \u2014 happy to help whenever you need it.' },
   ],
   // Photo question + discount coupon order flow
   [
     { who: 'user', text: 'Do you have the Pulse Smartwatch in white?' },
-    { who: 'agent', text: 'Yes — <strong>$96</strong>, in stock in White. Want me to add it to your cart?' },
+    { who: 'agent', text: 'Yes \u2014 <strong>$96</strong>, in stock in White. Want me to add it to your cart?' },
     { who: 'user', text: 'Yes. Can I use code WELCOME10?' },
-    { who: 'agent', text: 'Added to your cart ✓ Total: <strong>$96.00</strong>.' },
+    { who: 'agent', text: 'Added to your cart \u2713 Total: <strong>$96.00</strong>.' },
     { who: 'user', text: "Wait, I don't think the discount applied?" },
-    { who: 'agent', text: 'You\'re right, my mistake — fixed ✓ <span class="mono-chip">WELCOME10</span> applied, 10% off. New total: <strong>$86.40</strong>.' },
+    { who: 'agent', text: 'You\'re right, my mistake \u2014 fixed \u2713 <span class="mono-chip">WELCOME10</span> applied, 10% off. New total: <strong>$86.40</strong>.' },
     { who: 'user', text: 'Perfect, place the order please.' },
-    { who: 'agent', text: 'Order placed ✓ <span class="mono-chip">#4471</span> — confirmation and receipt sent to your email.' },
+    { who: 'agent', text: 'Order placed \u2713 <span class="mono-chip">#4471</span> \u2014 confirmation and receipt sent to your email.' },
     { who: 'user', text: 'Thank you!' },
-    { who: 'agent', text: 'You\'re welcome — enjoy 🙂' },
+    { who: 'agent', text: 'You\'re welcome \u2014 enjoy \uD83D\uDE42' },
   ],
 ];
 
@@ -477,7 +560,7 @@ function typeIntoInput(el, text){
 function recordIntoInput(el, duration){
   return new Promise((resolve) => {
     el.classList.add('is-recording');
-    el.innerHTML = '<span class="rec-dot"></span><span>Recording voice message… ' + duration + '</span>';
+    el.innerHTML = '<span class="rec-dot"></span><span>Recording voice message\u2026 ' + duration + '</span>';
     setTimeout(resolve, 900);
   });
 }
@@ -485,14 +568,14 @@ function recordIntoInput(el, duration){
 function attachPhotoIntoInput(el){
   return new Promise((resolve) => {
     el.classList.add('is-recording');
-    el.innerHTML = '<span class="rec-dot"></span><span>Attaching photo…</span>';
+    el.innerHTML = '<span class="rec-dot"></span><span>Attaching photo\u2026</span>';
     setTimeout(resolve, 750);
   });
 }
 
 function resetInput(el){
   el.classList.remove('is-typing', 'is-recording');
-  el.textContent = 'Type a message…';
+  el.textContent = 'Type a message\u2026';
 }
 
 const VOICE_WAVE = [5,9,13,7,15,10,6,12,8,14,7,10,5];
@@ -503,7 +586,7 @@ function addHeroBubble(container, turn, who){
   if (turn.type === 'voice') {
     div.classList.add('bubble-voice');
     const bars = VOICE_WAVE.map((h) => `<span style="height:${h}px"></span>`).join('');
-    div.innerHTML = `<span class="voice-play">▶</span><span class="voice-wave">${bars}</span><span class="voice-duration">${turn.duration}</span>`;
+    div.innerHTML = `<span class="voice-play">\u25B6</span><span class="voice-wave">${bars}</span><span class="voice-duration">${turn.duration}</span>`;
   } else if (turn.type === 'photo') {
     div.classList.add('bubble-photo');
     const cap = turn.text ? `<div class="bubble-photo-caption">${turn.text}</div>` : '';
@@ -554,7 +637,7 @@ async function runHeroChat(container, inputEl){
       if (turn.type === 'voice') {
         div.classList.add('bubble-voice');
         const bars = VOICE_WAVE.map((h) => `<span style="height:${h}px"></span>`).join('');
-        div.innerHTML = `<span class="voice-play">▶</span><span class="voice-wave">${bars}</span><span class="voice-duration">${turn.duration}</span>`;
+        div.innerHTML = `<span class="voice-play">\u25B6</span><span class="voice-wave">${bars}</span><span class="voice-duration">${turn.duration}</span>`;
       } else if (turn.type === 'photo') {
         div.classList.add('bubble-photo');
         const cap = turn.text ? `<div class="bubble-photo-caption">${turn.text}</div>` : '';
@@ -608,20 +691,20 @@ async function runHeroChat(container, inputEl){
 
   const replies = [
     { keys: ['price', 'pricing', 'cost', 'koto', 'dam'],
-      text: "Setup runs <strong>$800–$4,000</strong> depending on complexity, plus a <strong>$150–$1,000/month</strong> retainer. Want a rough quote for your store?" },
+      text: "Setup runs <strong>$800\u2013$4,000</strong> depending on complexity, plus a <strong>$150\u2013$1,000/month</strong> retainer. Want a rough quote for your store?" },
     { keys: ['setup', 'time', 'launch', 'onboard', 'koto din'],
-      text: "Most Shopify stores are live in <strong>1–2 weeks</strong> — we connect your catalog and order data first, then tune tone and policies." },
+      text: "Most Shopify stores are live in <strong>1\u20132 weeks</strong> \u2014 we connect your catalog and order data first, then tune tone and policies." },
     { keys: ['integrat', 'shopify', 'whatsapp', 'woocommerce', 'platform'],
-      text: "We support <strong>Shopify, WooCommerce, Magento, WhatsApp,</strong> and custom storefronts — same engine underneath, adapted to each channel." },
+      text: "We support <strong>Shopify, WooCommerce, Magento, WhatsApp,</strong> and custom storefronts \u2014 same engine underneath, adapted to each channel." },
     { keys: ['human', 'agent', 'escalat', 'handoff'],
-      text: "Anytime the agent isn't confident, it hands off to a human with full context — no repeating yourself." },
+      text: "Anytime the agent isn't confident, it hands off to a human with full context \u2014 no repeating yourself." },
     { keys: ['hi', 'hello', 'hey', 'assalam'],
-      text: "Hey there 👋 — happy to answer questions about setup, pricing, or how Wrennon fits your store." }
+      text: "Hey there \uD83D\uDC4B \u2014 happy to answer questions about setup, pricing, or how Wrennon fits your store." }
   ];
   function reply(msg){
     const m = msg.toLowerCase();
     const hit = replies.find(r => r.keys.some(k => m.includes(k)));
-    return hit ? hit.text : "Good question — on a real deployment I'd answer that from your actual catalog and policies. For now, <a href=\"contact.html\" style=\"color:var(--accent);text-decoration:underline;\">book a call</a> and we'll walk through it.";
+    return hit ? hit.text : "Good question \u2014 on a real deployment I'd answer that from your actual catalog and policies. For now, <a href=\"contact.html\" style=\"color:var(--accent);text-decoration:underline;\">book a call</a> and we'll walk through it.";
   }
 
   function send(){
@@ -637,21 +720,24 @@ async function runHeroChat(container, inputEl){
 
 // ---------- PRICING TOGGLE ----------
 document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.getElementById('pricing-toggle');
-  if (toggle) {
-    const monthlyLabel = document.getElementById('label-monthly');
-    const yearlyLabel = document.getElementById('label-yearly');
+  const btnMonthly = document.getElementById('btn-monthly');
+  const btnYearly = document.getElementById('btn-yearly');
+  const indicator = document.getElementById('billing-indicator');
+
+  if (btnMonthly && btnYearly) {
     const amounts = document.querySelectorAll('.price-amount');
     const periods = document.querySelectorAll('.billing-period');
+    let isYearly = true;
 
     function updatePricing() {
-      const isYearly = toggle.checked;
       if (isYearly) {
-        yearlyLabel.classList.add('active');
-        monthlyLabel.classList.remove('active');
+        btnYearly.classList.add('active');
+        btnMonthly.classList.remove('active');
+        if (indicator) indicator.style.transform = 'translateX(100%)';
       } else {
-        monthlyLabel.classList.add('active');
-        yearlyLabel.classList.remove('active');
+        btnMonthly.classList.add('active');
+        btnYearly.classList.remove('active');
+        if (indicator) indicator.style.transform = 'translateX(0)';
       }
 
       amounts.forEach(el => {
@@ -666,13 +752,14 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    toggle.addEventListener('change', updatePricing);
+    btnMonthly.addEventListener('click', () => { isYearly = false; updatePricing(); });
+    btnYearly.addEventListener('click', () => { isYearly = true; updatePricing(); });
     updatePricing(); // initialize on load
   }
 });
 
 // ---------- HERO AMBIENT NETWORK ANIMATION ----------
-// Soft drifting nodes with connecting lines, in brand colors — an original
+// Soft drifting nodes with connecting lines, in brand colors \u2014 an original
 // canvas animation (no external assets) suggesting "your store's data, linked".
 function initHeroCanvas(canvas) {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -762,4 +849,64 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+});
+
+// ---------- FEATURE DETAIL MODAL (What Wrennon does) ----------
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.getElementById('wrennonFeatureGrid');
+  const backdrop = document.getElementById('featureModalBackdrop');
+  if (!grid || !backdrop) return;
+
+  const modalIcon = document.getElementById('featureModalIcon');
+  const modalTitle = document.getElementById('featureModalTitle');
+  const modalBody = document.getElementById('featureModalBody');
+  const closeBtn = document.getElementById('featureModalClose');
+
+  function openModal(card) {
+    const iconEl = card.querySelector('.feature-icon');
+    modalIcon.innerHTML = iconEl ? iconEl.innerHTML : '';
+    modalTitle.innerHTML = card.getAttribute('data-modal-title') || '';
+    modalBody.textContent = card.getAttribute('data-modal-detail') || '';
+    backdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    backdrop.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  grid.querySelectorAll('.feature-card').forEach(card => {
+    card.addEventListener('click', () => openModal(card));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(card);
+      }
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+});
+
+// ---------- BLOG FILTER ----------
+document.addEventListener('DOMContentLoaded', () => {
+  const filters = document.querySelectorAll('.blog-filter');
+  const cards = document.querySelectorAll('.card-grid .info-card');
+  if (!filters.length || !cards.length) return;
+
+  filters.forEach(filter => {
+    filter.addEventListener('click', () => {
+      filters.forEach(f => f.classList.remove('active'));
+      filter.classList.add('active');
+      const category = filter.textContent.trim();
+      cards.forEach(card => {
+        const tag = card.querySelector('.tag');
+        const match = category === 'All posts' || (tag && tag.textContent.trim() === category);
+        card.style.display = match ? '' : 'none';
+      });
+    });
+  });
 });

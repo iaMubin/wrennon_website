@@ -1,4 +1,4 @@
-// ── Backend URL detection ──────────────────────────────────────────
+// \u2500\u2500 Backend URL detection \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
 const _RENDER_HOST = "wrennon-backend.onrender.com";
 const _IS_LOCAL = location.hostname === "localhost" || location.hostname === "127.0.0.1" || location.protocol === "file:";
 const API_BASE = `${_IS_LOCAL ? "http" : "https"}://${_IS_LOCAL ? "localhost:8000" : _RENDER_HOST}/api`;
@@ -29,7 +29,7 @@ const conversationSession = document.getElementById("conversation-session");
 const agentMessages = document.getElementById("agent-messages");
 const agentInput = document.getElementById("agent-message-input");
 
-// ── Theme Management ───────────────────────────────────────────────
+// \u2500\u2500 Theme Management \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
 function setupThemeDropdown() {
   const menuBtn = document.getElementById("theme-menu-btn");
   const dropdown = document.getElementById("theme-dropdown");
@@ -256,18 +256,18 @@ function connectSocket() {
     connectionDot.classList.add("dot--offline");
 
     // The backend closes with code 4401 specifically for auth failures
-    // (missing/expired/invalid/revoked token — see websocket_routes.py).
+    // (missing/expired/invalid/revoked token \u2014 see websocket_routes.py).
     // Retrying an auth failure with the same dead token forever (this used
     // to keep exponential-backoff-retrying indefinitely, hammering the
     // server every 30s with a token that will never become valid again)
-    // helps no one — the fix is to stop and send the agent back to login.
+    // helps no one \u2014 the fix is to stop and send the agent back to login.
     if (event.code === 4401) {
       connectionDot.title = "Session expired. Please log in again.";
       logout();
       return;
     }
 
-    // Any other disconnect (network blip, server restart, etc.) — keep the
+    // Any other disconnect (network blip, server restart, etc.) \u2014 keep the
     // existing exponential backoff retry behavior.
     reconnectAttempts++;
     const delay = Math.min(1000 * Math.pow(2, reconnectAttempts), 30000); // max 30s
@@ -284,7 +284,7 @@ function connectSocket() {
       loadConversations();
       if (data.session_id === activeSessionId) {
         if (data.summary) {
-          appendMessage("system", `📋 ${data.summary}`);
+          appendMessage("system", `\uD83D\uDCCB ${data.summary}`);
         }
         if (data.is_resolved) {
           resolveBtn.textContent = "Resolved";
@@ -510,7 +510,7 @@ function renderConversationList(conversations) {
     }
 
     const reopenBadge = conv.reopen_count > 0
-      ? `<span class="conv-item__reopen-badge">↩ Reopened${conv.reopen_count > 1 ? ` ×${conv.reopen_count}` : ""}</span>`
+      ? `<span class="conv-item__reopen-badge">\u21A9 Reopened${conv.reopen_count > 1 ? ` &times;${conv.reopen_count}` : ""}</span>`
       : "";
 
     let sentimentBadge = '';
@@ -536,7 +536,7 @@ function renderConversationList(conversations) {
       const diffMins = (now - updatedTime) / 60000;
       if (diffMins >= 5) {
         let timeStr = diffMins >= 60 ? `${Math.floor(diffMins / 60)}hr` : `${Math.floor(diffMins)}min`;
-        slaBadge = `<span class="badge badge--sla-warning">⏳ ${timeStr} waiting</span>`;
+        slaBadge = `<span class="badge badge--sla-warning">\u23F3 ${timeStr} waiting</span>`;
       }
     }
 
@@ -904,7 +904,7 @@ function appendMessage(sender, content, isoString = new Date().toISOString(), is
 
   if (sender !== "system") {
     const timeStr = formatTime(isoString);
-    const ticks = (sender === "ai" || sender === "agent" || isInternal) ? `<span class="msg-ticks">✓✓</span>` : "";
+    const ticks = (sender === "ai" || sender === "agent" || isInternal) ? `<span class="msg-ticks">\u2713\u2713</span>` : "";
     const metaDiv = document.createElement("div");
     metaDiv.className = `msg-meta msg-meta--${actualSender}`;
     metaDiv.innerHTML = `<span>${timeStr}</span>${ticks}`;
@@ -952,7 +952,7 @@ document.addEventListener("click", async (e) => {
   }
 });
 
-// ── Slash Commands & Mentions Autocomplete ──
+// \u2500\u2500 Slash Commands & Mentions Autocomplete \u2500\u2500
 const MACROS = [
   { cmd: "/refund", desc: "Refund policy template", text: "Hi there! I can help you with your refund. According to our policy, we can process a full refund within 30 days of purchase. Would you like me to proceed with that?" },
   { cmd: "/greeting", desc: "Standard welcome message", text: "Hello! Thank you for reaching out to Wrennon Support. How can I assist you today?" },
@@ -1267,7 +1267,7 @@ function renderCopilotActions(actions) {
     actions.forEach(action => {
         const btn = document.createElement('button');
         btn.className = 'btn btn-secondary btn-sm';
-        btn.innerHTML = `⚡ ${escapeHtml(action.label)}`;
+        btn.innerHTML = `\u26A1 ${escapeHtml(action.label)}`;
         btn.onclick = async () => {
             btn.innerHTML = 'Executing...';
             btn.disabled = true;
@@ -1375,7 +1375,7 @@ function hideOrderPopup() {
 // --- Customer Details Sidebar (ported from the real product UI) ---
 // The real backend returns a `customer` object with { id, name, tags, email,
 // phone, loyalty_tier, lifetime_value, recent_order }. The static demo data
-// only has name/email/order, so we deterministically synthesize the rest —
+// only has name/email/order, so we deterministically synthesize the rest \u2014
 // same customer always gets the same demo values across renders.
 function hashSeed(str) {
   let h = 0;
@@ -1395,13 +1395,13 @@ function buildDemoCustomer(chat) {
   const phone = `555-${String(1000 + (seed % 9000)).slice(0, 4)}`;
   const tag1 = tagPool[seed % tagPool.length];
   const tag2 = tagPool[(seed + 3) % tagPool.length];
-  const orderId = chat.order?.order_id ? `#${chat.order.order_id}` : '—';
+  const orderId = chat.order?.order_id ? `#${chat.order.order_id}` : '\u2014';
 
   return {
     id: chat.short_id || chat.session_id || '',
     name: chat.customer_name || 'Unknown Customer',
     tags: tag1 === tag2 ? [tag1] : [tag1, tag2],
-    email: chat.customer_email || '—',
+    email: chat.customer_email || '\u2014',
     phone,
     loyalty_tier: tier,
     lifetime_value: `$${ltv.toFixed(2)}`,
@@ -1841,7 +1841,7 @@ window.addEventListener('message', (event) => {
 
       if (data.session_id === activeSessionId) {
         if (data.summary) {
-          appendMessage("system", `📋 ${data.summary}`);
+          appendMessage("system", `\uD83D\uDCCB ${data.summary}`);
           scrollToBottom(true);
         }
         const resolveBtn = document.getElementById("resolve-btn");
