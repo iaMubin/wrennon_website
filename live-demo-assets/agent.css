@@ -211,7 +211,7 @@ body {
   width: 440px;
   min-width: 380px;
   max-width: 900px;
-  background: var(--bg-surface);
+  background: var(--bg-surface, #ffffff); opacity: 1 !important;
   border-right: 1px solid var(--line);
   display: flex;
   flex-direction: column;
@@ -307,7 +307,7 @@ body {
   padding: 12px 14px;
   gap: 6px;
   border-bottom: 1px solid var(--line);
-  background: var(--bg-surface);
+  background: var(--bg-surface, #ffffff); opacity: 1 !important;
 }
 
 .tab {
@@ -497,7 +497,7 @@ body {
   width: 5px;
   background-color: transparent;
   cursor: col-resize;
-  z-index: 10;
+  
   transition: background-color 0.2s;
   flex-shrink: 0;
   position: relative;
@@ -556,7 +556,7 @@ body {
   justify-content: space-between;
   align-items: center;
   background: var(--bg-brand);
-  z-index: 10;
+  
 }
 .conv-header-actions {
   display: flex;
@@ -645,6 +645,7 @@ body {
   font-size: var(--fs-base);
   line-height: 1.6;
   position: relative;
+  
   word-wrap: break-word;
   animation: slideUpFade 0.25s var(--ease-out-expo) forwards;
 }
@@ -664,7 +665,7 @@ body {
 }
 
 .msg--human, .msg--user {
-  background: var(--bg-surface);
+  background: var(--bg-surface, #ffffff); opacity: 1 !important;
   color: var(--ink);
   border: 1px solid var(--line);
   border-left: 3px solid var(--accent);
@@ -695,7 +696,7 @@ body {
 }
 
 .msg--ai, .msg--bot {
-  background: var(--bg-surface);
+  background: var(--bg-surface, #ffffff); opacity: 1 !important;
   color: var(--ink);
   border: 1px solid var(--line);
   border-right: 3px solid var(--accent);
@@ -718,22 +719,34 @@ body {
 .msg--agent {
   background: linear-gradient(135deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 80%, black) 100%);
   color: var(--accent-ink);
-  border-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-right: 3px solid rgba(0, 0, 0, 0.15);
   border-radius: var(--radius-lg) var(--radius-lg) 4px var(--radius-lg);
   box-shadow: var(--shadow-sm);
 }
 
-.msg--grouped {
+.msg-content--grouped {
   margin-top: -4px;
 }
-.msg--grouped::before {
+.msg-content--grouped .msg::before {
   display: none !important;
 }
 
+/* Boxy shapes for grouped messages */
+.msg-content--grouped.msg-content--human .msg,
+.msg-content--grouped.msg-content--user .msg {
+  border-top-left-radius: 4px;
+}
+.msg-content--grouped.msg-content--ai .msg,
+.msg-content--grouped.msg-content--bot .msg,
+.msg-content--grouped.msg-content--agent .msg {
+  border-top-right-radius: 4px;
+}
+
 .msg--internal {
-  background: color-mix(in srgb, var(--accent-warning) 12%, var(--bg-surface)) !important;
-  border: 1px dashed var(--accent-warning) !important;
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg-surface)) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent) !important;
+  border-right: 3px solid var(--accent) !important;
   color: var(--ink) !important;
 }
 
@@ -770,9 +783,9 @@ body {
 .msg-content--ai:has(+ .msg-content--ai.msg-content--grouped) .msg-meta { display: none; }
 
 .msg-ticks {
-  font-weight: bold;
-  letter-spacing: -2px;
   margin-left: 4px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .date-separator {
@@ -791,12 +804,116 @@ body {
   opacity: 0.65;
 }
 
-.msg-actions {
-  opacity: 0 !important;
-  transition: opacity 0.2s ease;
+/* WhatsApp style message dropdown */
+.msg-dropdown-container {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  
 }
-.msg-content:hover .msg-actions {
-  opacity: 0.85 !important;
+
+.msg-dropdown-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px 4px;
+  color: inherit;
+  opacity: 0;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.msg--agent .msg-dropdown-btn,
+.msg--ai .msg-dropdown-btn,
+.msg--bot .msg-dropdown-btn {
+  color: var(--text-muted);
+}
+
+.msg--human .msg-dropdown-btn,
+.msg--user .msg-dropdown-btn {
+  color: var(--ink-soft);
+}
+
+.msg-content:hover .msg-dropdown-btn,
+.msg-dropdown-container:has(.msg-dropdown-menu.show) .msg-dropdown-btn {
+  opacity: 1;
+}
+
+.msg-dropdown-btn:hover {
+  background: rgba(128, 128, 128, 0.2);
+}
+
+.msg-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  background: var(--bg-surface, #ffffff) !important; opacity: 1 !important;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15) !important;
+  min-width: 180px;
+  z-index: 999999 !important;
+  padding: 6px 0;
+  animation: popIn 0.15s var(--ease-out-expo);
+}
+.msg--user .msg-dropdown-menu {
+  left: 0;
+  right: auto;
+}
+.msg--agent .msg-dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+.msg-dropdown-menu.show {
+  display: block;
+}
+
+/* Real fix for the "dropdown background looks transparent" reports:
+   #conversation-header / #sidebar-header / #empty-state / #agent-input-row
+   all use backdrop-filter (a frosted-glass look) — confirmed live that
+   this creates a blur compositing layer that makes ANY dropdown popover
+   rendered in that stacking context look translucent, no matter how solid
+   the dropdown's own background/opacity is set. Piling more !important
+   onto the dropdown itself (see the two patches above/below this) can't
+   fix a parent-level compositing effect. Suspending the blur on those
+   containers while a dropdown is open does. */
+body:has(.theme-dropdown-menu:not(.hidden)) #conversation-header,
+body:has(.theme-dropdown-menu:not(.hidden)) #sidebar-header,
+body:has(.theme-dropdown-menu:not(.hidden)) #empty-state,
+body:has(.theme-dropdown-menu:not(.hidden)) #agent-input-row,
+body:has(.msg-dropdown-menu.show) #conversation-header,
+body:has(.msg-dropdown-menu.show) #sidebar-header,
+body:has(.msg-dropdown-menu.show) #empty-state,
+body:has(.msg-dropdown-menu.show) #agent-input-row {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.msg-dropdown-item {
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.msg-dropdown-item:hover {
+  background: var(--bg-surface, #ffffff); opacity: 1 !important;
+}
+
+.msg-dropdown-item svg {
+  color: var(--text-muted);
+  width: 16px;
+  height: 16px;
 }
 
 /* ── Order Context Popup ── */
@@ -872,7 +989,7 @@ body {
 /* ── Input Row ── */
 #agent-input-row {
   padding: 16px 24px;
-  background: var(--bg-surface);
+  background: var(--bg-surface, #ffffff); opacity: 1 !important;
   display: flex;
   gap: 8px;
   border-top: 1px solid var(--line);
@@ -986,7 +1103,7 @@ body {
   gap: 10px;
   padding: 10px 14px;
   border-radius: var(--radius-pill);
-  background: var(--bg-surface);
+  background: var(--bg-surface, #ffffff); opacity: 1 !important;
   border: 1px solid var(--line);
   max-width: 320px;
   margin: 8px 0;
@@ -1158,12 +1275,12 @@ body {
 .customer-sidebar {
   width: 340px;
   min-width: 340px;
-  background: var(--bg-surface);
+  background: var(--bg-surface, #ffffff); opacity: 1 !important;
   border-left: 1px solid var(--line);
   display: flex;
   flex-direction: column;
   transition: margin-right 0.35s var(--ease-out-expo), transform 0.35s var(--ease-out-expo), opacity 0.3s ease;
-  z-index: 10;
+  
   box-shadow: -4px 0 16px rgba(0, 0, 0, 0.02);
   margin-right: 0;
   transform: translateX(0);
@@ -1313,6 +1430,214 @@ body {
   text-transform: uppercase;
 }
 
+/* ── Ticket Properties Bar: priority / assignee / tags ── */
+.ticket-properties-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+  min-height: 40px;
+}
+
+.tp-divider {
+  width: 1px;
+  height: 18px;
+  background: var(--line);
+  flex-shrink: 0;
+}
+
+.tp-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Priority badge */
+.priority-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 8px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  background: var(--bg-hover);
+  color: var(--ink);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.priority-badge:hover { background: color-mix(in srgb, var(--accent) 8%, var(--bg-hover)); }
+
+.priority-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+.priority-dot--low { background: var(--ink-soft, #8a8a8a); }
+.priority-dot--normal { background: var(--accent); }
+.priority-dot--high { background: var(--warning); }
+.priority-dot--urgent { background: var(--danger); animation: pulseSLA 2s infinite; }
+
+.priority-badge--low .priority-dot,
+.priority-badge--low { color: var(--ink-soft, #8a8a8a); }
+.priority-badge--high { color: var(--warning); border-color: color-mix(in srgb, var(--warning) 40%, var(--line)); background: color-mix(in srgb, var(--warning) 10%, transparent); }
+.priority-badge--urgent { color: var(--danger); border-color: color-mix(in srgb, var(--danger) 45%, var(--line)); background: color-mix(in srgb, var(--danger) 12%, transparent); }
+
+.tp-caret { opacity: 0.55; flex-shrink: 0; }
+
+/* Shared dropdown shell (priority + assignee) */
+.tp-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 168px;
+  background: var(--bg-surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  padding: 6px;
+  /* Must beat .pinned-messages-wrapper (z-index: 100) — when a message
+     is pinned, that banner sits directly below this bar in the DOM and
+     was covering the open dropdown's options. */
+  z-index: 150;
+}
+.tp-dropdown.hidden { display: none; }
+
+.tp-dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 10px;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  text-align: left;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.tp-dropdown__item:hover { background: var(--bg-hover); }
+.tp-dropdown__item.tp-dropdown__item--active { background: color-mix(in srgb, var(--accent) 12%, transparent); font-weight: 700; }
+
+/* Assignee badge */
+.assignee-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px 3px 4px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  background: var(--bg-hover);
+  color: var(--ink);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.assignee-badge:hover { background: color-mix(in srgb, var(--accent) 8%, var(--bg-hover)); }
+
+.assignee-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+}
+.assignee-avatar--unassigned { background: var(--ink-soft, #8a8a8a); opacity: 0.6; }
+
+.tp-dropdown__item .assignee-avatar { width: 18px; height: 18px; font-size: 9px; }
+
+/* Tags */
+.tp-item--tags { flex: 1; min-width: 140px; flex-wrap: wrap; gap: 6px; }
+
+.tag-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tp-tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent);
+  padding: 3px 6px 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+.tp-tag-chip__remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.6;
+  padding: 0;
+}
+.tp-tag-chip__remove:hover { opacity: 1; background: color-mix(in srgb, var(--accent) 20%, transparent); }
+
+.tag-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  border: 1px dashed var(--line);
+  background: transparent;
+  color: var(--ink-soft, var(--ink));
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.tag-add-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.tag-input {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 3px 12px;
+  font-size: var(--fs-xs);
+  background: var(--bg-base);
+  color: var(--ink);
+  width: 150px;
+}
+.tag-input.hidden { display: none; }
+.tag-input:focus { outline: none; border-color: var(--accent); }
+
+@media (max-width: 800px) {
+  .ticket-properties-bar { padding: 6px 12px; }
+  .tp-item--tags { min-width: 100%; order: 10; }
+}
+
 /* ── Feature 7: Agent Mentions ── */
 .agent-mention {
   background: var(--accent);
@@ -1346,7 +1671,7 @@ body {
   bottom: 100%;
   left: 24px;
   margin-bottom: 8px;
-  background: var(--bg-surface);
+  background: var(--bg-surface, #ffffff);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   box-shadow: 0 8px 24px rgba(0,0,0,0.1);
@@ -1457,7 +1782,7 @@ body {
 #section-tabs {
   padding: 14px 12px 12px;
   gap: 4px;
-  background: var(--bg-surface);
+  background: var(--bg-surface, #ffffff); opacity: 1 !important;
 }
 
 .tab {
@@ -1473,7 +1798,7 @@ body {
 
 #conversation-list {
   padding: 10px 12px 18px;
-  background: var(--bg-surface);
+  background: var(--bg-surface, #ffffff); opacity: 1 !important;
 }
 
 .conv-item {
@@ -1548,19 +1873,20 @@ body {
 }
 
 .msg--human, .msg--user {
-  border-left: 0;
+  border-left: 2px solid var(--accent);
   border-radius: 14px 14px 14px 4px;
   box-shadow: var(--shadow-xs);
 }
 
 .msg--ai, .msg--bot {
-  border-right: 0;
+  border-right: 2px solid var(--accent);
   border-radius: 14px 14px 4px 14px;
 }
 
 .msg--agent {
   background: var(--accent);
   color: var(--accent-ink);
+  border-right: 2px solid color-mix(in srgb, var(--accent) 60%, white);
   border-radius: 14px 14px 4px 14px;
 }
 
@@ -1614,7 +1940,7 @@ body {
   z-index: 110;
   width: 34px;
   height: 34px;
-  background: var(--bg-surface);
+  background: var(--bg-surface, #ffffff); opacity: 1 !important;
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   color: var(--ink-soft);
@@ -1700,5 +2026,169 @@ body {
   #resizer {
     display: none;
   }
+}
+
+/* WhatsApp Style Reply Bubble */
+.msg-reply-bubble {
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  border-left: 4px solid currentColor;
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin-bottom: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+.msg-reply-bubble:hover {
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}
+.msg-reply-author {
+  font-weight: bold;
+  color: currentColor;
+  opacity: 0.9;
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+.msg-reply-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.85;
+}
+
+
+
+/* Stacking context fix for dropdown menus */
+
+
+
+
+/* WhatsApp-style Pinned Messages */
+.pinned-messages-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 16px;
+  background: var(--bg-base);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  /* Server caps pins at 5, but 5 full rows is still a lot of vertical
+     space to permanently steal from the conversation — cap the visible
+     height to ~2.5 rows and let the rest scroll, same pattern Slack uses
+     for its pinned-items panel. */
+  max-height: 132px;
+  overflow-y: auto;
+}
+
+.pinned-message {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-surface, #ffffff); opacity: 1 !important;
+  border-left: 4px solid var(--accent);
+  padding: 8px 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: all 0.2s;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.pinned-message:hover {
+  background: color-mix(in srgb, var(--bg-surface) 95%, var(--ink));
+}
+
+.pinned-message--internal {
+  border-left: 4px solid var(--accent-alert);
+  background: color-mix(in srgb, var(--accent-alert) 8%, var(--bg-surface));
+}
+
+.pinned-message-content {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-right: 12px;
+  flex: 1;
+}
+
+.pinned-message-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.pinned-message--internal .pinned-message-header {
+  color: var(--accent-alert);
+}
+
+.pinned-badge {
+  background: var(--accent-alert);
+  color: white;
+  padding: 1.5px 5px;
+  border-radius: 4px;
+  font-size: 9px;
+}
+
+.pinned-message-text {
+  font-size: 13px;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.85;
+}
+
+.unpin-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted, #888);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.unpin-btn:hover {
+  background: rgba(0,0,0,0.08);
+  color: var(--ink);
+}
+
+/* Persistent pin indicator on a pinned message bubble itself — unlike the
+   3-dot menu (opacity 0 until hover), this must stay visible at all times
+   since it's the only always-on signal (besides the banner) that a given
+   message is pinned. */
+.msg-pin-indicator {
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+  transform: rotate(-40deg);
+}
+
+.msg--agent .msg-pin-indicator {
+  background: var(--bg-base);
+  color: var(--accent);
 }
 
